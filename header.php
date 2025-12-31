@@ -19,7 +19,7 @@
             <img id="logo_accueil" src="assets/img/Logo_club/logo_rogne.png" alt="Image du logo du club">
             <nav class="nav_bar">
                 <ul>
-                    <li><a href="#">Accueil</a></li>
+                    <li><a href="index.php">Accueil</a></li>
                     <li><a href="#">&Eacute;quipes</a></li>
                     <li><a href="#">Photos</a></li>
                     <li><a href="#">Boutique</a></li>
