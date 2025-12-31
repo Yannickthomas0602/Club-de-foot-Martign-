@@ -11,13 +11,10 @@
 </head>
 <body>
     <header>
-        <div class="login_accueil">
-            <a href="login.php"><i class="fa-solid fa-user"></i> Se connecter</a>
-        </div>
-        <div class="bar_nav">
+        <div class="bar_nav_login">
             <button class="burger" aria-label="Menu">☰</button>
             <img id="logo_accueil" src="assets/img/Logo_club/logo_rogne.png" alt="Image du logo du club">
-            <nav class="nav_bar">
+            <nav class="nav_bar_login">
                 <ul>
                     <li><a href="#">Accueil</a></li>
                     <li><a href="#">&Eacute;quipes</a></li>
@@ -27,3 +24,26 @@
             </nav>
         </div>
     </header>
+    <main class="page_login">
+        <div class="form_login">
+            <section class="card_login">
+                <h3>Se connecter</h3>
+                <form method="POST">
+                    <div class="field">
+                        <label for="text">Identifiant</label>
+                        <input id="text" type="text" name="username" required>
+                    </div>
+                    <div class="field">
+                        <label for="password">Mot de passe</label>
+                        <input id="password" type="password" name="password" required>
+                    </div>
+                    <div class="actions">
+                        <button class="btn" type="submit">Se connecter</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+<?php
+include "footer.php";
+?>
