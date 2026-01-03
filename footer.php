@@ -1,4 +1,5 @@
     <footer>
+        <script src="assets/js/burger_menu.js"></script>
         <div class="social_media">
             <p>Suivez-nous : </p>
             <a href="https://www.instagram.com/cadetschelunmartigne/" title="instagram">
