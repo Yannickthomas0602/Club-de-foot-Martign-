@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#rectangle {
+    width: 100%;
+    height: 59px;
+    background: 
+        linear-gradient(to right, #9e0101bf 0%, #f0322b 50%, #9e0101bf 100%),
+#f0322b;   
+
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0 30px;
+position: relative;
+}
+
+.nav_group.left, .nav_group.right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.nav_group.right {
+    justify-content: flex-end;
+}
+
+.nav_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.desktop_links a, .login_accueil a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.desktop_links a:hover, .login_accueil a:hover {
+    color: #000;
+}
+
+.desktop_links {
+    display: flex;
+    gap: 20px;
+}
+.logo_club {
+    height: 85px; /* On lui donne une taille fixe */
+    width: auto;
+    transform: translateY(20px); /* Le descend pour l'effet "dépassant" */
+    z-index: 10;
+    filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.2)); /* Ajoute une ombre légère */
+}
+
+ @media screen and (max-width: 1024px) {
+    #rectangle {
+        padding: 0 10px; /* On réduit les marges de la barre rouge */
+    }
+    
+    .logo_club {
+        height: 65px; /* Le logo rétrécit un peu */
+        transform: translateY(12px);
+    }
+}
+
+/* Écran mobile (Smartphone) */
+@media screen and (max-width: 768px) {
+    .desktop_links a, .login_accueil a {
+        font-size: 9px; /* Taille minimale pour que ça tienne encore */
+        letter-spacing: 0px; /* On resserre les lettres */
+    }
+
+    .nav_group {
+        gap: 5px; /* Espace minimum entre les éléments */
+    }
+
+    .logo_club {
+        height: 50px; /* Le logo devient plus discret */
+        transform: translateY(10px);
+    }
+    
+    /* On cache peut-être juste le mot "Se connecter" pour ne garder que l'icône si c'est vraiment trop serré */
+    .login_accueil a span {
+        display: none;
+    }
+}

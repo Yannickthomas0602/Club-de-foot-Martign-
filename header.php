@@ -8,22 +8,34 @@
     <title>Cadets Chelun Martigné-Ferchaud</title>
     <!-- Logo du club devant le titre de l'onglet -->
     <link rel="icon" type="image/png" href="assets/img/Logo_club/logo_rogne.png"> 
+    <link rel="stylesheet" href="header.css">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+</style>
 </head>
 <body>
     <header>
-        <div class="login_accueil">
-            <a href="login.php"><i class="fa-solid fa-user"></i> Se connecter</a>
+        <div id="rectangle">
+            <div class="nav_group left">
+                <button class="burger" aria-label="Menu">☰</button>
+                <nav class="desktop_links">
+                    <a href="index.php">Accueil</a>
+                    <a href="#">&Eacute;quipes</a>
+                </nav>
+            </div>
+            <div class="nav_center">
+<img id="logo_accueil" src="assets/img/Logo_club/logo_rogne.png" alt="Image du logo du club" class="logo_club">
+            </div>
+        
+            <div class="nav_group right">
+                <nav class="desktop_links">
+                    <a href="#">Photos</a>
+                    <a href="#">Boutique</a>
+                </nav>
+<div class="login_accueil">
+     <a href="login.php"><i class="fa-solid fa-user"></i> Se connecter</a>
+            </div>
         </div>
-        <div class="bar_nav">
-            <button class="burger" aria-label="Menu">☰</button>
-            <img id="logo_accueil" src="assets/img/Logo_club/logo_rogne.png" alt="Image du logo du club">
-            <nav class="nav_bar">
-                <ul>
-                    <li><a href="index.php">Accueil</a></li>
-                    <li><a href="#">&Eacute;quipes</a></li>
-                    <li><a href="#">Photos</a></li>
-                    <li><a href="#">Boutique</a></li>
-                </ul>
-            </nav>
         </div>
+        
     </header>
