@@ -8,7 +8,7 @@
     <title>Cadets Chelun Martigné-Ferchaud</title>
     <!-- Logo du club devant le titre de l'onglet -->
     <link rel="icon" type="image/png" href="assets/img/Logo_club/logo_rogne.png"> 
-    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="assets/css/header.css">
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 </style>
