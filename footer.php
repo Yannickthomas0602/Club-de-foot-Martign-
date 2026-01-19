@@ -1,4 +1,5 @@
     <footer>
+        <link rel="stylesheet" href="assets/css/carousel.css">
         <script src="assets/js/burger_menu.js"></script>
         <div class="social_media">
             <p>Suivez-nous : </p>
@@ -10,14 +11,7 @@
             </a>
         </div>
         <p class="devise">"Jouez Ensemble, Vivre Ensemble, Grandir Ensemble"</p>
-        <div class="carrousel_footer">
-            <img src="#" alt="sponsor_1">
-            <div class="legende_1">Lorem ipsum dolor</div>
-            <img src="#" alt="sponsor_2">
-            <div class="legende_2">Lorem ipsum dolor</div>
-            <img src="#" alt="sponsor_3">
-            <div class="legende_3">Lorem ipsum dolor</div>
-        </div>
+     
         <nav class="mentions_legales">
             <ul>
                 <li><a href="#">Mentions l&eacute;gales</a></li>
@@ -25,7 +19,8 @@
                 <li><a href="#">Gestion des cookies</a></li>
             </ul>
         </nav>
+         <?php include 'carousel.php'; ?>
     </footer>
-    
+    <script src="assets/js/carousel.js"></script>
 </body>
 </html>
