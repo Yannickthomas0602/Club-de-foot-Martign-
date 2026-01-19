@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" href="assets/img/Logo_club/logo_rogne.png"> 
     <link rel="stylesheet" href="assets/css/header.css">
     <style>
+    
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 </style>
 </head>
@@ -17,7 +18,8 @@
     <header>
         <div id="rectangle">
             <div class="nav_group_left">
-                 <button id="openBtn" class="burger-btn">☰</button>
+                
+                 <?php include 'menu_burger.html'; ?>
                 <nav class="desktop_links">
                     <a href="index.php">Accueil</a>
                     <a href="#">&Eacute;quipes</a>
@@ -36,5 +38,5 @@
 
         
         </div>
-        
+     
     </header>
