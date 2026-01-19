@@ -16,8 +16,8 @@
 <body>
     <header>
         <div id="rectangle">
-            <div class="nav_group left">
-                <button class="burger" aria-label="Menu">☰</button>
+            <div class="nav_group_left">
+                 <button id="openBtn" class="burger-btn">☰</button>
                 <nav class="desktop_links">
                     <a href="index.php">Accueil</a>
                     <a href="#">&Eacute;quipes</a>
@@ -27,15 +27,14 @@
 <img id="logo_accueil" src="assets/img/Logo_club/logo_rogne.png" alt="Image du logo du club" class="logo_club">
             </div>
         
-            <div class="nav_group right">
+            <div class="nav_group_right">
                 <nav class="desktop_links">
                     <a href="#">Photos</a>
                     <a href="#">Boutique</a>
                 </nav>
-<div class="login_accueil">
-     <a href="login.php"><i class="fa-solid fa-user"></i> Se connecter</a>
-            </div>
-        </div>
+                </div>
+
+        
         </div>
         
     </header>

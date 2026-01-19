@@ -1,0 +1,12 @@
+/* base.css - reset + utilities */
+:root {
+  --max-width:1200px;
+  --gap:1rem;
+  --font-family: 'Roboto', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:var(--font-family);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.container{max-width:var(--max-width);margin:0 auto;padding:0 1rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
