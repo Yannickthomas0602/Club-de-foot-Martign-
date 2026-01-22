@@ -71,3 +71,39 @@ INSERT INTO teams (name) VALUES
   ('Equipe A'), ('Equipe B'), ('Equipe C')
 ON DUPLICATE KEY UPDATE name = VALUES(name);
 
+-- 8) Table des Joueurs (Licenciés)
+CREATE TABLE players (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    last_name VARCHAR(100) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    category VARCHAR(50), -- ex: U18, Senior [cite: 85, 86]
+    license_number VARCHAR(50), -- Numéro de licence obligatoire [cite: 360]
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 9) Table des Convocations
+CREATE TABLE convocations (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    match_date DATETIME NOT NULL,
+    opponent VARCHAR(100) NOT NULL,
+    location VARCHAR(100) NOT NULL,
+    team_id INT UNSIGNED NOT NULL, -- Lien vers l'équipe concernée
+    CONSTRAINT fk_convocations_team FOREIGN KEY (team_id) REFERENCES teams(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 10) Table des Photos (Galerie)
+CREATE TABLE photos (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    file_path VARCHAR(255) NOT NULL, -- Chemin du fichier [cite: 361]
+    album_name VARCHAR(100), -- Catégorie (ex: U6-U7) [cite: 272, 337]
+    upload_date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 11) Table des Sponsors (Bandeau défilant)
+CREATE TABLE sponsors (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    logo_path VARCHAR(255), -- Chemin vers le logo (Savouré, Pigeon, etc.) [cite: 72, 74, 362]
+    link VARCHAR(255) -- Lien vers le site du partenaire [cite: 362]
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
