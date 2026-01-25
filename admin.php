@@ -8,5 +8,15 @@
     <link rel="stylesheet" href="convocation_admin.php">
 </head>
 <body> 
+    <header>
+        <?php include 'header.php'; ?>
+    </header>
+    <main>
     <p>Admin</p>
     <li><a href="convocation_admin.php">accès convocation</a></li>
+    </main>
+    <footer>
+        <?php include 'footer.php'; ?>
+    </footer>
+</body>
+</html>
