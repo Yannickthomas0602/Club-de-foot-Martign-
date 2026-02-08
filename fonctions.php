@@ -1,23 +1,19 @@
-
 <?php
 /**
  * Fonctions d'accès et utilitaires pour la base "appdb"
  * Schéma supporté :
  * - roles(id, slug, label, created_at)
  * - teams(id, name, created_at)
- * - users(id, last_name, first_name, username, email, password_hash, role_id, is_active, created_at, updated_at)
+ * - users(id, last_name, first_name, username, email, password_hash, role_id, is_active, convocation_id, created_at, updated_at)
  * - user_teams(user_id, team_id, role_attribution, assigned_at)
  */
 
-// ---------------------------------------
-// Connexion PDO à la base de données
-// ---------------------------------------
 function getDB(): PDO {
     $host     = "localhost";
     $port     = 3306;
     $dbname   = "appdb";
     $username = "root";
-    $password = "";
+    $password = "root";
 
     $dsn = "mysql:host={$host};port={$port};dbname={$dbname};charset=utf8mb4";
 
@@ -37,7 +33,6 @@ function getDB(): PDO {
     }
 }
 
-// Récuppère l'id d'un rôle à partir de son slug (ex: admin, user). Retourne null si aucun rôle ne correspond.
 function getRoleIdBySlug(PDO $pdo, string $slug): ?int {
     $stmt = $pdo->prepare("SELECT id FROM roles WHERE slug = ? LIMIT 1");
     $stmt->execute([$slug]);
@@ -45,7 +40,6 @@ function getRoleIdBySlug(PDO $pdo, string $slug): ?int {
     return $id === false ? null : (int)$id;
 }
 
-// Récuppère les informations du rôle (id, slug, label) à partir de son identifiant. Retourne null si non trouvé.
 function getRoleById(PDO $pdo, int $roleId): ?array {
     $stmt = $pdo->prepare("SELECT id, slug, label FROM roles WHERE id = ? LIMIT 1");
     $stmt->execute([$roleId]);
@@ -53,21 +47,18 @@ function getRoleById(PDO $pdo, int $roleId): ?array {
     return $row ?: null;
 }
 
-// Vérifie si un email existe déjà dans la table users. Retourne true ou false.
 function emailExiste(PDO $pdo, string $email): bool {
     $stmt = $pdo->prepare("SELECT 1 FROM users WHERE email = ? LIMIT 1");
     $stmt->execute([$email]);
     return (bool)$stmt->fetchColumn();
 }
-// Vérifie si un email existe déjà dans la table users. Retourne true ou false.
+
 function usernameExiste(PDO $pdo, string $username): bool {
     $stmt = $pdo->prepare("SELECT 1 FROM users WHERE username = ? LIMIT 1");
     $stmt->execute([$username]);
     return (bool)$stmt->fetchColumn();
 }
 
-// Crée un nouvel utilisateur avec les champs fournis. Convertit d'abord le role_slug en role_id (et lève une exception
-// si inconnu), puis insère l'utilisateur, et renvoie l'id nouvellement créé.
 function creerUtilisateur(
     PDO $pdo,
     string $lastName,
@@ -101,7 +92,6 @@ function creerUtilisateur(
     return (int)$pdo->lastInsertId();
 }
 
-// Récupère un utilisateur par son email avec ses infos et celles du rôle (jointure sur roles). Retourne null si non trouvé.
 function getUserByEmail(PDO $pdo, string $email): ?array {
     $stmt = $pdo->prepare(
         "SELECT u.*, r.slug AS role_slug, r.label AS role_label
@@ -115,7 +105,6 @@ function getUserByEmail(PDO $pdo, string $email): ?array {
     return $row ?: null;
 }
 
-// Pareil que getUserByEmail mais par username
 function getUserByUsername(PDO $pdo, string $username): ?array {
     $stmt = $pdo->prepare(
         "SELECT u.*, r.slug AS role_slug, r.label AS role_label
@@ -128,7 +117,7 @@ function getUserByUsername(PDO $pdo, string $username): ?array {
     $row = $stmt->fetch();
     return $row ?: null;
 }
-// Pareil que getUserByEmail mais par id
+
 function getUserById(PDO $pdo, int $id): ?array {
     $stmt = $pdo->prepare(
         "SELECT u.*, r.slug AS role_slug, r.label AS role_label
@@ -142,7 +131,6 @@ function getUserById(PDO $pdo, int $id): ?array {
     return $row ?: null;
 }
 
-// Liste tous les utilisateurs (avex rôle), triés par date de création décroissante.
 function getAllUsers(PDO $pdo): array {
     $stmt = $pdo->query(
         "SELECT
@@ -152,6 +140,7 @@ function getAllUsers(PDO $pdo): array {
            u.username,
            u.email,
            u.is_active,
+           u.convocation_id,
            u.created_at,
            u.updated_at,
            r.slug  AS role_slug,
@@ -163,8 +152,6 @@ function getAllUsers(PDO $pdo): array {
     return $stmt->fetchAll();
 }
 
-// Met à jour de manière flexible un utilisateur via une white_list de colonnes autorisées. Accepte role_slug et le convertit en 
-// role_id. Ignore les colonnes non autorisées. Retourne false si aucun champ valide n'est fourni.
 function updateUser(PDO $pdo, int $id, array $fields): bool {
     $allowed = [
         'last_name',
@@ -173,10 +160,11 @@ function updateUser(PDO $pdo, int $id, array $fields): bool {
         'email',
         'password_hash',
         'role_id',
-        'is_active'
+        'is_active',
+        'convocation_id'   // ← ajout pour coller au schéma
     ];
 
-    // Si on a reçu un role_slug, on le convertit en role_id
+    // Conversion éventuelle role_slug -> role_id
     if (isset($fields['role_slug'])) {
         $roleId = getRoleIdBySlug($pdo, (string)$fields['role_slug']);
         if ($roleId === null) {
@@ -191,8 +179,8 @@ function updateUser(PDO $pdo, int $id, array $fields): bool {
 
     foreach ($fields as $col => $val) {
         if (in_array($col, $allowed, true)) {
-            $setParts[]           = "{$col} = :{$col}";
-            $params[":{$col}"]    = $val;
+            $setParts[]        = "{$col} = :{$col}";
+            $params[":{$col}"] = $val;
         }
     }
 
@@ -205,21 +193,18 @@ function updateUser(PDO $pdo, int $id, array $fields): bool {
     return $stmt->execute($params);
 }
 
-// Supprime un utilisateur par son id. Retourne true si succès.
 function deleteAccount(PDO $pdo, int $id): bool {
-    // user_teams est en ON DELETE CASCADE => pas besoin d'effacer les liaisons à la main
     $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
     return $stmt->execute([$id]);
 }
 
-// Vérifie si un utilisateur est connecté (session active avec user_id) et si $_SESSION est démarrée.
 function isLogged(): bool {
     if (session_status() !== PHP_SESSION_ACTIVE) {
         @session_start();
     }
     return isset($_SESSION['user_id']);
 }
-// Redirige vers login.php si l'utilisateur n'est pas connecté.
+
 function requireLogin(): void {
     if (!isLogged()) {
         header("Location: login.php");
@@ -227,9 +212,7 @@ function requireLogin(): void {
     }
 }
 
-// Ajoute (ou met à jour) l'attribution d'un utilisateur à une équipe (membre ou coach) via INSERT ... ON DUPLICATE KEY UPDATE.
 function addUserToTeam(PDO $pdo, int $userId, int $teamId, string $roleAttribution = 'member'): bool {
-    // role_attribution: 'member'|'coach'
     $stmt = $pdo->prepare(
         "INSERT INTO user_teams (user_id, team_id, role_attribution)
          VALUES (?, ?, ?)
@@ -238,13 +221,11 @@ function addUserToTeam(PDO $pdo, int $userId, int $teamId, string $roleAttributi
     return $stmt->execute([$userId, $teamId, $roleAttribution]);
 }
 
-// Retire un utilisateur d'une équipe.
 function removeUserFromTeam(PDO $pdo, int $userId, int $teamId): bool {
     $stmt = $pdo->prepare("DELETE FROM user_teams WHERE user_id = ? AND team_id = ?");
     return $stmt->execute([$userId, $teamId]);
 }
 
-// Liste les équipes d'un utilisateur avec son rôle dans l'équipe et la date d'attribution, triées par nom d'équipe.
 function getTeamsByUser(PDO $pdo, int $userId): array {
     $stmt = $pdo->prepare(
         "SELECT t.id, t.name, ut.role_attribution, ut.assigned_at
@@ -256,7 +237,7 @@ function getTeamsByUser(PDO $pdo, int $userId): array {
     $stmt->execute([$userId]);
     return $stmt->fetchAll();
 }
-// Liste les utilisateurs d'une équipe avec leur attribution et date d'affectation, triés par nom et prénom.
+
 function getUsersByTeam(PDO $pdo, int $teamId): array {
     $stmt = $pdo->prepare(
         "SELECT u.id, u.last_name, u.first_name, u.username, u.email, ut.role_attribution, ut.assigned_at
