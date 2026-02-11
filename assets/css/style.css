@@ -1,0 +1,118 @@
+
+
+ .Image_accueil {
+    position: relative;
+    width: 100%;
+    /* On définit un ratio (ex: 16/9 ou 3/2). L'image s'adaptera partout ! */
+    aspect-ratio: 16 / 9; 
+    overflow: hidden;
+    background-color: #130201; /* Rappel de ta couleur de fond pour éviter un flash blanc */
+}
+
+.Image_accueil img {
+    width: 100%;
+    height: 100%; 
+    /* L'image remplit le ratio sans être écrasée */
+    object-fit: cover; 
+    display: block;
+}
+
+.Image_accueil::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%; /* On peut l'agrandir un peu pour plus de douceur */
+    background: linear-gradient(to top, rgba(19, 2, 1, 1), rgba(19, 2, 1, 0.6), transparent);
+    pointer-events: none;
+    z-index: 2;
+}
+
+
+/* Le conteneur qui aligne les deux cartes */
+.container-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    flex-wrap: wrap; /* Important pour le responsive */
+}
+
+/* Style de base d'une carte */
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    width: 450px; /* Largeur ajustable */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid transparent;
+}
+.card:hover {
+    border-color: #ff0000; /* Accentue la bordure rouge au survol */
+}
+
+
+.border-blue { border-color: #ffffff; } /* La bordure bleue de ton image */
+
+.card-title {
+    align-self: flex-start;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+/* Zone de contenu interne */
+.card-content {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+    background: #fdfaf7; /* Fond un peu crème comme sur ton image */
+    padding: 15px;
+    text-align: center;
+}
+
+.image-slider img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Le bouton rouge avec dégradé */
+.btn-red {
+    display: block;
+    width: 90%;
+    padding: 12px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    background: linear-gradient(to bottom, #d32f2f, #8b0000); /* Dégradé rouge */
+    transition: transform 0.2s;
+}
+
+.btn-red:hover {
+    transform: scale(1.02);
+}
+
+/* Style spécifique au score */
+.score-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.score-badge {
+    background: #e0e0e0;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+}
+
+.logo { width: 50px; height: 50px; }

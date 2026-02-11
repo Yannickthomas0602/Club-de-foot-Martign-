@@ -5,10 +5,13 @@
     position: fixed;
     z-index: 1;
     top: 0;
-    left: -250px;
+    left: -1550px;
     background-color: #333333;
     padding-top: 60px;
     transition: 0.5s ease;
+    width: 100vw;
+    opacity: 0.95;
+
 }
 /* texte  */
 .sidenav a{
