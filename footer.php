@@ -1,5 +1,6 @@
     <footer>
         <link rel="stylesheet" href="assets/css/carousel.css">
+        <link rel="stylesheet" href="assets/css/footer.css">
         <script src="assets/js/burger_menu.js"></script>
         <div class="social_media">
             <p>Suivez-nous : </p>
