@@ -26,7 +26,7 @@
                 </nav>
             </div>
             <div class="nav_center">
-<img id="logo_accueil" src="assets/img/Logo_club/logo_rogne.png" alt="Image du logo du club" class="logo_club">
+                <img id="logo_accueil" src="assets/img/Logo_club/logo_rogne.png" alt="Image du logo du club" class="logo_club">
             </div>
         
             <div class="nav_group_right">
