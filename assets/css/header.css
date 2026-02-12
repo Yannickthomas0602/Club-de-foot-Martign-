@@ -41,8 +41,8 @@ align-items: center;
 .desktop_links a{
     color: white;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.2vw;
+    font-family: "Bebas Neue", cursive;
+    font-size: 1.7vw;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.1vw;
@@ -64,4 +64,5 @@ align-items: center;
     z-index: 10;
     filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.2)); 
 }
+
 
