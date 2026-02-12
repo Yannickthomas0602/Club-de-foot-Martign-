@@ -13,6 +13,7 @@
     </header>
     <main>
     <p>Admin</p>
+    <a href="manage_users.php">Gérer les utilisateurs</a>
     <li><a href="convocation_admin.php">accès convocation</a></li>
     </main>
     <footer>
