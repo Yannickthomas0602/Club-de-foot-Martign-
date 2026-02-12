@@ -5,7 +5,7 @@
     gap: 20px;
     position: relative;
     padding: 20px;
-    background: #f5f5f5;
+    background: transparent;
 }
 
 .carousel-container {
@@ -57,7 +57,7 @@
 /* Style des flèches */
 .prev-btn, .next-btn {
     background: rgba(0,0,0,0.6);
-    color: white;
+    color: rgb(255, 255, 255);
     border: none;
     padding: 12px 16px;
     cursor: pointer;

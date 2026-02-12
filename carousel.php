@@ -1,4 +1,8 @@
-<footer class="site-footer">
+<link rel="stylesheet" href= "assets/css/carousel.css">
+<link rel="stylesheet" href="assets/css/footer.css">
+
+
+<div class="site-footer">
     <div class="carousel-wrapper">
         <button class="prev-btn" id="prevBtn">❮</button>
         
@@ -19,4 +23,4 @@
 
         <button class="next-btn" id="nextBtn">❯</button>
     </div>
-</footer>
+</div>
