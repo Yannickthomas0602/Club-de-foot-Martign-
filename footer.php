@@ -18,18 +18,20 @@
             </a>
             <p class="devise">"Jouer Ensemble, Vivre Ensemble, Grandir Ensemble"</p>
             
-        <nav class="mentions_legales">
+        
+         <?php include 'carousel.php'; ?>
+    
+    <script src="assets/js/carousel.js"></script>
+    <nav class="mentions_legales">
             <ul>
                 <li><a href="#">Mentions l&eacute;gales</a></li>
                 <li><a href="#">Informations l&eacute;gales</a></li>
                 <li><a href="#">Gestion des cookies</a></li>
             </ul>
         </nav>
-         <?php include 'carousel.php'; ?>
-    
-    <script src="assets/js/carousel.js"></script>
         </div>
         </div>
+        
      </footer>
     
 </body>

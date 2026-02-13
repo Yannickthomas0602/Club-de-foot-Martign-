@@ -32,7 +32,10 @@
             <div class="nav_group_right">
                 <nav class="desktop_links">
                     <a href="photos.php">Photos</a>
-                    <a href="#">Boutique</a>
+                    <a class="boutique-link" href="https://cadets-chelun-martigne.kalisport.com/"target="_blank"rel="noopener noreferrer">Boutique</a>
+                    <div class="Se_connecter">
+                    <a href="login.php"><i class="fa-solid fa-user"></i> Se connecter</a>
+                    </div>
                 </nav>
                 </div>
 

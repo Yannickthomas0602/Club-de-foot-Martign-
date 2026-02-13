@@ -5,7 +5,7 @@
     left: 0;
     width: 100%;
     height: 50%; 
-    height: 400px;
+    height: 600px;
     z-index: 2;
     background: linear-gradient(to top,rgb(19, 2, 1) , rgb(138,29,25),rgb(240,50,43));
 }
@@ -23,3 +23,6 @@ font-size: 2.5rem; color: #fff; text-align: center; margin-top: 50px;
 .social_img{
     height: 30px; width: 30px; object-fit: contain; 
 }
+
+.mentions_legales {  text-align: center; } .mentions_legales ul { list-style: none; padding: 0; display: inline-flex; gap: 20px; } 
+.mentions_legales ul li a { color: #fff; text-decoration: none; font-size: 0.9rem; }

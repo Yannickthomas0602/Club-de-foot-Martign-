@@ -39,6 +39,6 @@
     </div>
 </section>
 
-    <a href="login.php"><i class="fa-solid fa-user"></i> Se connecter</a>
+    
 </main>
 

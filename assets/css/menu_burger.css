@@ -53,3 +53,6 @@
     background-color: #FFFDFD;
     margin: 6px 0;
 }
+#openBtn:hover .burger-icon span {
+    background-color: #111; 
+}
