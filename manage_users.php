@@ -38,10 +38,10 @@ $admin = $stmt->fetchAll();
                     <td>
                         <a class="btn" href="#">Modifer</a>
                         <a class="btn" href="#">Changer rôle</a>
-                        <!-- <form action="delete_admin.php" method="POST" style="display:inline;"> -->
-                            <!-- <input type="hidden" name="id" value=" //$u['id']"> -->
-                            <!-- <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</button> -->
-                        <!-- </form> -->
+                        <form action="delete_user.php" method="POST" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer le coach <?= $u['first_name'] ?> <?= $u['last_name'] ?>');">
+                            <input type="hidden" name="id" value="<?= $u['id'] ?>">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
                     </td>
                 </tr>
                 <?php
@@ -67,7 +67,7 @@ $admin = $stmt->fetchAll();
                     <th>Identifiant</th>
                     <th>Email</th>
                     <th>Rôle</th>
-                    <th>Actions</th>
+                    <th>Action</th>
                 </tr>
                 <?php foreach ($admin as $u): 
                     if ($u['slug'] == 'user'){?>
@@ -79,11 +79,10 @@ $admin = $stmt->fetchAll();
                     <td><?= $u['slug']?></td>
                     <td>
                         <a class="btn" href="#">Modifer</a>
-                        <a class="btn" href="#">Changer rôle</a>
-                        <!-- <form action="delete_admin.php" method="POST" style="display:inline;"> -->
-                            <!-- <input type="hidden" name="id" value=" //$u['id']"> -->
-                            <!-- <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</button> -->
-                        <!-- </form> -->
+                        <form action="delete_user.php" method="POST" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer l\'équipe <?= $u['last_name'] ?>');">
+                            <input type="hidden" name="id" value="<?= $u['id'] ?>">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
                     </td>
                 </tr>
                 <?php
