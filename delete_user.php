@@ -4,7 +4,6 @@ require "fonctions.php";
 
 $pdo = getDB();
 
-// Vérifier que l’utilisateur est admin
 if (!isset($_SESSION['user_id']) || ($_SESSION['role_slug'] ?? null) !== 'admin') {
     header("Location: login.php");
     exit;
