@@ -1,13 +1,5 @@
 /* Logo mobile caché par défaut */
-.logo_mobile_wrapper {
-    display: none;
-    width: 100vw;
-    text-align: center;
-    background: transparent;
-    margin: 0.7em 0 0.7em 0;
-    padding: 0;
-    z-index: 10;
-}
+
 .logo_club_mobile {
     height: 14vw;
     max-height: 56px;
@@ -26,7 +18,7 @@
     /* Cacher le logo du header */
     .nav_center {
         display: flex !important;
-        flex: 1 1 0;
+        flex: 1 0 1;
         justify-content: center !important;
         align-items: center !important;
         position: static !important;
@@ -38,17 +30,17 @@
         z-index: 10;
     }
     .logo_club {
-            display: block !important;
-            margin: 0 auto !important;
-            height: 36px !important;
-            width: auto !important;
-            max-width: 80vw !important;
-            min-width: 24px !important;
-            min-height: 24px !important;
-            max-height: 48px !important;
-            object-fit: contain;
-            transform: none !important;
-            z-index: 11;
+        display: block !important;
+        margin: 70px auto 0 auto !important;
+        height: 56px !important;
+        width: auto !important;
+        max-width: 90vw !important;
+        min-width: 32px !important;
+        min-height: 32px !important;
+        max-height: 80px !important;
+        object-fit: contain;
+        transform: none !important;
+        z-index: 11;
     }
     /* Afficher le logo mobile centré */
     .logo_mobile_wrapper {
@@ -112,12 +104,7 @@
         grid-column: 3;
         justify-content: flex-end;
     }
-    .Se_connecter {
-        display: flex !important;
-        width: auto;
-        justify-content: flex-end;
-        margin: 0;
-    }
+ 
 }
 /* utiliser l'unité des VW pour faire des tailles relatives à la largeur de l'écran */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
@@ -247,3 +234,19 @@ header {
 .btn-connexion:hover {
     background-color: #b71c1c; 
 }
+@media (max-width: 768px) {
+    #rectangle {
+        /* Pousse les éléments restants (Burger et Bouton) aux deux extrémités */
+        justify-content: space-between; 
+        padding: 0 15px; /* Ajoute un petit espace pour ne pas coller aux bords de l'écran */
+    }
+
+    /* On force le logo à être parfaitement au centre de l'écran */
+    .logo_club { /* Remplace .ton-logo par la classe ou l'ID de ton image de logo */
+        position: absolute;
+        left: 40%;
+        transform: translateX(-50%); /* C'est la formule magique pour centrer parfaitement */
+        margin: 0; 
+    }
+}
+
