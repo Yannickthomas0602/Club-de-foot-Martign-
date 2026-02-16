@@ -18,28 +18,24 @@
     <header>
         <div id="rectangle">
             <div class="nav_group_left">
-                
-                 <?php include 'menu_burger.html'; ?>
+                <?php include 'menu_burger.html'; ?>
                 <nav class="desktop_links">
                     <a href="index.php">Accueil</a>
                     <a href="#">&Eacute;quipes</a>
                 </nav>
             </div>
-            <div class="nav_center">
-                <img id="logo_accueil" src="assets/img/Logo_club/logo_rogne.png" alt="Image du logo du club" class="logo_club">
-            </div>
-        
             <div class="nav_group_right">
                 <nav class="desktop_links">
                     <a href="photos.php">Photos</a>
                     <a class="boutique-link" href="https://cadets-chelun-martigne.kalisport.com/"target="_blank"rel="noopener noreferrer">Boutique</a>
-                    <div class="Se_connecter">
-                    <a href="login.php"><i class="fa-solid fa-user"></i> Se connecter</a>
-                    </div>
                 </nav>
+                <div class="Se_connecter">
+                    <a href="login.php" class="btn-connexion"> Se connecter</a>
                 </div>
-
-        
+            </div>
+            <div class="nav_center">
+                <img id="logo_accueil" src="assets/img/Logo_club/logo_rogne.png" alt="Image du logo du club" class="logo_club">
+            </div>
         </div>
-     
+        <!-- (Suppression du logo mobile sous la barre) -->
     </header>

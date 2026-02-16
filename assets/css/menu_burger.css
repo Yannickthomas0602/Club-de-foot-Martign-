@@ -1,6 +1,7 @@
 /* bandeau */
+
 .sidenav{
-    height: 100%;
+    height: 100vh;
 
     position: fixed;
     z-index: 1;
@@ -26,7 +27,7 @@
 }
 
 .sidenav a:hover{
-    color: #111; 
+    color: #d32f2f; 
 }
 
 .sidenav ul {
@@ -47,12 +48,33 @@
 }
 
 .burger-icon span{
-    display: block;
-    width: 35px;
-    height: 5px;
-    background-color: #FFFDFD;
-    margin: 6px 0;
+        display: block;
+        width: 6vw;
+        max-width: 40px;
+        min-width: 24px;
+        height: 0.8vw;
+        max-height: 5px;
+        min-height: 3px;
+        background-color: #FFFDFD;
+        margin: 0.5vw 0;
+        border-radius: 2px;
+        transition: width 0.3s, height 0.3s;
+}
+
+@media (max-width: 600px) {
+    .burger-icon span {
+        width: 8vw;
+        max-width: 32px;
+        min-width: 18px;
+        height: 1.5vw;
+        max-height: 4px;
+        min-height: 2px;
+        margin: 1.5vw 0;
+    }
+    #openBtn {
+        padding: 0.5em;
+    }
 }
 #openBtn:hover .burger-icon span {
-    background-color: #111; 
+    background-color: #d32f2f; 
 }

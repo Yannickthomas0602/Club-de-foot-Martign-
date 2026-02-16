@@ -1,12 +1,13 @@
 
 
- .Image_accueil {
+
+.Image_accueil {
     position: relative;
     width: 100%;
-    /* On définit un ratio (ex: 16/9 ou 3/2). L'image s'adaptera partout ! */
     aspect-ratio: 16 / 9; 
     overflow: hidden;
-    background-color: #130201; /* Rappel de ta couleur de fond pour éviter un flash blanc */
+    background-color: #130201; 
+    margin-top: -70px;
 }
 
 .Image_accueil img {
