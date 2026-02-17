@@ -27,7 +27,6 @@
             <p class="footer-title">Navigation</p>
             <div class="footer-nav-columns">
               <ul class="footer-nav">
-                <li><a href="#">Accueil</a></li>
                 <li><a href="#">Résultats</a></li>
                 <li><a href="#">Calendrier</a></li>
                 <li><a href="#">Équipes</a></li>
@@ -39,7 +38,6 @@
                 <li><a href="#">Horaire et plan</a></li>
                 <li><a href="#">Organigramme</a></li>
                 <li><a class="boutique-link" href="https://cadets-chelun-martigne.kalisport.com/" target="_blank" rel="noopener noreferrer">Boutique</a></li>
-                <li><a href="#">Nos sponsors</a></li>
                 <li><a href="#">Espace coach</a></li>
               </ul>
             </div>

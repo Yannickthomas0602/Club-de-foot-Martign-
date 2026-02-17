@@ -76,7 +76,7 @@
         max-width: 160px;
         width: auto;
         text-align: center;
-        margin: 0.2em 0.5em 0.2em 0;
+        margin: 0.2em 0 0.2em 0;
         box-shadow: 0 2px 8px rgba(0,0,0,0.10);
         white-space: nowrap;
         overflow: hidden;
@@ -238,7 +238,7 @@ header {
     #rectangle {
         /* Pousse les éléments restants (Burger et Bouton) aux deux extrémités */
         justify-content: space-between; 
-        padding: 0 15px; /* Ajoute un petit espace pour ne pas coller aux bords de l'écran */
+        padding: 0 6vw; /* Ajoute un petit espace pour ne pas coller aux bords de l'écran */
     }
 
     /* On force le logo à être parfaitement au centre de l'écran */
