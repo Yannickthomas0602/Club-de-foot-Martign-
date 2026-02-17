@@ -13,6 +13,7 @@ $admin = $stmt->fetchAll();
 ?>
 
 <?php include 'header.php'; ?>
+<script src="assets/js/check_password.js"></script>
     <main>
         <div class="liste-coachs">
             <h2>Liste des coachs : </h2>
@@ -51,7 +52,7 @@ $admin = $stmt->fetchAll();
         </div>
         <div class="ajout-coachs">
             <h3>Ajouter un coachs</h3>
-            <form method="POST" action="add_coach.php">
+            <form method="POST" action="add_coach.php" class="js-check-password">
                 <div class="nom_coach">
                     <label for="last_name">Nom du coach</label>
                     <input type="text" name="last_name" placeholder="Insérer le nom du coach" required>
@@ -86,7 +87,6 @@ $admin = $stmt->fetchAll();
                     <th>ID</th>
                     <th>Nom de l'équipe</th>
                     <th>Identifiant</th>
-                    <th>Email</th>
                     <th>Rôle</th>
                     <th>Action</th>
                 </tr>
@@ -96,7 +96,6 @@ $admin = $stmt->fetchAll();
                     <td><?= $u['id']?></td>
                     <td><?= $u['last_name']?></td>
                     <td><?= $u['username']?></td>
-                    <td><?= $u['email']?></td>
                     <td><?= $u['slug']?></td>
                     <td>
                         <a class="btn" href="#">Modifer</a>
@@ -113,7 +112,7 @@ $admin = $stmt->fetchAll();
         </div>
         <div class="ajout-equipes">
             <h3>Ajouter une equipe</h3>
-            <form method="POST" action="add_user.php">
+            <form method="POST" action="add_user.php" class="js-check-password">
                 <div class="nom_equipe">
                     <label for="username">Nom de l'équipe</label>
                     <input type="text" name="last_name" placeholder="Insérer le nom de l'équipe" required>
@@ -170,7 +169,7 @@ $admin = $stmt->fetchAll();
         </div>
         <div class="ajout-coachs">
             <h3>Ajouter un administrateur</h3>
-            <form method="POST" action="add_admin.php">
+            <form method="POST" action="add_admin.php" class="js-check-password">
                 <div class="nom_admin">
                     <label for="last_name">Nom de l'administrateur</label>
                     <input type="text" name="last_name" placeholder="Insérer le nom de l'administrateur" required>
@@ -199,5 +198,4 @@ $admin = $stmt->fetchAll();
             </form>
         </div>
     </main>
-    </body>
-</html>
+<?php include 'footer.php'; ?>
