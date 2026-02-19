@@ -8,6 +8,10 @@
     margin: 0 auto; 
     padding: 20px;
 }
+.card-btn {
+    font-family: 'Montserrat', sans-serif;  
+    font-weight: bold;
+}
 
 
 .team-card {
@@ -27,6 +31,7 @@
 .card-body {
     padding: 20px;
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .card-btn {
