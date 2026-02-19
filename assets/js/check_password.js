@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "• 1 MAJUSCULE\n" +
                     "• 1 minuscule\n" +
                     "• 1 chiffre\n" +
-                    "• 1 caractère spécial\n"
+                    "• 1 caractère spécial (!@#$%^&*()-+)\n"
                 );
                 pwd.focus();
                 return;

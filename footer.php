@@ -27,8 +27,8 @@
             <p class="footer-title">Navigation</p>
             <div class="footer-nav-columns">
               <ul class="footer-nav">
-                <li><a href="#">Résultats</a></li>
-                <li><a href="#">Calendrier</a></li>
+                <li><a href="resultats.php">Résultats</a></li>
+                <li><a href="calendrier.php">Calendrier</a></li>
                 <li><a href="#">Équipes</a></li>
                 <li><a href="#">Convocations</a></li>
                 <li><a href="photos.php">Album photos</a></li>

@@ -35,7 +35,7 @@
                 <button class="arrow-score">❯</button>
             </div>
         </div>
-        <a href="#" class="btn-red">Voir tous les résultats</a>
+        <a href="resultats.php" class="btn-red">Voir tous les résultats</a>
     </div>
 </section>
 
