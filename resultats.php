@@ -1,4 +1,5 @@
 <?php include "header.php"; ?>
+<h1>Résultats, Classement et Calendrier</h1>
 <div class="scorenco-widget" data-widget-type="team" data-widget-id="168255" style="background: #F2F5F9; height: 500px; display: flex; align-items: center; justify-content: center; flex-direction: column;text-transform: uppercase; font-family: sans-serif; font-weight: bolder; gap: 9px; color:#1E457B;">
   <div class="ldsdr"></div>
   Score'n'co - Cadets Chelun Martigné

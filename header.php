@@ -21,7 +21,7 @@
                 <?php include 'menu_burger.html'; ?>
                 <nav class="desktop_links">
                     <a href="index.php">Accueil</a>
-                    <a href="#">&Eacute;quipes</a>
+                    <a href="equipes.php">&Eacute;quipes</a>
                 </nav>
             </div>
             <div class="nav_group_right">
