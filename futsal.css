@@ -1,0 +1,147 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap');
+
+body {
+    background-color: #f4f4f9;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+}
+
+body > header {
+    height: 0;
+}
+
+/* image de fond */
+.team-hero {
+    position: relative;
+    height: 100vh;
+    min-height: 100vh;
+    margin-top: 0;
+    z-index: 0;
+        
+    background-size: cover; /* L'image couvre tout sans être déformée */
+    background-position: center; /* On centre l'image */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Le filtre noir transparent pour lire le texte */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; 
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: white;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-top: 10px;
+    color: white;
+}
+
+/* --- 2. LA BARRE D'INFOS --- */
+.info-bar-container {
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    position: relative;
+    z-index: 10;
+    margin-top: -30px; /* L'effet de chevauchement sur la bannière */
+    border-radius: 8px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    flex-wrap: wrap;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 10px;
+}
+
+.info-icon { font-size: 2rem; }
+.info-item strong { display: block; font-weight: 700; color: #1a1a1a; }
+.info-item p { margin: 0; color: #666; }
+
+.convoc-btn {
+    display: inline-block;
+    background-color: #d32f2f; /* Ton rouge */
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+}
+
+.convoc-btn:hover {
+    background-color: #b71c1c;
+    transform: translateY(-3px);
+}
+
+/* --- 3. LA GRILLE (CLASSEMENT + RÉSULTATS) --- */
+.competition-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2/3 à gauche, 1/3 à droite */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    border-left: 5px solid #d32f2f;
+    padding-left: 15px;
+}
+
+.widget-container {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+/* RESPONSIVE (MOBILE) */
+@media (max-width: 992px) {
+    .hero-title { font-size: 3rem; }
+    .competition-grid { grid-template-columns: 1fr; } /* Tout sur une colonne */
+    .sidebar-column { margin-top: 30px; }
+}

@@ -1,0 +1,90 @@
+
+.grille-equipes {
+    display: grid;
+   
+    grid-template-columns: 1fr 1fr 1fr; 
+    gap: 30px; 
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding: 20px;
+}
+
+
+.team-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+}
+
+.card-header img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-btn {
+    display: inline-block;
+    background: #d32f2f;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+.team-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+    transition: all 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+.card-btn {
+    display: inline-block;
+    background: #d32f2f;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.card-btn:hover {
+    background-color: #a11c1c; 
+    cursor: pointer;
+}
+
+.card-header img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; 
+    transition: transform 0.5s ease;
+}
+
+
+.team-card:hover .card-header img {
+
+    transform: scale(1.1);
+}
+
+/* responsive */
+@media (max-width: 768px) {
+    .grille-equipes {
+        grid-template-columns: 1fr; 
+    }
+}
+
+
