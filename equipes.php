@@ -24,7 +24,7 @@ include "header.php";
         <div class="card-body">
             <h3>Sénior Féminine</h3>
             <p>D1</p>
-            <a href="#" class="card-btn">VOIR</a>
+            <a href="senior_feminine.php" class="card-btn">VOIR</a>
         </div>
     </div>
 
@@ -35,7 +35,7 @@ include "header.php";
         <div class="card-body">
             <h3>Sénior A</h3>
             <p>D2</p>
-            <a href="#" class="card-btn">VOIR</a>
+            <a href="senior_A.php" class="card-btn">VOIR</a>
         </div>
     </div>
 
@@ -47,9 +47,9 @@ include "header.php";
             <img src="assets\img\Image_accueil\image U15.jpeg" alt="Equipe 1">
         </div>
         <div class="card-body">
-            <h3>SENIORS B</h3>
+            <h3>Sénior B</h3>
             <p>Régional 2</p>
-            <a href="#" class="card-btn">VOIR</a>
+            <a href="senior_B.php" class="card-btn">VOIR</a>
         </div>
     </div>
 
@@ -60,18 +60,54 @@ include "header.php";
         <div class="card-body">
             <h3>Sénior C</h3>
             <p>D1</p>
-            <a href="#" class="card-btn">VOIR</a>
+            <a href="senior_C.php" class="card-btn">VOIR</a>
         </div>
     </div>
 
     <div class="team-card">
         <div class="card-header">
             <img src="assets\img\Image_accueil\image U15.jpeg" alt="Equipe 3">
+        </div>
+        <div class="card-body">
+            <h3>Sénior D</h3>
+            <p>D2</p>
+            <a href="senior_D.php" class="card-btn">VOIR</a>
+        </div>
+    </div>
+
+</div>
+<div class="grille-equipes">
+
+    <div class="team-card">
+        <div class="card-header">
+            <img src="assets\img\Image_accueil\image U15.jpeg" alt="Equipe 1">
         </div>
         <div class="card-body">
             <h3>U18</h3>
+            <p>Régional 2</p>
+            <a href="U18.php" class="card-btn">VOIR</a>
+        </div>
+    </div>
+
+    <div class="team-card">
+        <div class="card-header">
+            <img src="assets\img\Image_accueil\image U15.jpeg" alt="Equipe 2">
+        </div>
+        <div class="card-body">
+            <h3>U15</h3>
+            <p>D1</p>
+            <a href="U15.php" class="card-btn">VOIR</a>
+        </div>
+    </div>
+
+    <div class="team-card">
+        <div class="card-header">
+            <img src="assets\img\Image_accueil\image U15.jpeg" alt="Equipe 3">
+        </div>
+        <div class="card-body">
+            <h3>U15 F1</h3>
             <p>D2</p>
-            <a href="#" class="card-btn">VOIR</a>
+            <a href="U15_F1.php" class="card-btn">VOIR</a>
         </div>
     </div>
 
@@ -83,9 +119,9 @@ include "header.php";
             <img src="assets\img\Image_accueil\image U15.jpeg" alt="Equipe 1">
         </div>
         <div class="card-body">
-            <h3>U16 -  U17</h3>
+            <h3>U13</h3>
             <p>Régional 2</p>
-            <a href="#" class="card-btn">VOIR</a>
+            <a href="U13.php" class="card-btn">VOIR</a>
         </div>
     </div>
 
@@ -94,9 +130,9 @@ include "header.php";
             <img src="assets\img\Image_accueil\image U15.jpeg" alt="Equipe 2">
         </div>
         <div class="card-body">
-            <h3>U14 - U15</h3>
+            <h3>U13 M2</h3>
             <p>D1</p>
-            <a href="#" class="card-btn">VOIR</a>
+            <a href="U13_M2.php" class="card-btn">VOIR</a>
         </div>
     </div>
 
@@ -105,45 +141,9 @@ include "header.php";
             <img src="assets\img\Image_accueil\image U15.jpeg" alt="Equipe 3">
         </div>
         <div class="card-body">
-            <h3>U12 - U13</h3>
+            <h3>U11</h3>
             <p>D2</p>
-            <a href="#" class="card-btn">VOIR</a>
-        </div>
-    </div>
-
-</div>
-<div class="grille-equipes">
-
-    <div class="team-card">
-        <div class="card-header">
-            <img src="assets\img\Image_accueil\image U15.jpeg" alt="Equipe 1">
-        </div>
-        <div class="card-body">
-            <h3>U10 - U11</h3>
-            <p>Régional 2</p>
-            <a href="#" class="card-btn">VOIR</a>
-        </div>
-    </div>
-
-    <div class="team-card">
-        <div class="card-header">
-            <img src="assets\img\Image_accueil\image U15.jpeg" alt="Equipe 2">
-        </div>
-        <div class="card-body">
-            <h3>U8 - U9</h3>
-            <p>D1</p>
-            <a href="#" class="card-btn">VOIR</a>
-        </div>
-    </div>
-
-    <div class="team-card">
-        <div class="card-header">
-            <img src="assets\img\Image_accueil\image U15.jpeg" alt="Equipe 3">
-        </div>
-        <div class="card-body">
-            <h3>U6 - U7</h3>
-            <p>D2</p>
-            <a href="#" class="card-btn">VOIR</a>
+            <a href="U11.php" class="card-btn">VOIR</a>
         </div>
     </div>
     <div class="team-card">
