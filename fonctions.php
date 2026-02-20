@@ -161,7 +161,7 @@ function updateUser(PDO $pdo, int $id, array $fields): bool {
         'password_hash',
         'role_id',
         'is_active',
-        'convocation_id'   // ← ajout pour coller au schéma
+        'convocation_id'   
     ];
 
     // Conversion éventuelle role_slug -> role_id

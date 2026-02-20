@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_slug'] !== 'admin') {
     header("Location: login.php");
     exit;
 }
+// récupérer tous les utilisateurs avec leur rôle pour les afficher dans la liste
 $stmt = $pdo->query("SELECT u.id, u.last_name, u.first_name, u.username, u.email, r.slug FROM users u JOIN roles r ON u.role_id = r.id");
 $admin = $stmt->fetchAll();
 
@@ -37,7 +38,7 @@ $admin = $stmt->fetchAll();
                     <td><?= $u['email']?></td>
                     <td><?= $u['slug']?></td>
                     <td>
-                        <a class="btn" href="#">Modifer</a>
+                        <a class="btn" href="edit_user.php?id=<?= $u['id'] ?>">Modifier</a>
                         <a class="btn" href="#">Changer rôle</a>
                         <form action="delete_user.php" method="POST" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer le coach <?= $u['first_name'] ?> <?= $u['last_name'] ?>');">
                             <input type="hidden" name="id" value="<?= $u['id'] ?>">
@@ -98,7 +99,7 @@ $admin = $stmt->fetchAll();
                     <td><?= $u['username']?></td>
                     <td><?= $u['slug']?></td>
                     <td>
-                        <a class="btn" href="#">Modifer</a>
+                        <a class="btn" href="edit_user.php?id=<?= $u['id'] ?>">Modifier</a>
                         <form action="delete_user.php" method="POST" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer l\'équipe <?= $u['last_name'] ?>');">
                             <input type="hidden" name="id" value="<?= $u['id'] ?>">
                             <button type="submit" class="btn btn-danger">Supprimer</button>
@@ -154,7 +155,7 @@ $admin = $stmt->fetchAll();
                     <td><?= $u['email']?></td>
                     <td><?= $u['slug']?></td>
                     <td>
-                        <a class="btn" href="#">Modifer</a>
+                        <a class="btn" href="edit_user.php?id=<?= $u['id'] ?>">Modifier</a>
                         <a class="btn" href="#">Changer rôle</a>
                         <form action="delete_user.php" method="POST" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer l\'administrateur <?= $u['first_name'] ?> <?= $u['last_name'] ?>');">
                             <input type="hidden" name="id" value="<?= $u['id'] ?>">

@@ -8,6 +8,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_slug'] !== 'admin') {
     exit;
 }
 
+// si pas admin, redirige vers login
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $last_name = trim($_POST['last_name']);
@@ -17,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = trim($_POST['password']);
     $confirm  = trim($_POST['password_confirm']);
 
+// si le MDP ne respecte pas les critères de sécurité, redirige vers la page précédente avec une erreur
     if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{12,}$/", $password)) {
         header("Location: manage_users.php?error=weak_password");
         exit;
