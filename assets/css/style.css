@@ -1,6 +1,9 @@
 
 
-
+body {
+    margin: 0;
+    background-color: #f4f4f9; 
+}
 .Image_accueil {
     position: relative;
     width: 100%;

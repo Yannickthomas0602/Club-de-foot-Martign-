@@ -95,7 +95,7 @@ body > header {
 
 .convoc-btn {
     display: inline-block;
-    background-color: #d32f2f; /* Ton rouge */
+    background-color: #d32f2f;
     color: white;
     text-decoration: none;
     padding: 15px 30px;
@@ -103,7 +103,7 @@ body > header {
     font-weight: 700;
     text-transform: uppercase;
     transition: background 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+    
 }
 
 .convoc-btn:hover {

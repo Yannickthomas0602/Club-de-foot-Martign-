@@ -21,7 +21,8 @@
     font-size: 25px;
     color: #FFFDFD;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
     display: block;
     transition: 0.3s;
 }
@@ -45,6 +46,13 @@
     top: 0;
     right: 25px;
     font-size: 36px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sidenav .close:hover {
+    color: #d32f2f;
+    opacity: 0.7;
+    transform: scale(1.1);
 }
 
 .burger-icon span{
