@@ -39,7 +39,6 @@ $admin = $stmt->fetchAll();
                     <td><?= $u['slug']?></td>
                     <td>
                         <a class="btn" href="edit_user.php?id=<?= $u['id'] ?>">Modifier</a>
-                        <a class="btn" href="#">Changer rôle</a>
                         <form action="delete_user.php" method="POST" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer le coach <?= $u['first_name'] ?> <?= $u['last_name'] ?>');">
                             <input type="hidden" name="id" value="<?= $u['id'] ?>">
                             <button type="submit" class="btn btn-danger">Supprimer</button>
@@ -156,7 +155,6 @@ $admin = $stmt->fetchAll();
                     <td><?= $u['slug']?></td>
                     <td>
                         <a class="btn" href="edit_user.php?id=<?= $u['id'] ?>">Modifier</a>
-                        <a class="btn" href="#">Changer rôle</a>
                         <form action="delete_user.php" method="POST" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer l\'administrateur <?= $u['first_name'] ?> <?= $u['last_name'] ?>');">
                             <input type="hidden" name="id" value="<?= $u['id'] ?>">
                             <button type="submit" class="btn btn-danger">Supprimer</button>
