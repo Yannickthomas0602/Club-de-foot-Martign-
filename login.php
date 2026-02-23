@@ -1,9 +1,27 @@
 
 <?php
 session_start();
-require "fonctions.php";
+require_once __DIR__ . "/fonctions.php";
 
 $pdo = getDB();
+
+// si déjà connecté, redirige vers la page compte associé au role 
+
+if (isset($_SESSION['user_id'])) {
+    switch ($_SESSION['role_slug']) {
+        case 'admin':
+            header("Location: admin.php");
+            exit;
+        case 'coach':
+            header("Location: coach.php");
+            exit;
+        default:
+            header("Location: user.php");
+            exit;
+    }
+}
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
@@ -47,32 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 ?>
-
-<!-- <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <title>Cadets Chelun Martigné-Ferchaud</title>
-    <link rel="icon" type="image/png" href="assets/img/Logo_club/logo_rogne.png"> 
-</head>
-<body>
-    <header>
-        <div class="bar_nav_login">
-            <button class="burger" aria-label="Menu">☰</button>
-            <img id="logo_accueil" src="assets/img/Logo_club/logo_rogne.png" alt="Image du logo du club">
-            <nav class="nav_bar_login">
-                <ul>
-                    <li><a href="index.php">Accueil</a></li>
-                    <li><a href="#">Équipes</a></li>
-                    <li><a href="#">Photos</a></li>
-                    <li><a href="#">Boutique</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header> -->
 
     <?php include 'header.php'; ?>
     <main class="page_login">

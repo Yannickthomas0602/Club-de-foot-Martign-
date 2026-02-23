@@ -1,3 +1,12 @@
+<?php
+require_once __DIR__ . "/fonctions.php";
+
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -22,6 +31,7 @@
                 <nav class="desktop_links">
                     <a href="index.php">Accueil</a>
                     <a href="equipes.php">&Eacute;quipes</a>
+                    
                 </nav>
             </div>
             <div class="nav_group_right">
@@ -29,8 +39,27 @@
                     <a href="photos.php">Photos</a>
                     <a class="boutique-link" href="https://cadets-chelun-martigne.kalisport.com/"target="_blank"rel="noopener noreferrer">Boutique</a>
                 </nav>
+                <!-- <a href="login.php" class="btn-connexion"> Se connecter</a> -->
+
                 <div class="Se_connecter">
-                    <a href="login.php" class="btn-connexion"> Se connecter</a>
+                    <?php if (isset($_SESSION['user_id'])): ?>
+        
+                        <?php if ($_SESSION['role_slug'] === 'admin'): ?>
+                            <a href="admin.php" class="btn-connexion">Espace admin</a>
+                        <?php elseif ($_SESSION['role_slug'] === 'coach'): ?>
+                            <a href="coach.php" class="btn-connexion">Espace coach</a>
+                        <?php else: ?>
+                            <a href="#" class="btn-connexion">Mon compte</a>
+                        <?php endif; ?>
+
+                        <!-- Bouton de déconnexion -->
+                        <a href="logout.php" class="btn-connexion">Se déconnecter</a>
+
+                    <?php else: ?>
+
+                        <a href="login.php" class="btn-connexion">Se connecter</a>
+
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="nav_center">
