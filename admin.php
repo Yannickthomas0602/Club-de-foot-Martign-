@@ -1,3 +1,13 @@
+<?php
+session_start();
+require_once "fonctions.php";
+checkSessionTimeout();
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role_slug'] !== 'admin') {
+    header("Location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

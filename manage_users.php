@@ -3,6 +3,9 @@
 session_start();
 require "fonctions.php";
 $pdo = getDB();
+
+checkSessionTimeout();
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role_slug'] !== 'admin') {
     header("Location: login.php");
     exit;

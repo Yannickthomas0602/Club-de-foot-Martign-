@@ -1,10 +1,11 @@
 
 <?php
 session_start();
-require "fonctions.php";
+require_once "fonctions.php";
 
 $pdo = getDB();
 
+checkSessionTimeout();
 // si pas connecté ou pas admin, redirige vers login
 if (!isset($_SESSION['user_id']) || ($_SESSION['role_slug'] ?? null) !== 'admin') {
     header("Location: login.php");

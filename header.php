@@ -43,17 +43,11 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
                 <div class="Se_connecter">
                     <?php if (isset($_SESSION['user_id'])): ?>
-        
-                        <?php if ($_SESSION['role_slug'] === 'admin'): ?>
-                            <a href="admin.php" class="btn-connexion">Espace admin</a>
-                        <?php elseif ($_SESSION['role_slug'] === 'coach'): ?>
-                            <a href="coach.php" class="btn-connexion">Espace coach</a>
-                        <?php else: ?>
-                            <a href="#" class="btn-connexion">Mon compte</a>
-                        <?php endif; ?>
 
                         <!-- Bouton de déconnexion -->
                         <a href="logout.php" class="btn-connexion">Se déconnecter</a>
+                        <a href="admin.php" class="btn-connexion"><i class="fa-solid fa-user" style="color: rgb(255, 255, 255);"></i></a>
+
 
                     <?php else: ?>
 

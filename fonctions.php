@@ -249,3 +249,24 @@ function getUsersByTeam(PDO $pdo, int $teamId): array {
     $stmt->execute([$teamId]);
     return $stmt->fetchAll();
 }
+
+// foncction qui déconnecte automatiquement un utilisateur au bout de 5h (18000 sec)
+function checkSessionTimeout(int $max_inactivity = 18000) { 
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    if (!isset($_SESSION['last_activity'])) {
+        $_SESSION['last_activity'] = time();
+        return;
+    }
+
+    if (time() - $_SESSION['last_activity'] > $max_inactivity) {
+        session_unset();
+        session_destroy();
+        header("Location: login.php?timeout=1");
+        exit;
+    }
+
+    $_SESSION['last_activity'] = time();
+}
