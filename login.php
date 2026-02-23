@@ -67,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
     <?php include 'header.php'; ?>
+    <link rel="stylesheet" href="assets/css/login.css">
     <main class="page_login">
         <div class="form_login">
             <section class="card_login">
