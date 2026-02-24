@@ -126,81 +126,82 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?> 
 
 <?php include 'header.php'; ?>
-
+<link rel="stylesheet" href="assets/css/edit_user.css">
 <style>
     .hidden {
         display: none;
     }
 </style>
 <main>
-  <h2>Modifier le compte
-  </h2>
+  <h2>Modifier le compte</h2>
 
   <form method="POST" class="js-edit-user-form" autocomplete="off">
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf, ENT_QUOTES) ?>">
 
     <?php if ($isTeam): ?>
-      <!-- ÉQUIPE -->
+
       <div class="form-row">
-        <label class="label" for="last_name">Nom de l'équipe</label>
+        <label for="last_name">Nom de l'équipe</label>
         <input type="text" id="last_name" name="last_name" required
                value="<?= htmlspecialchars($user['last_name'] ?? '', ENT_QUOTES) ?>">
       </div>
 
       <div class="form-row">
-        <label class="label" for="username">Identifiant</label>
+        <label for="username">Identifiant</label>
         <input type="text" id="username" name="username" required
                value="<?= htmlspecialchars($user['username'] ?? '', ENT_QUOTES) ?>">
       </div>
 
-
     <?php else: ?>
+
       <div class="form-row">
-        <label class="label" for="last_name">Nom</label>
+        <label for="last_name">Nom</label>
         <input type="text" id="last_name" name="last_name" required
                value="<?= htmlspecialchars($user['last_name'] ?? '', ENT_QUOTES) ?>">
       </div>
 
       <div class="form-row">
-        <label class="label" for="first_name">Prénom</label>
+        <label for="first_name">Prénom</label>
         <input type="text" id="first_name" name="first_name" required
                value="<?= htmlspecialchars($user['first_name'] ?? '', ENT_QUOTES) ?>">
       </div>
 
       <div class="form-row">
-        <label class="label" for="email">Email</label>
+        <label for="email">Email</label>
         <input type="email" id="email" name="email" required
                value="<?= htmlspecialchars($user['email'] ?? '', ENT_QUOTES) ?>">
       </div>
 
       <div class="form-row">
-        <label class="label" for="username">Identifiant</label>
+        <label for="username">Identifiant</label>
         <input type="text" id="username" name="username" required
                value="<?= htmlspecialchars($user['username'] ?? '', ENT_QUOTES) ?>">
       </div>
+
     <?php endif; ?>
 
-    <div class="form-row">
+    <div class="form-row full-row toolbar">
       <button type="button" class="btn btn-secondary" id="togglePwd">Modifier le MDP</button>
       <input type="hidden" name="change_password" id="change_password" value="0">
     </div>
 
-    <div id="pwd_block" class="hidden">
+    <div id="pwd_block" class="hidden full-row">
       <div class="form-row">
-        <label class="js-check-password" for="password">Nouveau mot de passe</label>
-        <input type="password" id="password" name="password"
-               placeholder="12+ caractères, MAJ, min, chiffre, spécial">
+        <label for="password">Nouveau mot de passe</label>
+        <input type="password" id="password" name="password" placeholder="12+ caractères, MAJ, min, chiffre, spécial">
       </div>
+
       <div class="form-row">
-        <label class="js-check-password" for="password_confirm">Confirmer le mot de passe</label>
+        <label for="password_confirm">Confirmer le mot de passe</label>
         <input type="password" id="password_confirm" name="password_confirm">
       </div>
     </div>
 
-    <div class="form-row">
-      <button type="submit" class="btn btn-primary" onclick="return confirm('Êtes-vous sûr de vouloir modifier ce compte ?')">Enregistrer</button>
+    <div class="form-row full-row actions">
+      <button type="submit" class="btn btn-primary" onclick="return confirm('Êtes-vous sûr ?')">Enregistrer</button>
       <a class="btn btn-danger" href="manage_users.php">Annuler</a>
     </div>
+
   </form>
 </main>
 

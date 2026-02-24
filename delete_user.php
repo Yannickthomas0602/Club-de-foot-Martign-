@@ -26,5 +26,17 @@ if ($id === (int)$_SESSION['user_id']) {
 
 deleteAccount($pdo, $id);
 
-header("Location: manage_users.php");
-exit;
+// si le compte est admin il redirige vers l'encre admin, sinon si le compte est coach il redirige vers l'encre coach, sinon redirige vers l'encre équipe
+$user = getUserById($pdo, $id);
+if ($user) {
+    if ($user['role_slug'] === 'admin') {
+        header("Location: manage_users.php?success=1#liste-admins");
+        exit;
+    } elseif ($user['role_slug'] === 'coach') {
+        header("Location: manage_users.php?success=1#liste-coachs");
+        exit;
+    }
+}   else {
+    header("Location: manage_users.php?success=1#liste-equipes");
+    exit;
+}

@@ -1,0 +1,179 @@
+:root {
+    --red: #F0322B;
+    --red-dark: #8A1D19;
+    --black: #111;
+    --grey: #f5f5f5;
+    --text-dark: #222;
+    --text-light: #fff;
+    --border: #d9d9d9;
+    --focus: #ffb3b3;
+}
+
+main {
+    width: 95%;
+    max-width: 900px;
+    margin: 40px auto 80px;
+    padding: 24px;
+    background: var(--grey);
+    border-left: 6px solid var(--red);
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    color: var(--text-dark);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main h2 {
+    margin: 0 0 16px 0;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+form.js-edit-user-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 28px;
+    margin-top: 8px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.full-row {
+    grid-column: 1 / -1;
+}
+
+.label, label {
+    font-weight: 700;
+    font-size: 14px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 12px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+    font-size: 15px;
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+input::placeholder {
+    color: #9a9a9a;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px var(--focus);
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: background .15s ease, transform .05s ease;
+    user-select: none;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-primary {
+    background: var(--red);
+    color: var(--text-light);
+}
+
+.btn-primary:hover {
+    background: var(--red-dark);
+}
+
+.btn-secondary {
+    background: #2c2c2c;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background: #000;
+}
+
+.btn-danger {
+    background: #8A1D19;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #8A1D19;
+}
+
+.hidden {
+    display: none;
+}
+
+#pwd_block {
+    background: #fff;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+
+/* Lignes pleine largeur dans la grille */
+.full-row { grid-column: 1 / -1; }
+
+/* Barre du bouton "Modifier le MDP" : centré, pas full-width */
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+.toolbar .btn,
+.toolbar button {
+    width: auto;
+}
+
+/* Ligne des actions "Enregistrer / Annuler" : côte à côte */
+.actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    justify-content: flex-start;
+}
+.actions .btn,
+.actions button {
+    width: auto;
+}
+
+/* Boutons : alignement interne pour éviter les décalages <a> vs <button> */
+.btn, button.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+/* Anti-étirement venant d’un style global éventuel */
+.form-row .btn, 
+.form-row button {
+    max-width: max-content;
+}
+
+
+@media (max-width: 820px) {
+    form.js-edit-user-form {
+        grid-template-columns: 1fr;
+    }
+}

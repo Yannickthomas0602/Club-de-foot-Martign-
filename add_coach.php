@@ -41,9 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
    creerUtilisateur($pdo, $last_name, $first_name, $username, $email, $password_hash, 'coach', 1);
 
-    header("Location: manage_users.php?success=coach_added");
+    header("Location: manage_users.php?success=coach_added#liste-coachs");
     exit;
 }
 
-header("Location: manage_users.php");
+header("Location: manage_users.php#liste-coachs");
 exit;

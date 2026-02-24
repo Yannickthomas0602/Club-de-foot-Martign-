@@ -43,9 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     creerUtilisateur($pdo, $last_name, $first_name, $username, $email, $password_hash, 'admin', 1);
 
-    header("Location: manage_users.php?success=admin_added");
+    header("Location: manage_users.php?success=admin_added#liste-admins");
     exit;
 }
 
-header("Location: manage_users.php");
+header("Location: manage_users.php#liste-admins");
 exit;

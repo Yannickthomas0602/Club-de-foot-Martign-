@@ -18,8 +18,9 @@ $admin = $stmt->fetchAll();
 
 <?php include 'header.php'; ?>
 <script src="assets/js/check_password.js"></script>
+<link rel="stylesheet" href="assets/css/manage_users.css">
     <main>
-        <div class="liste-coachs">
+        <div id="liste-coachs" class="liste-coachs">
             <h2>Liste des coachs : </h2>
             <table border="2">
                 <tr>
@@ -53,7 +54,7 @@ $admin = $stmt->fetchAll();
                     endforeach; ?>
             </table>
         </div>
-        <div class="ajout-coachs">
+        <div id="ajout-coachs" class="ajout-coachs">
             <h3>Ajouter un coachs</h3>
             <form method="POST" action="add_coach.php" class="js-check-password">
                 <div class="nom_coach">
@@ -83,7 +84,7 @@ $admin = $stmt->fetchAll();
                 <button type="submit">Ajouter un coach</button>
             </form>
         </div>
-        <div class="liste-equipes">
+        <div id="liste-equipes" class="liste-equipes">
             <h2>Liste des équipes : </h2>
             <table border="2">
                 <tr>
@@ -113,7 +114,7 @@ $admin = $stmt->fetchAll();
                     endforeach; ?>
             </table>
         </div>
-        <div class="ajout-equipes">
+        <div id="ajout-equipes" class="ajout-equipes">
             <h3>Ajouter une equipe</h3>
             <form method="POST" action="add_user.php" class="js-check-password">
                 <div class="nom_equipe">
@@ -135,7 +136,7 @@ $admin = $stmt->fetchAll();
                 <button type="submit">Ajouter une équipe</button>
             </form>
         </div>
-        <div class="liste-admins">
+        <div id="liste-admins" class="liste-admins">
             <h2>Liste des administrateurs : </h2>
             <table border="2">
                 <tr>
@@ -169,7 +170,7 @@ $admin = $stmt->fetchAll();
                     endforeach; ?>
             </table>
         </div>
-        <div class="ajout-coachs">
+        <div id="ajout-admins" class="ajout-admins">
             <h3>Ajouter un administrateur</h3>
             <form method="POST" action="add_admin.php" class="js-check-password">
                 <div class="nom_admin">
