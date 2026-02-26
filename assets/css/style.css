@@ -120,3 +120,57 @@ body {
 }
 
 .logo { width: 50px; height: 50px; }
+
+.results-box {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.results-box .scorenco-widget {
+    width: 100%;
+    min-height: 180px;
+    height: 180px;
+    background: #F2F5F9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: bolder;
+    gap: 9px;
+    color: #1E457B;
+}
+
+.results-box iframe {
+    height: 180px !important;
+    min-height: 295px !important;
+}
+
+.card.border-blue .btn-red {
+    margin-top: 14px;
+}
+
+.ldsdr {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+.ldsdr:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #1E457B;
+    border-color: #1E457B transparent;
+    animation: ldsdr 1.2s linear infinite;
+}
+
+@keyframes ldsdr {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

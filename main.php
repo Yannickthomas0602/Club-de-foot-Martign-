@@ -25,19 +25,16 @@
 
     <div class="card border-blue"> <h3 class="card-title"><i class="fa-solid fa-trophy"></i> Les Derniers Résultats</h3>
         <div class="card-content results-box">
-            <span class="team-top-name">US Janzé</span>
-            <p class="match-date">Janzé - Samedi 06 Décembre 2025</p>
-            <div class="score-row">
-                <button class="arrow-score">❮</button>
-                <img src="logo-janze.png" alt="Logo Janzé" class="logo">
-                <div class="score-badge">0 | 1</div>
-                <img src="logo-adversaire.png" alt="Logo CCM" class="logo">
-                <button class="arrow-score">❯</button>
+            <div class="scorenco-widget" data-widget-type="team" data-widget-id="168255">
+                <div class="ldsdr"></div>
+                Score'n'co - Cadets Chelun Martigné
             </div>
         </div>
         <a href="resultats.php" class="btn-red">Voir tous les résultats</a>
     </div>
 </section>
+
+<script async defer src="https://widgets.scorenco.com/host/widgets.js"></script>
 
     
 </main>
