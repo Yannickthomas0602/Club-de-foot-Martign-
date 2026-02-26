@@ -11,6 +11,7 @@
 
         <?php include 'carousel.php'; ?>
         <script src="assets/js/carousel.js"></script>
+        <script src="assets/js/script.js"></script>
         <div class="footer-yellow-line"></div>
 
         <div class="rectangle_footer footer-flex">
