@@ -1,4 +1,6 @@
-<?php include "header.php"; ?>
+<?php 
+$page_title = "Résultats";
+include "header.php"; ?>
 <link rel="stylesheet" href="assets/css/resultats.css">
 
    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">

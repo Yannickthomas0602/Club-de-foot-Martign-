@@ -14,6 +14,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_slug'] !== 'admin') {
 $stmt = $pdo->query("SELECT u.id, u.last_name, u.first_name, u.username, u.email, r.slug FROM users u JOIN roles r ON u.role_id = r.id");
 $admin = $stmt->fetchAll();
 
+$page_title = "Gestion des utilisateurs";
 ?>
 
 <?php include 'header.php'; ?>

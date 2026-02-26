@@ -14,7 +14,20 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <title>Cadets Chelun Martigné-Ferchaud</title>
+    
+    <title>
+        <?php
+        if (!isset($page_title) || $page_title === "") {
+            // Page d’accueil → titre simple
+            echo "Cadets Chelun Martigné";
+        } else {
+            // Toutes les autres pages
+            echo $page_title . " | Cadets Chelun Martigné";
+        }
+        ?>
+    </title>
+
+
     <!-- Logo du club devant le titre de l'onglet -->
     <link rel="icon" type="image/png" href="assets/img/Logo_club/logo_rogne.png"> 
     <link rel="stylesheet" href="assets/css/header.css">

@@ -64,6 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     exit;
 }
+
+$page_title = "Connexion";
 ?>
 
     <?php include 'header.php'; ?>

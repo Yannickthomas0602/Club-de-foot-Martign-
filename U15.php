@@ -1,4 +1,6 @@
-<?php include "header.php"; ?>
+<?php 
+$page_title = "U15";
+include "header.php"; ?>
 
 <link rel="stylesheet" href="futsal.css">
 

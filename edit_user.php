@@ -123,6 +123,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
+
+$page_title = "Modifier $user[username]";
 ?> 
 
 <?php include 'header.php'; ?>

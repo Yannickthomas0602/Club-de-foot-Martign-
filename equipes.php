@@ -1,4 +1,5 @@
 <?php
+$page_title = "Équipes";
 include "header.php";
 ?>
 

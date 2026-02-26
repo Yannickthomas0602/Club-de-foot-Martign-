@@ -57,6 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Erreur lors de l'inscription: " . htmlspecialchars($e->getMessage(), ENT_QUOTES));
     }
 }
+
+checkSessionTimeout();
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role_slug'] !== 'admin') {
+    header("Location: login.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
