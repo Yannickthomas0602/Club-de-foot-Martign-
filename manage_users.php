@@ -82,7 +82,7 @@ $page_title = "Gestion des utilisateurs";
                     <label for="password_confirm">Confirmer le mot de passe</label>
                     <input type="password" name="password_confirm" placeholder="Confirmer le mot de passe" required>
                 </div>
-                <button type="submit">Ajouter un coach</button>
+                <button type="submit" onsubmit="return confirm('Êtes-vous sûr de vouloir ajouter ce coach ?')">Ajouter un coach</button>
             </form>
         </div>
         <div id="liste-equipes" class="liste-equipes">
@@ -134,7 +134,7 @@ $page_title = "Gestion des utilisateurs";
                     <label for="password_confirm">Confirmer le mot de passe</label>
                     <input type="password" name="password_confirm" placeholder="Confirmer le mot de passe" required>
                 </div>
-                <button type="submit">Ajouter une équipe</button>
+                <button type="submit" onsubmit="return confirm('Êtes-vous sûr de vouloir ajouter cette équipe ?')">Ajouter une équipe</button>
             </form>
         </div>
         <div id="liste-admins" class="liste-admins">
@@ -198,7 +198,7 @@ $page_title = "Gestion des utilisateurs";
                     <label for="password_confirm">Confirmer le mot de passe</label>
                     <input type="password" name="password_confirm" placeholder="Confirmer le mot de passe" required>
                 </div>
-                <button type="submit">Ajouter un administrateur</button>
+                <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir ajouter cet administrateur ?')">Ajouter un administrateur</button>
             </form>
         </div>
     </main>
