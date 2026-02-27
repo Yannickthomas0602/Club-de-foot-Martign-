@@ -15,6 +15,8 @@ $page_title = "Administration";
     <a href="manage_users.php">Gérer les utilisateurs</a>
     <br>
     <a href="convocation_admin.php">accès convocation</a>
+    <br>
+    <a href="annonces_popup_admin.php">Gérer les annonces pop-up</a>
     </main>
     <footer>
         <?php include 'footer.php'; ?>
