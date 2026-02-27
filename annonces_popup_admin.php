@@ -29,6 +29,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!hash_equals($_SESSION['csrf_popup'], $token)) {
         $error = "Jeton de sécurité invalide.";
+    } elseif ($action === 'update_date') {
+        $updateId = (int)($_POST['update_id'] ?? 0);
+        $newDateFinInput = trim($_POST['new_date_fin'] ?? '');
+
+        if ($updateId <= 0 || $newDateFinInput === '') {
+            $error = "Informations invalides pour la mise à jour de la durée.";
+        } else {
+            $newDateFin = DateTime::createFromFormat('Y-m-d\\TH:i', $newDateFinInput);
+
+            if (!$newDateFin) {
+                $error = "Nouvelle date de fin invalide.";
+            } else {
+                $stmtUpdate = $pdo->prepare(
+                    "UPDATE annonces_popup
+                     SET date_fin = :date_fin
+                     WHERE id = :id"
+                );
+                $stmtUpdate->execute([
+                    ':date_fin' => $newDateFin->format('Y-m-d H:i:s'),
+                    ':id' => $updateId,
+                ]);
+                $success = "Durée d'affichage mise à jour avec succès.";
+            }
+        }
     } elseif ($action === 'delete') {
         $deleteId = (int)($_POST['delete_id'] ?? 0);
 
@@ -132,6 +156,19 @@ $annonces = $pdo->query(
                 <td><?= htmlspecialchars($annonce['date_fin'], ENT_QUOTES, 'UTF-8') ?></td>
                 <td><?= ((int)$annonce['actif'] === 1) ? 'Oui' : 'Non' ?></td>
                 <td>
+                    <form method="post" action="" style="display:inline-block;margin-right:8px;">
+                        <input type="hidden" name="csrf_popup" value="<?= htmlspecialchars($_SESSION['csrf_popup'], ENT_QUOTES, 'UTF-8') ?>">
+                        <input type="hidden" name="action" value="update_date">
+                        <input type="hidden" name="update_id" value="<?= (int)$annonce['id'] ?>">
+                        <input
+                            type="datetime-local"
+                            name="new_date_fin"
+                            value="<?= htmlspecialchars((new DateTime($annonce['date_fin']))->format('Y-m-d\\TH:i'), ENT_QUOTES, 'UTF-8') ?>"
+                            required
+                        >
+                        <button type="submit">Mettre à jour</button>
+                    </form>
+
                     <form method="post" action="" onsubmit="return confirm('Supprimer cette annonce ?');" style="display:inline;">
                         <input type="hidden" name="csrf_popup" value="<?= htmlspecialchars($_SESSION['csrf_popup'], ENT_QUOTES, 'UTF-8') ?>">
                         <input type="hidden" name="action" value="delete">
