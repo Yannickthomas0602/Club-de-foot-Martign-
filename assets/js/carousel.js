@@ -1,8 +1,18 @@
+(() => {
 const track = document.getElementById('carouselTrack');
 const container = document.getElementById('carouselContainer');
 const nextBtn = document.getElementById('nextBtn');
 const prevBtn = document.getElementById('prevBtn');
+if (!track || !container || !nextBtn || !prevBtn) {
+    return;
+}
 const slides = Array.from(track.children);
+
+if (slides.length === 0) {
+    nextBtn.style.display = 'none';
+    prevBtn.style.display = 'none';
+    return;
+}
 
 // Cloner les slides pour créer l'effet infini
 const clonedSlides = slides.map(slide => slide.cloneNode(true));
@@ -105,3 +115,4 @@ window.addEventListener('resize', () => {
 
 // Initialiser
 startAutoScroll();
+})();

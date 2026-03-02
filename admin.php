@@ -17,6 +17,7 @@ $page_title = "Administration";
     <ul><a href="convocation_admin.php">Gérer les convocations</a></ul>
     <ul><a href="annonces_popup_admin.php">Gérer les annonces pop-up</a></ul>
     <ul><a href="admin_organigramme.php">Gérer l'organigramme</a></ul>
+    <ul><a href="admin_sponsors.php">Gérer les sponsors (carrousel)</a></ul>
     </li>
     </main>
     <footer>

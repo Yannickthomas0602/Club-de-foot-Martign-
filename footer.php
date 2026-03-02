@@ -16,12 +16,17 @@
 
         <div class="rectangle_footer footer-flex">
           <div class="footer-col footer-left">
-            <p class="devise">
-              Jouer Ensemble,<span class="devise-break"> Vivre Ensemble,</span><span class="devise-break"> Grandir Ensemble</span>
-            </p>
-            <div class="social_links">
-              <a class="social_link" href="https://www.facebook.com/p/Cadets-Chelun-Martigné-Ferchaud-100057405613179/" target="blank"><img class="social_img" src="assets/img/Logo_club/icons8-facebook-100 (1).png" alt="logo facebook"></a>
-              <a class="social_link" href="https://www.instagram.com/cadetschelunmartigne/" target="blank"><img class="social_img" src="assets/img/Logo_club/icons8-instagram-100 (1).png" alt="logo instagram"></a>
+            <div class="footer-left-row">
+              <img class="footer-club-logo" src="assets/img/Logo_club/logo%20full%20blanc.png" alt="Logo Cadets Chelun Martigné">
+              <div class="footer-left-content">
+                <p class="devise">
+                  Jouer Ensemble,<span class="devise-break"> Vivre Ensemble,</span><span class="devise-break"> Grandir Ensemble</span>
+                </p>
+                <div class="social_links">
+                  <a class="social_link" href="https://www.facebook.com/p/Cadets-Chelun-Martigné-Ferchaud-100057405613179/" target="blank"><img class="social_img" src="assets/img/Logo_club/icons8-facebook-100 (1).png" alt="logo facebook"></a>
+                  <a class="social_link" href="https://www.instagram.com/cadetschelunmartigne/" target="blank"><img class="social_img" src="assets/img/Logo_club/icons8-instagram-100 (1).png" alt="logo instagram"></a>
+                </div>
+              </div>
             </div>
           </div>
           <div class="footer-col footer-center">
@@ -44,12 +49,28 @@
             </div>
           </div>
           <div class="footer-col footer-right">
-            <p class="footer-title">Informations légales</p>
-            <ul class="footer-legal">
-              <li><a href="#">Mentions légales</a></li>
-              <li><a href="#">Informations légales</a></li>
-              <li><a href="#">Gestion des cookies</a></li>
-            </ul>
+            <div class="footer-right-sections">
+              <div class="footer-legal-wrap">
+                <p class="footer-title">Informations légales</p>
+                <ul class="footer-legal">
+                  <li><a href="#">Mentions légales</a></li>
+                  <li><a href="#">Informations légales</a></li>
+                  <li><a href="#">Gestion des cookies</a></li>
+                </ul>
+              </div>
+
+              <div class="footer-contact-wrap">
+                <p class="footer-title">Contact</p>
+                <ul class="footer-contact-list">
+                  <li>
+                    <a href="tel:+33000000000"><i class="fa-solid fa-phone"></i> 06 31 07 99 01</a>
+                  </li>
+                  <li>
+                    <a href="mailto:contact@cadets-chelun-martigne.fr"><i class="fa-solid fa-envelope"></i>  CCMreseauxsociaux@gmail.com</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
 

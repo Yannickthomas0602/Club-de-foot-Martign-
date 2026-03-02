@@ -9,13 +9,19 @@
         <div class="carousel-container" id="carouselContainer">
             <div class="carousel-track" id="carouselTrack">
                 <?php
-                include 'config/sponsors.php';
-                
-                // On affiche chaque sponsor avec son lien
-                foreach ($sponsors as $logo => $url) {
-                    if (file_exists($logo)) {
-                        echo '<div class="slide"><a href="' . $url . '" target="_blank" title="Visiter le site"><img src="' . $logo . '" alt="Sponsor"></a></div>';
+                require_once __DIR__ . '/sponsors_store.php';
+                $sponsors = loadSponsors();
+
+                foreach ($sponsors as $sponsor) {
+                    $logo = (string)($sponsor['image'] ?? '');
+                    $url = (string)($sponsor['url'] ?? '');
+                    if ($logo === '' || !file_exists(__DIR__ . '/' . ltrim($logo, '/'))) {
+                        continue;
                     }
+
+                    $logoSafe = htmlspecialchars($logo, ENT_QUOTES, 'UTF-8');
+                    $urlSafe = htmlspecialchars($url !== '' ? $url : '#', ENT_QUOTES, 'UTF-8');
+                    echo '<div class="slide"><a href="' . $urlSafe . '" target="_blank" title="Visiter le site" rel="noopener noreferrer"><img src="' . $logoSafe . '" alt="Sponsor"></a></div>';
                 }
                 ?>
             </div>
