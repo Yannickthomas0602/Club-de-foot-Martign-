@@ -170,6 +170,7 @@ if (!$annoncesPopup) {
 (function () {
     const overlay = document.getElementById('popupOverlay');
     const closeBtn = document.getElementById('popupClose');
+    const autoOpenKey = 'club_popup_opened_once';
 
     if (!overlay || !closeBtn) {
         return;
@@ -180,8 +181,17 @@ if (!$annoncesPopup) {
         overlay.setAttribute('aria-hidden', 'true');
     }
 
-    overlay.style.display = 'flex';
-    overlay.setAttribute('aria-hidden', 'false');
+    function openPopup() {
+        overlay.style.display = 'flex';
+        overlay.setAttribute('aria-hidden', 'false');
+    }
+
+    window.openClubPopup = openPopup;
+
+    if (!sessionStorage.getItem(autoOpenKey)) {
+        openPopup();
+        sessionStorage.setItem(autoOpenKey, '1');
+    }
 
     closeBtn.addEventListener('click', closePopup);
 
