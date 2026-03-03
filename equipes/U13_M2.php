@@ -1,14 +1,15 @@
 <?php 
-$page_title = "U15 F1";
-include "header.php"; ?>
+$page_title = "U13 M2";
+$base_href = '../';
+include "../header.php"; ?>
 
-<link rel="stylesheet" href="futsal.css">
+<link rel="stylesheet" href="assets/css/page_equipes.css">
 
     <section class="team-hero" style="background-image: url('assets/img/Image_accueil/image U15.jpeg');">
         
         <div class="hero-overlay">
             <div class="hero-content">
-                <h1 class="hero-title">Sénior Féminine</h1>
+                <h1 class="hero-title">U13 M2</h1>
                 <p class="hero-subtitle">Saison 2025-2026 - Division 1</p>
             </div>
         </div>
@@ -47,7 +48,7 @@ include "header.php"; ?>
         <div class="main-column">
             <h2 class="section-title">Le Classement</h2>
             <div class="widget-container">
-               <div class="scorenco-widget" data-widget-type="ranking" data-widget-id="185002" style="background: #F2F5F9; height: 500px; display: flex; align-items: center; justify-content: center; flex-direction: column;text-transform: uppercase; font-family: sans-serif; font-weight: bolder; gap: 9px; color:#1E457B;">
+               <div class="scorenco-widget" data-widget-type="ranking" data-widget-id="185006" style="background: #F2F5F9; height: 500px; display: flex; align-items: center; justify-content: center; flex-direction: column;text-transform: uppercase; font-family: sans-serif; font-weight: bolder; gap: 9px; color:#1E457B;">
   <div class="ldsdr"></div>
   Score'n'co - Cadets Chelun Martigné
   </div>
@@ -59,7 +60,7 @@ include "header.php"; ?>
         <div class="sidebar-column">
             <h2 class="section-title">Derniers Résultats</h2>
             <div class="widget-container">
-               <div class="scorenco-widget" data-widget-type="previous-next" data-widget-id="185003" style="background: #F2F5F9; height: 500px; display: flex; align-items: center; justify-content: center; flex-direction: column;text-transform: uppercase; font-family: sans-serif; font-weight: bolder; gap: 9px; color:#1E457B;">
+               <div class="scorenco-widget" data-widget-type="previous-next" data-widget-id="185007" style="background: #F2F5F9; height: 500px; display: flex; align-items: center; justify-content: center; flex-direction: column;text-transform: uppercase; font-family: sans-serif; font-weight: bolder; gap: 9px; color:#1E457B;">
   <div class="ldsdr"></div>
   Score'n'co - Cadets Chelun Martigné
   </div>
@@ -70,4 +71,4 @@ include "header.php"; ?>
 
     </section>
 
-<?php include "footer.php"; ?>
+<?php include "../footer.php"; ?>

@@ -1,8 +1,9 @@
 <?php 
 $page_title = "U18";
-include "header.php"; ?>
+$base_href = '../';
+include "../header.php"; ?>
 
-<link rel="stylesheet" href="futsal.css">
+<link rel="stylesheet" href="assets/css/page_equipes.css">
 
     <section class="team-hero" style="background-image: url('assets/img/Image_accueil/image U15.jpeg');">
         
@@ -71,4 +72,4 @@ include "header.php"; ?>
 
     </section>
 
-<?php include "footer.php"; ?>
+<?php include "../footer.php"; ?>

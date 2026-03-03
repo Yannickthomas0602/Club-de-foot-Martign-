@@ -5,6 +5,8 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
+$base_href = isset($base_href) ? (string)$base_href : '';
+
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +14,9 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php if ($base_href !== ''): ?>
+    <base href="<?= htmlspecialchars($base_href, ENT_QUOTES, 'UTF-8') ?>">
+    <?php endif; ?>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
@@ -40,7 +45,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     <header>
         <div id="rectangle">
             <div class="nav_group_left">
-                <?php include 'menu_burger.html'; ?>
+                <?php include __DIR__ . '/menu_burger.html'; ?>
                 <nav class="desktop_links">
                     <a href="index.php">Accueil</a>
                     <a href="equipes.php">&Eacute;quipes</a>

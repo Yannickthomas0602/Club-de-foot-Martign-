@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-        <?php include 'carousel.php'; ?>
+        <?php include __DIR__ . '/carousel.php'; ?>
         <script src="assets/js/carousel.js"></script>
         <script src="assets/js/script.js"></script>
         <div class="footer-yellow-line"></div>
