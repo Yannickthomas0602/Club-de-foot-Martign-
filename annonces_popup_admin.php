@@ -105,110 +105,128 @@ $annonces = $pdo->query(
 
 <?php include 'header.php'; ?>
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<main style="max-width:900px;margin:30px auto;padding:0 16px;">
-    <h1>Créer une annonce pop-up</h1>
+<link rel="stylesheet" href="assets/css/pop_up_admin.css">
 
-    <?php if ($success !== ''): ?>
-        <p style="color:#1f7a1f;"><?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?></p>
-    <?php endif; ?>
+<main>
+  <h2>Créer une annonce pop-up</h2>
 
-    <?php if ($error !== ''): ?>
-        <p style="color:#b30000;"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
-    <?php endif; ?>
+  <?php if ($success !== ''): ?>
+    <p class="alert alert--success"><?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?></p>
+  <?php endif; ?>
 
-    <form method="post" action="">
-        <input type="hidden" name="csrf_popup" value="<?= htmlspecialchars($_SESSION['csrf_popup'], ENT_QUOTES, 'UTF-8') ?>">
-        <input type="hidden" name="action" value="create">
+  <?php if ($error !== ''): ?>
+    <p class="alert alert--error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
+  <?php endif; ?>
 
-        <label for="titre">Titre</label><br>
-        <input type="text" id="titre" name="titre" maxlength="255" required value="<?= htmlspecialchars($titre, ENT_QUOTES, 'UTF-8') ?>" style="width:100%;max-width:600px;padding:8px;margin:8px 0 16px;"><br>
+  <section class="bloc bloc--form">
+    <form method="post" action="" class="form-popup">
+      <input type="hidden" name="csrf_popup" value="<?= htmlspecialchars($_SESSION['csrf_popup'], ENT_QUOTES, 'UTF-8') ?>">
+      <input type="hidden" name="action" value="create">
 
-        <label for="editor">Contenu</label><br>
-        <div id="editor" style="height:320px;"><?= $contenu !== '' ? $contenu : '<p></p>' ?></div>
-        <textarea id="contenu" name="contenu" style="display:none;"></textarea><br>
+      <div class="form-row">
+        <label for="titre">Titre</label>
+        <input type="text" id="titre" name="titre" maxlength="255" required
+               value="<?= htmlspecialchars($titre, ENT_QUOTES, 'UTF-8') ?>">
+      </div>
 
-        <label for="date_fin">Date de fin d'affichage</label><br>
-        <input type="datetime-local" id="date_fin" name="date_fin" required value="<?= htmlspecialchars($dateFinInput, ENT_QUOTES, 'UTF-8') ?>" style="padding:8px;margin:8px 0 16px;"><br>
+      <div class="form-row">
+        <label for="editor">Contenu</label>
+        <div id="editor" class="quill-editor"><?= $contenu !== '' ? $contenu : '<p></p>' ?></div>
+        <textarea id="contenu" name="contenu" class="u-hidden"></textarea>
+      </div>
 
-        <label>
-            <input type="checkbox" name="actif" <?= $actif ? 'checked' : '' ?>>
-            Annonce active
-        </label><br><br>
+      <div class="form-row form-row--inline">
+        <div>
+          <label for="date_fin">Date de fin d'affichage</label>
+          <input type="datetime-local" id="date_fin" name="date_fin" required
+                 value="<?= htmlspecialchars($dateFinInput, ENT_QUOTES, 'UTF-8') ?>">
+        </div>
 
-        <button type="submit">Enregistrer l'annonce</button>
+        <label class="checkbox">
+          <input type="checkbox" name="actif" <?= $actif ? 'checked' : '' ?>>
+          <span>Annonce active</span>
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn">Enregistrer l'annonce</button>
+      </div>
     </form>
+  </section>
 
-    <hr style="margin:30px 0;">
+  <section class="bloc">
+    <h3>Dernières annonces</h3>
 
-    <h2>Dernières annonces</h2>
-    <table border="1" cellpadding="8" cellspacing="0" style="width:100%;max-width:800px;border-collapse:collapse;">
-        <tr>
+    <div class="table-wrap">
+      <table border="2">
+        <thead>
+          <tr>
             <th>ID</th>
             <th>Titre</th>
             <th>Date de fin</th>
             <th>Actif</th>
             <th>Actions</th>
-        </tr>
+          </tr>
+        </thead>
+        <tbody>
         <?php foreach ($annonces as $annonce): ?>
-            <tr>
-                <td><?= (int)$annonce['id'] ?></td>
-                <td><?= htmlspecialchars($annonce['titre'], ENT_QUOTES, 'UTF-8') ?></td>
-                <td><?= htmlspecialchars($annonce['date_fin'], ENT_QUOTES, 'UTF-8') ?></td>
-                <td><?= ((int)$annonce['actif'] === 1) ? 'Oui' : 'Non' ?></td>
-                <td>
-                    <form method="post" action="" style="display:inline-block;margin-right:8px;">
-                        <input type="hidden" name="csrf_popup" value="<?= htmlspecialchars($_SESSION['csrf_popup'], ENT_QUOTES, 'UTF-8') ?>">
-                        <input type="hidden" name="action" value="update_date">
-                        <input type="hidden" name="update_id" value="<?= (int)$annonce['id'] ?>">
-                        <input
-                            type="datetime-local"
-                            name="new_date_fin"
-                            value="<?= htmlspecialchars((new DateTime($annonce['date_fin']))->format('Y-m-d\\TH:i'), ENT_QUOTES, 'UTF-8') ?>"
-                            required
-                        >
-                        <button type="submit">Mettre à jour</button>
-                    </form>
+          <tr>
+            <td><?= (int)$annonce['id'] ?></td>
+            <td><?= htmlspecialchars($annonce['titre'], ENT_QUOTES, 'UTF-8') ?></td>
+            <td><?= htmlspecialchars($annonce['date_fin'], ENT_QUOTES, 'UTF-8') ?></td>
+            <td><?= ((int)$annonce['actif'] === 1) ? 'Oui' : 'Non' ?></td>
+            <td class="actions-cell">
+              <form method="post" action="" class="form-inline">
+                <input type="hidden" name="csrf_popup" value="<?= htmlspecialchars($_SESSION['csrf_popup'], ENT_QUOTES, 'UTF-8') ?>">
+                <input type="hidden" name="action" value="update_date">
+                <input type="hidden" name="update_id" value="<?= (int)$annonce['id'] ?>">
+                <input type="datetime-local" name="new_date_fin"
+                       value="<?= htmlspecialchars((new DateTime($annonce['date_fin']))->format('Y-m-d\TH:i'), ENT_QUOTES, 'UTF-8') ?>"
+                       required>
+                <button type="submit" class="btn">Mettre à jour</button>
+              </form>
 
-                    <form method="post" action="" onsubmit="return confirm('Supprimer cette annonce ?');" style="display:inline;">
-                        <input type="hidden" name="csrf_popup" value="<?= htmlspecialchars($_SESSION['csrf_popup'], ENT_QUOTES, 'UTF-8') ?>">
-                        <input type="hidden" name="action" value="delete">
-                        <input type="hidden" name="delete_id" value="<?= (int)$annonce['id'] ?>">
-                        <button type="submit">Supprimer</button>
-                    </form>
-                </td>
-            </tr>
+              <form method="post" action="" onsubmit="return confirm('Supprimer cette annonce ?');" class="form-inline">
+                <input type="hidden" name="csrf_popup" value="<?= htmlspecialchars($_SESSION['csrf_popup'], ENT_QUOTES, 'UTF-8') ?>">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="delete_id" value="<?= (int)$annonce['id'] ?>">
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+              </form>
+            </td>
+          </tr>
         <?php endforeach; ?>
-    </table>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </main>
 
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
 const quill = new Quill('#editor', {
-    theme: 'snow',
-    modules: {
-        toolbar: [
-            [{ header: [1, 2, false] }],
-            ['bold', 'italic', 'underline'],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            ['link'],
-            ['clean']
-        ]
-    }
+  theme: 'snow',
+  modules: {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ['bold', 'italic', 'underline'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      ['link'],
+      ['clean']
+    ]
+  }
 });
 
-const form = document.querySelector('form');
+const form = document.querySelector('.form-popup');
 const contenuField = document.getElementById('contenu');
 
 form.addEventListener('submit', function (event) {
-    const texte = quill.getText().trim();
-
-    if (!texte) {
-        event.preventDefault();
-        alert('Merci de saisir un contenu pour l\'annonce.');
-        return;
-    }
-
-    contenuField.value = quill.root.innerHTML;
+  const texte = quill.getText().trim();
+  if (!texte) {
+    event.preventDefault();
+    alert('Merci de saisir un contenu pour l\'annonce.');
+    return;
+  }
+  contenuField.value = quill.root.innerHTML;
 });
 </script>
 

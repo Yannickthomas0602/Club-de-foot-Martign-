@@ -60,6 +60,7 @@ $sponsors = loadSponsors();
 ?>
 
 <?php include 'header.php'; ?>
+<link rel="stylesheet" href="assets/css/admin_sponsors.css">
 <main style="max-width:1000px;margin:28px auto;padding:0 16px;">
     <h1>Gestion des sponsors (carrousel)</h1>
 
