@@ -19,28 +19,44 @@ if (empty($_SESSION['csrf_sponsors'])) {
 $message = '';
 $error = '';
 
+if (isset($_SESSION['sponsors_flash']) && is_array($_SESSION['sponsors_flash'])) {
+    $flash = $_SESSION['sponsors_flash'];
+    unset($_SESSION['sponsors_flash']);
+
+    if (($flash['type'] ?? '') === 'success') {
+        $message = (string)($flash['message'] ?? '');
+    } elseif (($flash['type'] ?? '') === 'error') {
+        $error = (string)($flash['message'] ?? '');
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $token = $_POST['csrf_sponsors'] ?? '';
     $action = $_POST['action'] ?? '';
 
+    $flashType = 'error';
+    $flashMessage = 'Action invalide.';
+
     if (!hash_equals($_SESSION['csrf_sponsors'], $token)) {
-        $error = 'Jeton de sécurité invalide.';
+        $flashMessage = 'Jeton de sécurité invalide.';
     } elseif ($action === 'add') {
         $url = $_POST['sponsor_url'] ?? '';
         $file = $_FILES['sponsor_image'] ?? [];
         $result = addSponsor($file, (string)$url);
         if ($result['ok']) {
-            $message = $result['message'];
+            $flashType = 'success';
+            $flashMessage = $result['message'];
         } else {
-            $error = $result['message'];
+            $flashMessage = $result['message'];
         }
     } elseif ($action === 'delete') {
         $id = (string)($_POST['sponsor_id'] ?? '');
         $result = deleteSponsor($id);
         if ($result['ok']) {
-            $message = $result['message'];
+            $flashType = 'success';
+            $flashMessage = $result['message'];
         } else {
-            $error = $result['message'];
+            $flashMessage = $result['message'];
         }
     } elseif ($action === 'migrate_webp') {
         $result = migrateSponsorsToWebp();
@@ -49,11 +65,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             . ' | Échecs: ' . (int)($result['failed'] ?? 0);
 
         if ($result['ok']) {
-            $message = $result['message'] . $details;
+            $flashType = 'success';
+            $flashMessage = $result['message'] . $details;
         } else {
-            $error = $result['message'] . $details;
+            $flashMessage = $result['message'] . $details;
         }
     }
+
+    $_SESSION['sponsors_flash'] = [
+        'type' => $flashType,
+        'message' => $flashMessage,
+    ];
+
+    header('Location: admin_sponsors.php');
+    exit;
 }
 
 $sponsors = loadSponsors();
