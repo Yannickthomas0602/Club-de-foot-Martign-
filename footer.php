@@ -33,7 +33,7 @@
             <p class="footer-title">Navigation</p>
             <div class="footer-nav-columns">
               <ul class="footer-nav">
-                <li><a href="resultats.php">Résultats</a></li>
+                <li><a href="index.php">Accueil</a></li>
                 <li><a href="calendrier.php">Calendrier</a></li>
                 <li><a href="equipes.php">Équipes</a></li>
                 <li><a href="#">Convocations</a></li>
@@ -43,8 +43,8 @@
                 <li><a href="#">PEF</a></li>
                 <li><a class="boutique-link" href="https://cadets-chelun-martigne.kalisport.com/" target="_blank" rel="noopener noreferrer">Boutique</a></li>
                 <li><a href="#">Organigramme</a></li>
+                <li><a href="resultats.php">Résultats</a></li>
                 <li><a href="coach.php">Espace coach</a></li>
-                <li><a href="admin.php">Administration</a></li>
               </ul>
             </div>
           </div>
