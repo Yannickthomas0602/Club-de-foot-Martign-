@@ -2,12 +2,46 @@
  
 
 <div class="Image_accueil">
-    <img src="assets\img\Image_accueil\image U15.jpeg" alt="Image d'accueil du club de football" style="width: 100%;">
-    <div class="Degrade_image_accueil"> 
-        <div class="button"> 
-    <button class="" id="">❮</button>
-<button class="" id="">❯</button>
-    </div>
+    <?php
+    $sliderDir = __DIR__ . '/assets/img/Image_accueil/slider';
+    $sliderImages = [];
+
+    if (is_dir($sliderDir)) {
+        $sliderImages = glob($sliderDir . '/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}', GLOB_BRACE) ?: [];
+        sort($sliderImages, SORT_NATURAL | SORT_FLAG_CASE);
+
+        $projectRoot = str_replace('\\', '/', realpath(__DIR__) ?: __DIR__);
+
+        $sliderImages = array_values(array_filter(array_map(static function ($absolutePath) use ($projectRoot) {
+            $normalizedPath = str_replace('\\', '/', realpath($absolutePath) ?: $absolutePath);
+
+            if (strpos($normalizedPath, $projectRoot . '/') === 0) {
+                return substr($normalizedPath, strlen($projectRoot) + 1);
+            }
+
+            return null;
+        }, $sliderImages)));
+    }
+
+    if (empty($sliderImages)) {
+        $sliderImages = ['assets/img/Image_accueil/image U15.jpeg'];
+    }
+    ?>
+
+    <?php foreach ($sliderImages as $index => $imagePath): ?>
+        <img
+            src="<?= htmlspecialchars($imagePath, ENT_QUOTES, 'UTF-8') ?>"
+            alt="Image d'accueil du club <?= $index + 1 ?>"
+            class="hero-slide <?= $index === 0 ? 'is-active' : '' ?>"
+        >
+    <?php endforeach; ?>
+
+    <div class="hero-progress" id="heroProgress">
+        <?php for ($bar = 0; $bar < count($sliderImages); $bar++): ?>
+            <button class="hero-bar<?= $bar === 0 ? ' is-active' : '' ?>" type="button" aria-label="Aller à la photo <?= $bar + 1 ?>">
+                <span class="hero-bar-fill"></span>
+            </button>
+        <?php endfor; ?>
     </div>
 </div>
 
@@ -50,6 +84,63 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    const heroSlides = Array.from(document.querySelectorAll('.Image_accueil .hero-slide'));
+    const heroBars   = Array.from(document.querySelectorAll('#heroProgress .hero-bar'));
+    const heroDuration = 5000; // ms par slide
+    let heroIndex = 0;
+    let heroRaf = null;
+    let heroStart = null;
+
+    function showHeroSlide(index) {
+        heroSlides.forEach(function (slide, i) {
+            slide.classList.toggle('is-active', i === index);
+        });
+        heroBars.forEach(function (bar, i) {
+            bar.classList.remove('is-active', 'is-done');
+            if (i < index)  { bar.classList.add('is-done'); }
+            if (i === index) { bar.classList.add('is-active'); }
+            bar.querySelector('.hero-bar-fill').style.transform = i < index ? 'scaleX(1)' : 'scaleX(0)';
+        });
+    }
+
+    function tick(timestamp) {
+        if (!heroStart) { heroStart = timestamp; }
+        const elapsed = timestamp - heroStart;
+        const progress = Math.min(elapsed / heroDuration, 1);
+
+        if (heroBars[heroIndex]) {
+            heroBars[heroIndex].querySelector('.hero-bar-fill').style.transform = 'scaleX(' + progress + ')';
+        }
+
+        if (progress < 1) {
+            heroRaf = requestAnimationFrame(tick);
+        } else {
+            heroIndex = (heroIndex + 1) % heroSlides.length;
+            showHeroSlide(heroIndex);
+            heroStart = null;
+            heroRaf = requestAnimationFrame(tick);
+        }
+    }
+
+    function goToSlide(index) {
+        cancelAnimationFrame(heroRaf);
+        heroIndex = index;
+        showHeroSlide(heroIndex);
+        heroStart = null;
+        heroRaf = requestAnimationFrame(tick);
+    }
+
+    if (heroSlides.length <= 1) {
+        const progressEl = document.getElementById('heroProgress');
+        if (progressEl) { progressEl.style.display = 'none'; }
+    } else {
+        heroBars.forEach(function (bar, i) {
+            bar.addEventListener('click', function () { goToSlide(i); });
+        });
+        showHeroSlide(heroIndex);
+        heroRaf = requestAnimationFrame(tick);
+    }
+
     const slides = Array.from(document.querySelectorAll('#homeFeatureSlides .results-slide'));
     const previousButton = document.getElementById('homeFeaturePrev');
     const nextButton = document.getElementById('homeFeatureNext');

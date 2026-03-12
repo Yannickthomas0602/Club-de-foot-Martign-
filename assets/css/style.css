@@ -13,12 +13,67 @@ body {
     margin-top: -70px;
 }
 
-.Image_accueil img {
+.Image_accueil .hero-slide {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%; 
-    /* L'image remplit le ratio sans être écrasée */
     object-fit: cover; 
     display: block;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+}
+
+.Image_accueil .hero-slide.is-active {
+    opacity: 1;
+}
+
+/* ── Barres de progression du slider d'accueil ── */
+.hero-progress {
+    position: absolute;
+    bottom: 50px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+    z-index: 4;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.30);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-sizing: border-box;
+}
+
+.hero-bar {
+    flex: 1;
+    height: 3px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.35);
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    transition: background 0.3s;
+}
+
+.hero-bar:hover {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.hero-bar.is-done {
+    background: rgba(255, 255, 255, 0.80);
+}
+
+.hero-bar-fill {
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 4px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
 }
 
 .Image_accueil::after {
@@ -31,6 +86,12 @@ body {
     background: linear-gradient(to top, rgba(19, 2, 1, 1), rgba(19, 2, 1, 0.6), transparent);
     pointer-events: none;
     z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .hero-bar {
+        flex: 1;
+    }
 }
 
 
@@ -91,30 +152,37 @@ body {
     object-fit: cover;
 }
 
-/* Le bouton rouge avec dégradé */
+/* Le bouton rouge style "Se connecter" */
 .btn-red {
     display: block;
     width: 90%;
     margin-top: auto;
-    padding: 12px;
+    padding: 10px 16px;
     text-align: center;
-    color: white;
+    color: #fff;
     text-decoration: none;
+    font-family: "Bebas Neue", cursive;
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
     font-weight: bold;
-    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    border-radius: 24px;
     border: none;
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
-    font-family: "Roboto", sans-serif;
-    font-size: 1rem;
-    line-height: 1.2;
-    background: linear-gradient(to bottom, #d32f2f, #8b0000); /* Dégradé rouge */
-    transition: transform 0.2s;
+    background-color: #d32f2f;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    transition: background-color 0.25s ease;
 }
 
 .btn-red:hover {
-    transform: scale(1.02);
+    background-color: #8A1D19;
 }
 
 /* Style spécifique au score */
