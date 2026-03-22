@@ -58,12 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-checkSessionTimeout();
+// checkSessionTimeout();
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role_slug'] !== 'admin') {
-    header("Location: login.php");
-    exit;
-}
+// if (!isset($_SESSION['user_id']) || $_SESSION['role_slug'] !== 'admin') {
+//     header("Location: login.php");
+//     exit;
+// }
 ?>
 
 <!DOCTYPE html>
