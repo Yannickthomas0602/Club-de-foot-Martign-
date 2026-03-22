@@ -2,6 +2,12 @@
 session_start();
 require_once "fonctions.php";
 
+/**
+ * Optionnel : aligne le fuseau horaire PHP avec ton usage.
+ * Tu peux adapter si besoin (ex: UTC).
+ */
+date_default_timezone_set('Europe/Paris');
+
 checkSessionTimeout();
 
 if (!isset($_SESSION['user_id']) || ($_SESSION['role_slug'] ?? '') !== 'admin') {
@@ -23,9 +29,12 @@ $contenu = "";
 $dateFinInput = "";
 $actif = 1;
 
+/* ==========================
+   TRAITEMENT DES FORMULAIRES
+   ========================== */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? 'create';
-    $token = $_POST['csrf_popup'] ?? '';
+    $token  = $_POST['csrf_popup'] ?? '';
 
     if (!hash_equals($_SESSION['csrf_popup'], $token)) {
         $error = "Jeton de sécurité invalide.";
@@ -48,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 );
                 $stmtUpdate->execute([
                     ':date_fin' => $newDateFin->format('Y-m-d H:i:s'),
-                    ':id' => $updateId,
+                    ':id'       => $updateId,
                 ]);
                 $success = "Durée d'affichage mise à jour avec succès.";
             }
@@ -64,10 +73,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $success = "Annonce supprimée avec succès.";
         }
     } else {
-        $titre = trim($_POST['titre'] ?? '');
-        $contenu = trim($_POST['contenu'] ?? '');
+        // Création
+        $titre        = trim($_POST['titre'] ?? '');
+        $contenu      = trim($_POST['contenu'] ?? '');
         $dateFinInput = $_POST['date_fin'] ?? '';
-        $actif = isset($_POST['actif']) ? 1 : 0;
+        $actif        = isset($_POST['actif']) ? 1 : 0;
+
+        // On interdit un contenu vide côté serveur aussi
         $contenuTexte = trim(strip_tags($contenu));
 
         if ($titre === '' || $contenuTexte === '' || $dateFinInput === '') {
@@ -83,20 +95,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([
-                    ':titre' => $titre,
-                    ':contenu' => $contenu,
+                    ':titre'    => $titre,
+                    ':contenu'  => $contenu,
                     ':date_fin' => $dateFin->format('Y-m-d H:i:s'),
-                    ':actif' => $actif,
+                    ':actif'    => $actif,
                 ]);
 
                 $success = "Annonce enregistrée avec succès.";
+                // Reset des champs du formulaire après succès
+                $titre = "";
+                $contenu = "";
+                $dateFinInput = "";
+                $actif = 1;
             }
         }
     }
 }
 
+/* ===========================================================
+   MAINTENANCE "LAZY" (au chargement de la page d'admin)
+   1) Désactive les annonces dont la date de fin est passée
+   2) Supprime les annonces 2 jours après la date de fin
+   =========================================================== */
+try {
+    // 1) Désactiver automatiquement les annonces échues
+    $pdo->prepare("
+        UPDATE annonces_popup
+        SET actif = 0
+        WHERE actif = 1
+          AND date_fin <= NOW()
+    ")->execute();
+
+    // 2) Supprimer les annonces 2 jours après la fin
+    $pdo->prepare("
+        DELETE FROM annonces_popup
+        WHERE date_fin <= DATE_SUB(NOW(), INTERVAL 2 DAY)
+    ")->execute();
+} catch (Throwable $e) {
+    // On n'arrête pas l'affichage pour autant, mais on log si possible
+    // error_log($e->getMessage());
+}
+
+/* ===========================================================
+   LECTURE DES ANNONCES POUR L'AFFICHAGE
+   On "blinde" l'affichage via actif_effectif :
+   - actif_effectif = 1 seulement si actif=1 ET date_fin > NOW()
+   Cela garantit que le tableau affichera "Non" si c'est expiré.
+   =========================================================== */
 $annonces = $pdo->query(
-    "SELECT id, titre, date_fin, actif
+    "SELECT
+        id,
+        titre,
+        date_fin,
+        actif,
+        (actif = 1 AND date_fin > NOW()) AS actif_effectif
      FROM annonces_popup
      ORDER BY id DESC
      LIMIT 10"
@@ -125,8 +177,13 @@ $annonces = $pdo->query(
 
       <div class="form-row">
         <label for="titre">Titre</label>
-        <input type="text" id="titre" name="titre" maxlength="255" required
-               value="<?= htmlspecialchars($titre, ENT_QUOTES, 'UTF-8') ?>">
+        <input
+          type="text"
+          id="titre"
+          name="titre"
+          maxlength="255"
+          required
+          value="<?= htmlspecialchars($titre, ENT_QUOTES, 'UTF-8') ?>">
       </div>
 
       <div class="form-row">
@@ -138,8 +195,12 @@ $annonces = $pdo->query(
       <div class="form-row form-row--inline">
         <div>
           <label for="date_fin">Date de fin d'affichage</label>
-          <input type="datetime-local" id="date_fin" name="date_fin" required
-                 value="<?= htmlspecialchars($dateFinInput, ENT_QUOTES, 'UTF-8') ?>">
+          <input
+            type="datetime-local"
+            id="date_fin"
+            name="date_fin"
+            required
+            value="<?= htmlspecialchars($dateFinInput, ENT_QUOTES, 'UTF-8') ?>">
         </div>
 
         <label class="checkbox">
@@ -174,18 +235,23 @@ $annonces = $pdo->query(
             <td><?= (int)$annonce['id'] ?></td>
             <td><?= htmlspecialchars($annonce['titre'], ENT_QUOTES, 'UTF-8') ?></td>
             <td><?= htmlspecialchars($annonce['date_fin'], ENT_QUOTES, 'UTF-8') ?></td>
-            <td><?= ((int)$annonce['actif'] === 1) ? 'Oui' : 'Non' ?></td>
+            <!-- Affichage blindé via actif_effectif -->
+            <td><?= ((int)$annonce['actif_effectif'] === 1) ? 'Oui' : 'Non' ?></td>
             <td class="actions-cell">
+              <!-- Mettre à jour la date de fin -->
               <form method="post" action="" class="form-inline">
                 <input type="hidden" name="csrf_popup" value="<?= htmlspecialchars($_SESSION['csrf_popup'], ENT_QUOTES, 'UTF-8') ?>">
                 <input type="hidden" name="action" value="update_date">
                 <input type="hidden" name="update_id" value="<?= (int)$annonce['id'] ?>">
-                <input type="datetime-local" name="new_date_fin"
-                       value="<?= htmlspecialchars((new DateTime($annonce['date_fin']))->format('Y-m-d\TH:i'), ENT_QUOTES, 'UTF-8') ?>"
-                       required>
+                <input
+                  type="datetime-local"
+                  name="new_date_fin"
+                  value="<?= htmlspecialchars((new DateTime($annonce['date_fin']))->format('Y-m-d\TH:i'), ENT_QUOTES, 'UTF-8') ?>"
+                  required>
                 <button type="submit" class="btn">Mettre à jour</button>
               </form>
 
+              <!-- Supprimer l'annonce -->
               <form method="post" action="" onsubmit="return confirm('Supprimer cette annonce ?');" class="form-inline">
                 <input type="hidden" name="csrf_popup" value="<?= htmlspecialchars($_SESSION['csrf_popup'], ENT_QUOTES, 'UTF-8') ?>">
                 <input type="hidden" name="action" value="delete">
