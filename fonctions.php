@@ -198,6 +198,85 @@ function deleteAccount(PDO $pdo, int $id): bool {
     return $stmt->execute([$id]);
 }
 
+// Fonctions pour les équipes
+function getAllTeams(PDO $pdo): array {
+    $stmt = $pdo->query("SELECT id, name, created_at FROM teams ORDER BY created_at DESC");
+    return $stmt->fetchAll();
+}
+
+function createTeam(PDO $pdo, string $name): int {
+    $stmt = $pdo->prepare("INSERT INTO teams (name) VALUES (?)");
+    $stmt->execute([$name]);
+    return (int)$pdo->lastInsertId();
+}
+
+function getTeamById(PDO $pdo, int $id): ?array {
+    $stmt = $pdo->prepare("SELECT id, name, created_at FROM teams WHERE id = ? LIMIT 1");
+    $stmt->execute([$id]);
+    return $stmt->fetch() ?: null;
+}
+
+function updateTeam(PDO $pdo, int $id, array $fields): bool {
+    $allowed = ['name'];
+    $setParts = [];
+    $params = [':id' => $id];
+    foreach ($fields as $col => $val) {
+        if (in_array($col, $allowed, true)) {
+            $setParts[] = "{$col} = :{$col}";
+            $params[":{$col}"] = $val;
+        }
+    }
+    if (empty($setParts)) return false;
+    $sql = "UPDATE teams SET " . implode(', ', $setParts) . " WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute($params);
+}
+
+function deleteTeam(PDO $pdo, int $id): bool {
+    $stmt = $pdo->prepare("DELETE FROM teams WHERE id = ?");
+    return $stmt->execute([$id]);
+}
+
+// Fonctions pour les joueurs
+function getPlayersByTeam(PDO $pdo, int $teamId): array {
+    $stmt = $pdo->prepare("SELECT id, first_name, initial_name, team_id FROM players WHERE team_id = ? ORDER BY first_name");
+    $stmt->execute([$teamId]);
+    return $stmt->fetchAll();
+}
+
+function createPlayer(PDO $pdo, int $teamId, string $firstName, string $initialName): int {
+    $stmt = $pdo->prepare("INSERT INTO players (team_id, first_name, initial_name) VALUES (?, ?, ?)");
+    $stmt->execute([$teamId, $firstName, $initialName]);
+    return (int)$pdo->lastInsertId();
+}
+
+function getPlayerById(PDO $pdo, int $id): ?array {
+    $stmt = $pdo->prepare("SELECT id, first_name, initial_name, team_id FROM players WHERE id = ? LIMIT 1");
+    $stmt->execute([$id]);
+    return $stmt->fetch() ?: null;
+}
+
+function updatePlayer(PDO $pdo, int $id, array $fields): bool {
+    $allowed = ['first_name', 'initial_name', 'team_id'];
+    $setParts = [];
+    $params = [':id' => $id];
+    foreach ($fields as $col => $val) {
+        if (in_array($col, $allowed, true)) {
+            $setParts[] = "{$col} = :{$col}";
+            $params[":{$col}"] = $val;
+        }
+    }
+    if (empty($setParts)) return false;
+    $sql = "UPDATE players SET " . implode(', ', $setParts) . " WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute($params);
+}
+
+function deletePlayer(PDO $pdo, int $id): bool {
+    $stmt = $pdo->prepare("DELETE FROM players WHERE id = ?");
+    return $stmt->execute([$id]);
+}
+
 function isLogged(): bool {
     if (session_status() !== PHP_SESSION_ACTIVE) {
         @session_start();

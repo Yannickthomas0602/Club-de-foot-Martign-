@@ -21,6 +21,7 @@ $page_title = "Gestion des utilisateurs";
 <script src="assets/js/check_password.js"></script>
 <link rel="stylesheet" href="assets/css/manage_users.css">
     <main>
+        <h1>Gestion des utilisateurs</h1>
         <div id="liste-coachs" class="liste-coachs">
             <h2>Liste des coachs : </h2>
             <table border="2">
