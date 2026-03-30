@@ -1,0 +1,747 @@
+/* ================================================================
+   organigramme.css — Page publique « Organigramme du club »
+   Palette : rouge club #d32f2f, bleu nuit #0d1b3e, blanc, gris doux
+   ================================================================ */
+
+/* ---------- Variables de design ---------- */
+:root {
+    --orga-red:        #d32f2f;
+    --orga-red-dark:   #8a1d19;
+    --orga-navy:       #0d1b3e;
+    --orga-navy-light: #16285a;
+    --orga-bg:         #f0f2f8;
+    --orga-card-bg:    #ffffff;
+    --orga-text:       #1a1a2e;
+    --orga-muted:      #5a6278;
+    --orga-border:     #dde3f0;
+    --orga-shadow:     0 8px 32px rgba(13, 27, 62, 0.12);
+    --orga-radius:     18px;
+    --transition:      0.28s cubic-bezier(.4,0,.2,1);
+}
+
+/* ---------- Section principale ---------- */
+.orga-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px 80px;
+}
+
+/* ---------- En-tête héro ---------- */
+.orga-hero {
+    text-align: center;
+    margin-bottom: 64px;
+    position: relative;
+}
+
+.orga-hero-eyebrow {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--orga-red), #ff6b6b);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    border-radius: 40px;
+    margin-bottom: 18px;
+}
+
+.orga-hero-title {
+    font-family: 'Bebas Neue', 'Roboto', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    color: var(--orga-navy);
+    margin: 0 0 14px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+}
+
+.orga-hero-sub {
+    font-size: 1.05rem;
+    color: var(--orga-muted);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.65;
+}
+
+.orga-hero-divider {
+    width: 64px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--orga-red), #ff6b6b);
+    border-radius: 4px;
+    margin: 20px auto 0;
+}
+
+/* ---------- Categorie block ---------- */
+.orga-category {
+    margin-bottom: 72px;
+}
+
+.orga-category-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+}
+
+.orga-category-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--orga-red), #e57373);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    box-shadow: 0 6px 18px rgba(211, 47, 47, 0.35);
+}
+
+.orga-category-name {
+    font-family: 'Bebas Neue', 'Roboto', sans-serif;
+    font-size: 1.9rem;
+    color: var(--orga-navy);
+    margin: 0;
+    letter-spacing: 0.05em;
+}
+
+.orga-category-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--orga-border) 0%, transparent 100%);
+    border-radius: 2px;
+}
+
+.orga-category-count {
+    background: var(--orga-navy);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
+}
+
+/* ---------- Grille de cartes ---------- */
+.orga-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+@media (max-width: 900px) {
+    .orga-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+}
+
+@media (max-width: 560px) {
+    .orga-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* ---------- Carte membre ---------- */
+.orga-card {
+    background: var(--orga-card-bg);
+    border-radius: var(--orga-radius);
+    border: 1.5px solid var(--orga-border);
+    box-shadow: var(--orga-shadow);
+    padding: 32px 24px 28px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.orga-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--orga-red), #e57373);
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+
+.orga-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(13, 27, 62, 0.18);
+    border-color: rgba(211, 47, 47, 0.25);
+}
+
+.orga-card:hover::before {
+    opacity: 1;
+}
+
+/* ---------- Photo ---------- */
+.orga-avatar-wrap {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.orga-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--orga-border);
+    transition: border-color var(--transition);
+    display: block;
+}
+
+.orga-card:hover .orga-avatar {
+    border-color: var(--orga-red);
+}
+
+.orga-avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--orga-navy) 0%, var(--orga-navy-light) 100%);
+    border: 3px solid var(--orga-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color var(--transition);
+}
+
+.orga-card:hover .orga-avatar-placeholder {
+    border-color: var(--orga-red);
+}
+
+.orga-avatar-placeholder span {
+    font-family: 'Bebas Neue', 'Roboto', sans-serif;
+    font-size: 2rem;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+    line-height: 1;
+}
+
+/* ---------- Infos texte ---------- */
+.orga-card-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--orga-navy);
+    margin: 0 0 8px;
+    line-height: 1.25;
+}
+
+.orga-card-role {
+    font-size: 0.9rem;
+    color: var(--orga-muted);
+    font-weight: 500;
+    margin: 0;
+    background: var(--orga-bg);
+    padding: 5px 14px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* ---------- Etat vide ---------- */
+.orga-empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--orga-muted);
+}
+
+.orga-empty i {
+    font-size: 3rem;
+    opacity: 0.4;
+    display: block;
+    margin-bottom: 16px;
+}
+
+/* ================================================================
+   admin_organigramme.css — Page administration
+   ================================================================ */
+
+/* ---------- Layout admin ---------- */
+.oadmin-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+}
+
+.oadmin-title {
+    font-family: 'Bebas Neue', 'Roboto', sans-serif;
+    font-size: 2rem;
+    color: var(--orga-navy);
+    margin: 0 0 8px;
+    letter-spacing: 0.04em;
+}
+
+.oadmin-subtitle {
+    color: var(--orga-muted);
+    font-size: 0.95rem;
+    margin: 0 0 36px;
+}
+
+.oadmin-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--orga-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+    transition: color var(--transition);
+}
+
+.oadmin-back:hover { color: var(--orga-navy); }
+
+/* ---------- Alertes flash ---------- */
+.flash-msg {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+    border: 1px solid transparent;
+}
+
+.flash-success {
+    background: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.flash-error {
+    background: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+/* ---------- Layout 2 colonnes (form + liste) ---------- */
+.oadmin-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+@media (max-width: 860px) {
+    .oadmin-layout { grid-template-columns: 1fr; }
+}
+
+/* ---------- Panel / Card ---------- */
+.oadmin-panel {
+    background: #fff;
+    border: 1.5px solid var(--orga-border);
+    border-radius: var(--orga-radius);
+    box-shadow: var(--orga-shadow);
+    overflow: hidden;
+}
+
+.oadmin-panel-header {
+    background: linear-gradient(135deg, var(--orga-navy) 0%, var(--orga-navy-light) 100%);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.oadmin-panel-header i {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.oadmin-panel-header h2 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.oadmin-panel-body {
+    padding: 24px;
+}
+
+/* ---------- Formulaire ---------- */
+.oadmin-form-group {
+    margin-bottom: 18px;
+}
+
+.oadmin-label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--orga-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+}
+
+.oadmin-input,
+.oadmin-select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--orga-border);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-family: 'Roboto', sans-serif;
+    color: var(--orga-text);
+    background: #fafbff;
+    box-sizing: border-box;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    outline: none;
+}
+
+.oadmin-input:focus,
+.oadmin-select:focus {
+    border-color: var(--orga-red);
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.12);
+    background: #fff;
+}
+
+/* Upload zone */
+.oadmin-upload-zone {
+    border: 2px dashed var(--orga-border);
+    border-radius: 12px;
+    padding: 20px 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition);
+    background: #fafbff;
+    position: relative;
+}
+
+.oadmin-upload-zone:hover,
+.oadmin-upload-zone.drag-over {
+    border-color: var(--orga-red);
+    background: #fff5f5;
+}
+
+.oadmin-upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.oadmin-upload-zone i {
+    font-size: 1.8rem;
+    color: var(--orga-muted);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.oadmin-upload-zone p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--orga-muted);
+    line-height: 1.45;
+}
+
+.oadmin-upload-zone strong {
+    color: var(--orga-red);
+}
+
+/* Preview photo */
+.oadmin-photo-preview {
+    margin-top: 10px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #f0f8f0;
+    border-radius: 10px;
+    border: 1px solid #c3e6cb;
+}
+
+.oadmin-photo-preview.has-file {
+    display: flex;
+}
+
+.oadmin-photo-preview img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #c3e6cb;
+}
+
+.oadmin-photo-preview span {
+    font-size: 0.82rem;
+    color: #155724;
+    font-weight: 500;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ---------- Boutons ---------- */
+.btn-orga-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--orga-red) 0%, #e53935 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition);
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(211, 47, 47, 0.4);
+    margin-top: 6px;
+}
+
+.btn-orga-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(211, 47, 47, 0.5);
+}
+
+.btn-orga-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    transition: transform var(--transition), box-shadow var(--transition);
+    text-decoration: none;
+}
+
+.btn-edit {
+    background: #e8f0fe;
+    color: #1a56db;
+}
+.btn-edit:hover { background: #d0e2ff; }
+
+.btn-delete {
+    background: #fde8e8;
+    color: #c81e1e;
+}
+.btn-delete:hover { background: #fecaca; }
+
+/* ---------- Tableau liste membres ---------- */
+.oadmin-table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+}
+
+.oadmin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.oadmin-table thead {
+    background: linear-gradient(135deg, var(--orga-navy), var(--orga-navy-light));
+    color: #fff;
+}
+
+.oadmin-table thead th {
+    padding: 13px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+.oadmin-table tbody tr {
+    border-bottom: 1px solid var(--orga-border);
+    transition: background var(--transition);
+}
+
+.oadmin-table tbody tr:hover {
+    background: #f8f9ff;
+}
+
+.oadmin-table tbody td {
+    padding: 12px 16px;
+    color: var(--orga-text);
+    vertical-align: middle;
+}
+
+.oadmin-table .avatar-cell {
+    width: 48px;
+}
+
+.oadmin-table-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--orga-border);
+    display: block;
+}
+
+.oadmin-table-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--orga-navy), var(--orga-navy-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.badge-category {
+    background: rgba(13, 27, 62, 0.1);
+    color: var(--orga-navy);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.oadmin-table .actions-cell {
+    width: 130px;
+    white-space: nowrap;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 10px 16px;
+}
+
+/* Modale édition */
+.orga-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 9990;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+}
+
+.orga-modal-overlay.open {
+    display: flex;
+}
+
+.orga-modal {
+    background: #fff;
+    border-radius: var(--orga-radius);
+    max-width: 540px;
+    width: calc(100% - 40px);
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+    animation: modalIn 0.28s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes modalIn {
+    from { transform: translateY(30px) scale(0.97); opacity: 0; }
+    to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.orga-modal-header {
+    background: linear-gradient(135deg, var(--orga-navy), var(--orga-navy-light));
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: var(--orga-radius) var(--orga-radius) 0 0;
+}
+
+.orga-modal-header h3 {
+    color: #fff;
+    margin: 0;
+    font-size: 1.1rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.orga-modal-close {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition);
+}
+
+.orga-modal-close:hover { background: rgba(255,255,255,0.28); }
+
+.orga-modal-body {
+    padding: 24px;
+}
+
+.orga-modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--orga-border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-orga-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #f0f2f8;
+    color: var(--orga-navy);
+    border: 1.5px solid var(--orga-border);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    transition: background var(--transition);
+    text-decoration: none;
+}
+
+.btn-orga-secondary:hover { background: #e2e6f3; }
+
+.btn-orga-save {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, var(--orga-red), #e53935);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 4px 12px rgba(211,47,47,0.35);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.btn-orga-save:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(211,47,47,0.45);
+}
+
+/* Responsive tablette */
+@media (max-width: 640px) {
+    .oadmin-table thead th:nth-child(5),
+    .oadmin-table tbody td:nth-child(5) { display: none; }
+}
