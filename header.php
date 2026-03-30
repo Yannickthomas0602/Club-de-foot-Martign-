@@ -42,41 +42,80 @@ $base_href = isset($base_href) ? (string)$base_href : '';
 </style>
 </head>
 <body>  
-    <header>
-        <div id="rectangle">
-            <div class="nav_group_left">
-                <?php include __DIR__ . '/menu_burger.html'; ?>
-                <nav class="desktop_links">
-                    <a href="index.php">Accueil</a>
-                    <a href="equipes.php">&Eacute;quipes</a>
-                    
+    <header class="navbar-modern">
+        <div class="nav-container">
+            <!-- 1. GAUCHE -->
+            <div class="nav-left">
+                <button id="mobile-menu-btn" class="burger-menu mobile-only" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <nav class="desktop-only desktop-links">
+                    <a href="index.php" class="nav-link">Accueil</a>
+                    <a href="equipes.php" class="nav-link">&Eacute;quipes</a>
+                    <a href="resultats.php" class="nav-link">R&eacute;sultats</a>
                 </nav>
             </div>
-            <div class="nav_group_right">
-                <nav class="desktop_links">
-                    <a href="photos.php">Photos</a>
-                    <a class="boutique-link" href="https://cadets-chelun-martigne.kalisport.com/"target="_blank"rel="noopener noreferrer">Boutique</a>
+
+            <!-- 2. CENTRE : LOGO -->
+            <div class="nav-center">
+                <a href="index.php" class="logo-wrapper">
+                    <img src="assets/img/Logo_club/logo_rogne.png" alt="Logo club" class="nav-logo">
+                </a>
+            </div>
+
+            <!-- 3. DROITE -->
+            <div class="nav-right">
+                <nav class="desktop-only desktop-links">
+                    <a href="photos.php" class="nav-link">Photos</a>
+                    <div class="dropdown">
+                        <span class="nav-link dropdown-toggle">Le Club <i class="fa-solid fa-chevron-down dropdown-icon"></i></span>
+                        <div class="dropdown-menu">
+                            <a href="organigramme.php">Organigramme</a>
+                            <a href="#">PEF</a>
+                            <a href="#">Convocations</a>
+                        </div>
+                    </div>
+                    <a href="https://cadets-chelun-martigne.kalisport.com/" target="_blank" rel="noopener noreferrer" class="nav-link btn-boutique">Boutique</a>
                 </nav>
-                <!-- <a href="login.php" class="btn-connexion"> Se connecter</a> -->
 
-                <div class="Se_connecter">
+                <div class="auth-buttons">
                     <?php if (isset($_SESSION['user_id'])): ?>
-
-                        <!-- Bouton de déconnexion -->
-                        <a href="logout.php" class="btn-connexion">Se déconnecter</a>
-                        <a href="admin.php" class="btn-connexion"><i class="fa-solid fa-user" style="color: rgb(255, 255, 255);"></i></a>
-
-
+                        <a href="admin.php" class="btn-icon desktop-only" title="Mon Compte"><i class="fa-solid fa-user"></i></a>
+                        <a href="logout.php" class="btn-logout desktop-only" title="Se déconnecter"><i class="fa-solid fa-right-from-bracket"></i></a>
+                        <a href="admin.php" class="btn-icon mobile-only"><i class="fa-solid fa-circle-user"></i></a>
                     <?php else: ?>
-
-                        <a href="login.php" class="btn-connexion">Se connecter</a>
-
+                        <a href="login.php" class="btn-login desktop-only">Se connecter</a>
+                        <a href="login.php" class="btn-icon mobile-only"><i class="fa-solid fa-user"></i></a>
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="nav_center">
-                <img id="logo_accueil" src="assets/img/Logo_club/logo_rogne.png" alt="Image du logo du club" class="logo_club">
+        </div>
+    </header>
+
+    <div id="mobile-drawer" class="mobile-drawer">
+        <div class="drawer-header">
+            <h2 class="drawer-title">Menu</h2>
+            <button id="close-drawer-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="drawer-content">
+            <ul class="drawer-links">
+                <li><a href="index.php">Accueil</a></li>
+                <li><a href="equipes.php">&Eacute;quipes</a></li>
+                <li><a href="resultats.php">R&eacute;sultats</a></li>
+                <li><a href="calendrier.php">Calendrier</a></li>
+                <li><a href="photos.php">Photos</a></li>
+                <li><a href="organigramme.php">Organigramme</a></li>
+                <li><a href="https://cadets-chelun-martigne.kalisport.com/" target="_blank" rel="noopener noreferrer" class="boutique-text">Boutique du club</a></li>
+            </ul>
+            <div class="drawer-footer">
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <a href="admin.php" class="btn-register w-100 mb-2">Mon Tableau de bord</a>
+                    <a href="logout.php" class="btn-login w-100">Déconnexion</a>
+                <?php else: ?>
+                    <a href="login.php" class="btn-login w-100 mb-2">Se connecter</a>
+                <?php endif; ?>
             </div>
         </div>
-        <!-- (Suppression du logo mobile sous la barre) -->
-    </header>
+    </div>
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <script src="assets/js/menu_burger.js" defer></script>
