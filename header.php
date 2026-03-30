@@ -71,7 +71,7 @@ $base_href = isset($base_href) ? (string)$base_href : '';
                         <span class="nav-link dropdown-toggle">Le Club <i class="fa-solid fa-chevron-down dropdown-icon"></i></span>
                         <div class="dropdown-menu">
                             <a href="organigramme.php">Organigramme</a>
-                            <a href="#">PEF</a>
+                            <a href="pef.php">PEF</a>
                             <a href="#">Convocations</a>
                         </div>
                     </div>
@@ -105,6 +105,7 @@ $base_href = isset($base_href) ? (string)$base_href : '';
                 <li><a href="calendrier.php">Calendrier</a></li>
                 <li><a href="photos.php">Photos</a></li>
                 <li><a href="organigramme.php">Organigramme</a></li>
+                <li><a href="pef.php">PEF</a></li>
                 <li><a href="https://cadets-chelun-martigne.kalisport.com/" target="_blank" rel="noopener noreferrer" class="boutique-text">Boutique du club</a></li>
             </ul>
             <div class="drawer-footer">

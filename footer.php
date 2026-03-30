@@ -42,7 +42,7 @@
                         <li><a href="photos.php">Album photos</a></li>
                     </ul>
                     <ul class="footer-nav-list">
-                        <li><a href="#">PEF</a></li>
+                        <li><a href="pef.php">PEF</a></li>
                         <li><a class="boutique-link" href="https://cadets-chelun-martigne.kalisport.com/" target="_blank" rel="noopener noreferrer">Boutique</a></li>
                         <li><a href="#">Organigramme</a></li>
                         <li><a href="resultats.php">Résultats</a></li>

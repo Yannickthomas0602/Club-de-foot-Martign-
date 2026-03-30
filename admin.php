@@ -19,6 +19,7 @@ $page_title = "Administration";
         <li><a href="annonces_popup_admin.php">Gérer les annonces pop-up</a></li>
         <li><a href="admin_organigramme.php">Gérer l'organigramme</a></li>
         <li><a href="admin_sponsors.php">Gérer les sponsors (carrousel)</a></li>
+        <li><a href="admin_pef.php">Gérer le PEF</a></li>
     </ul>
     </main>
     <footer>
