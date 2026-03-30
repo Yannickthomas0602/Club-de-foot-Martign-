@@ -78,7 +78,7 @@ tailwind.config = {
 .pef-appear { opacity:0; transform:translateY(24px); transition:opacity .6s,transform .6s; }
 .pef-appear.is-visible { opacity:1; transform:none; }
 
-/* ── Modal ── */
+/* ── Modal & Lightbox ── */
 #pef-modal {
   display:none; position:fixed; inset:0; z-index:9999;
   background:rgba(0,0,0,.82); backdrop-filter:blur(4px);
@@ -96,7 +96,25 @@ tailwind.config = {
 #pef-modal-body { padding:28px; }
 #pef-modal-body h2 { font-family:"Bebas Neue",cursive; font-size:2rem; color:#130201; letter-spacing:.05em; margin:0 0 6px; }
 #pef-modal-content { font-size:.97rem; line-height:1.75; color:#333; margin-top:16px; }
-#pef-modal-content img { max-width:100%; border-radius:12px; margin:12px 0; }
+#pef-modal-content img { max-width:100%; border-radius:12px; margin:12px 0; cursor: zoom-in; transition: transform .2s; }
+#pef-modal-content img:hover { transform: scale(1.01); }
+
+/* Lightbox Image Zoom */
+#pef-lightbox {
+  display:none; position:fixed; inset:0; z-index:10000;
+  background:rgba(0,0,0,.95); align-items:center; justify-content:center;
+  cursor: zoom-out;
+}
+#pef-lightbox.open { display:flex; }
+#pef-lightbox img { max-width:90%; max-height:90%; object-fit:contain; border-radius:8px; box-shadow:0 0 40px rgba(0,0,0,.5); }
+#pef-lightbox-dl {
+  position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
+  background:#d32f2f; color:#fff; padding:10px 20px; border-radius:30px;
+  text-decoration:none; font-weight:bold; font-size:0.9rem;
+  display:flex; align-items:center; gap:8px; transition: background .2s;
+}
+#pef-lightbox-dl:hover { background:#8A1D19; }
+
 #pef-modal-close {
   position:absolute; top:16px; right:20px;
   background:#d32f2f; color:#fff; border:none; border-radius:50%;
@@ -104,13 +122,10 @@ tailwind.config = {
   display:flex; align-items:center; justify-content:center;
   box-shadow:0 4px 12px rgba(211,47,47,.5);
   transition:background .2s;
+  z-index:10;
 }
 #pef-modal-close:hover { background:#8A1D19; }
 #pef-modal-inner-wrap { position:relative; }
-
-::-webkit-scrollbar { width:6px; }
-::-webkit-scrollbar-track { background:#f4f4f9; }
-::-webkit-scrollbar-thumb { background:#d32f2f; border-radius:3px; }
 </style>
 
 <!-- ═══ SECTION 1 — HERO ═══════════════════════════════════════════════════ -->
@@ -291,6 +306,14 @@ tailwind.config = {
   </div>
 </div>
 
+<!-- ═══ LIGHTBOX (ZOOM) ══════════════════════════════════════════════════════ -->
+<div id="pef-lightbox" onclick="pefCloseLightbox()">
+  <img id="pef-lightbox-img" src="" alt="">
+  <a id="pef-lightbox-dl" href="" download onclick="event.stopPropagation()">
+    <i class="fa-solid fa-download"></i> Télécharger l'image
+  </a>
+</div>
+
 <?php include __DIR__ . "/footer.php"; ?>
 
 <script>
@@ -337,11 +360,33 @@ function pefOpenModal(id) {
   const d = new Date(art.date_publication);
   date.textContent = d.toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
   title.textContent = art.titre;
-  cont.innerHTML = art.contenu_html; // HTML sécurisé venant du WYSIWYG
+  cont.innerHTML = art.contenu_html;
+
+  // Ajout du clic sur les images pour le zoom
+  cont.querySelectorAll('img').forEach(image => {
+    image.addEventListener('click', (e) => {
+      e.stopPropagation();
+      pefOpenLightbox(image.src);
+    });
+  });
 
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
   document.getElementById('pef-modal-inner').scrollTop = 0;
+}
+
+function pefOpenLightbox(src) {
+  const lb    = document.getElementById('pef-lightbox');
+  const lbImg = document.getElementById('pef-lightbox-img');
+  const lbDl  = document.getElementById('pef-lightbox-dl');
+  
+  lbImg.src = src;
+  lbDl.href = src;
+  lb.classList.add('open');
+}
+
+function pefCloseLightbox() {
+  document.getElementById('pef-lightbox').classList.remove('open');
 }
 
 function pefCloseModal() {
@@ -354,7 +399,12 @@ function pefCloseOnOverlay(e) {
 }
 
 // Escape key
-document.addEventListener('keydown', e => { if (e.key === 'Escape') pefCloseModal(); });
+document.addEventListener('keydown', e => { 
+  if (e.key === 'Escape') {
+    if (document.getElementById('pef-lightbox').classList.contains('open')) pefCloseLightbox();
+    else pefCloseModal();
+  }
+});
 
 // Keyboard accessibility on cards
 document.querySelectorAll('.pef-blog-card').forEach(card => {

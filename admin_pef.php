@@ -163,9 +163,37 @@ tinymce.init({
   plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
   toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline | link image media | align lineheight | numlist bullist indent outdent | removeformat',
   height: 420,
-  images_upload_url: null,
-  automatic_uploads: false,
+  automatic_uploads: true,
+  images_upload_url: 'upload_image_tinymce.php',
   file_picker_types: 'image',
+  file_picker_callback: function(callback, value, meta) {
+    if (meta.filetype === 'image') {
+      var input = document.createElement('input');
+      input.setAttribute('type', 'file');
+      input.setAttribute('accept', 'image/jpeg,image/png,image/webp,image/gif');
+      input.addEventListener('change', function() {
+        var file = this.files[0];
+        var formData = new FormData();
+        formData.append('file', file);
+        fetch('upload_image_tinymce.php', {
+          method: 'POST',
+          body: formData
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.location) {
+            callback(data.location, { alt: file.name });
+          } else {
+            alert(data.error || "Erreur lors de l'upload.");
+          }
+        })
+        .catch(function() {
+          alert("Erreur réseau lors de l'upload.");
+        });
+      });
+      input.click();
+    }
+  },
   setup: function(editor) {
     editor.on('change', function() { editor.save(); });
   }
