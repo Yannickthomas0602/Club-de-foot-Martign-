@@ -5,25 +5,36 @@ if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
 
 $pdo = getDB();
 
-// ─── Récupération des membres triés : catégorie → ordre ────────────────────
-$stmt = $pdo->query(
-    "SELECT id, nom, prenom, role, categorie, photo_url, ordre_affichage
-       FROM club_membres
-      ORDER BY categorie ASC, ordre_affichage ASC, nom ASC"
-);
-$membres = $stmt->fetchAll();
+// ─── 1. Récupération des catégories triées par priorité ─────────────────────
+$categories = $pdo->query(
+    'SELECT id, nom_categorie
+       FROM club_categories_organigramme
+      ORDER BY ordre_priorite ASC, nom_categorie ASC'
+)->fetchAll();
 
-// Grouper par catégorie
-$parCategorie = [];
-foreach ($membres as $m) {
-    $parCategorie[$m['categorie']][] = $m;
+// ─── 2. Récupération de tous les membres avec leur catégorie ─────────────────
+$stmt = $pdo->query(
+    'SELECT m.id, m.nom, m.prenom, m.role, m.categorie_id, m.photo_url, m.ordre_affichage
+       FROM club_membres m
+      ORDER BY m.ordre_affichage ASC, m.nom ASC'
+);
+$tousLesMembres = $stmt->fetchAll();
+
+// ─── 3. Grouper les membres par categorie_id ─────────────────────────────────
+$membresByCat = [];
+foreach ($tousLesMembres as $m) {
+    $membresByCat[$m['categorie_id']][] = $m;
 }
 
-// Icônes par catégorie (fallback = users)
+// ─── Icônes par nom de catégorie (fallback = users) ──────────────────────────
+// Vous pouvez enrichir ce tableau au fur et à mesure
 $icones = [
     'Bureau'               => 'fa-solid fa-briefcase',
     'Staff Technique'      => 'fa-solid fa-whistle',
     'Responsables Jeunes'  => 'fa-solid fa-child-reaching',
+    'Arbitres'             => 'fa-solid fa-flag',
+    'Bénévoles'            => 'fa-solid fa-hands-helping',
+    'Médical'              => 'fa-solid fa-kit-medical',
 ];
 
 $page_title = "L'organigramme du club";
@@ -46,26 +57,36 @@ $page_title = "L'organigramme du club";
             <div class="orga-hero-divider"></div>
         </div>
 
-        <?php if (empty($parCategorie)): ?>
+        <?php
+        // Filtrer les catégories qui ont effectivement des membres
+        $categoriesAvecMembres = array_filter(
+            $categories,
+            fn($cat) => !empty($membresByCat[$cat['id']])
+        );
+        ?>
+
+        <?php if (empty($categoriesAvecMembres)): ?>
             <div class="orga-empty">
                 <i class="fa-regular fa-face-sad-tear"></i>
                 <p>Aucun membre enregistré pour le moment.</p>
             </div>
         <?php else: ?>
 
-            <?php foreach ($parCategorie as $categorie => $liste): ?>
+            <?php foreach ($categoriesAvecMembres as $cat): ?>
+                <?php
+                $liste     = $membresByCat[$cat['id']];
+                $nomCat    = $cat['nom_categorie'];
+                $iconeClass = $icones[$nomCat] ?? 'fa-solid fa-users';
+                ?>
                 <div class="orga-category">
 
                     <!-- ── Titre de la catégorie ── -->
                     <div class="orga-category-header">
                         <div class="orga-category-icon">
-                            <i class="<?= htmlspecialchars(
-                                $icones[$categorie] ?? 'fa-solid fa-users',
-                                ENT_QUOTES, 'UTF-8'
-                            ) ?>"></i>
+                            <i class="<?= htmlspecialchars($iconeClass, ENT_QUOTES, 'UTF-8') ?>"></i>
                         </div>
                         <h2 class="orga-category-name">
-                            <?= htmlspecialchars($categorie, ENT_QUOTES, 'UTF-8') ?>
+                            <?= htmlspecialchars($nomCat, ENT_QUOTES, 'UTF-8') ?>
                         </h2>
                         <div class="orga-category-line"></div>
                         <span class="orga-category-count"><?= count($liste) ?> membre<?= count($liste) > 1 ? 's' : '' ?></span>
