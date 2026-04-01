@@ -47,63 +47,127 @@ tailwind.config = {
 </script>
 
 <style>
+:root {
+  --pef-red: #d32f2f;
+  --pef-red-dark: #8a1d19;
+  --pef-ink: #130201;
+  --pef-paper: #f7f6f4;
+}
+
 /* ── Hero ── */
-.pef-hero-bg { background:linear-gradient(135deg,#130201 0%,#1e0302 45%,#2a0403 75%,#130201 100%); }
+.pef-hero-bg {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(211, 47, 47, .22), transparent 38%),
+    radial-gradient(circle at 88% 78%, rgba(211, 47, 47, .17), transparent 40%),
+    linear-gradient(122deg, #120201 0%, #1b0403 52%, #2a0908 100%);
+}
+.pef-hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    120deg,
+    rgba(255, 255, 255, .025) 0,
+    rgba(255, 255, 255, .025) 1px,
+    transparent 1px,
+    transparent 12px
+  );
+  pointer-events: none;
+}
+.pef-hero-kicker {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2);
+}
 .pef-gradient-text {
-  background:linear-gradient(135deg,#d32f2f,#e57373,#d32f2f);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  color: #fff;
+  text-shadow: 0 0 24px rgba(211, 47, 47, .35);
 }
 .pef-hero-wave { position:absolute; bottom:-1px; left:0; width:100%; overflow:hidden; line-height:0; }
 
 /* ── Pilier cards ── */
-.pef-pilier-card { transition:transform .3s,box-shadow .3s,border-color .3s; }
-.pef-pilier-card:hover { transform:translateY(-8px) scale(1.02); box-shadow:0 20px 40px rgba(211,47,47,.25); border-color:#d32f2f; }
-.pef-pilier-card:hover .pef-icon { background:#d32f2f; transform:scale(1.15) rotate(-5deg); }
-.pef-icon { transition:background .3s,transform .3s; }
+.pef-pilier-card {
+  transition: transform .26s ease, box-shadow .26s ease, border-color .26s ease;
+  box-shadow: 0 10px 28px rgba(10, 8, 8, .06);
+}
+.pef-pilier-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 44px rgba(10, 8, 8, .14);
+  border-color: rgba(211, 47, 47, .45);
+}
+.pef-pilier-card:hover .pef-icon {
+  background: #ffe7e7;
+  transform: scale(1.08);
+}
+.pef-icon { transition: background .26s ease, transform .26s ease; }
 
 /* ── Blog ── */
-.pef-blog-card { cursor:pointer; transition:transform .3s,box-shadow .3s; }
-.pef-blog-card:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,.18); }
+.pef-blog-card {
+  cursor: pointer;
+  position: relative;
+  transition: transform .26s ease, box-shadow .26s ease;
+}
+.pef-blog-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--pef-red-dark), var(--pef-red));
+  opacity: 0;
+  transition: opacity .26s ease;
+}
+.pef-blog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 42px rgba(0, 0, 0, .14);
+}
+.pef-blog-card:hover::after,
+.pef-blog-card:focus-visible::after {
+  opacity: 1;
+}
+.pef-blog-card:focus-visible {
+  outline: 3px solid rgba(211, 47, 47, .45);
+  outline-offset: 3px;
+}
 
 /* ── Category badges ── */
-.pef-cat-badge { font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; }
-.cat-sante        { background:#dcfce7; color:#166534; }
-.cat-citoyen      { background:#dbeafe; color:#1e40af; }
-.cat-environnement{ background:#d1fae5; color:#065f46; }
-.cat-fairplay     { background:#fef9c3; color:#854d0e; }
-.cat-regles       { background:#ede9fe; color:#4c1d95; }
-.cat-culture      { background:#fee2e2; color:#991b1b; }
+.pef-cat-badge { font-size: .69rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.cat-sante         { background:#dcfce7; color:#166534; }
+.cat-citoyen       { background:#dbeafe; color:#1e40af; }
+.cat-environnement { background:#d1fae5; color:#065f46; }
+.cat-fairplay      { background:#fef9c3; color:#854d0e; }
+.cat-regles        { background:#ede9fe; color:#4c1d95; }
+.cat-culture       { background:#fee2e2; color:#991b1b; }
 
 /* ── Fade-in ── */
-.pef-appear { opacity:0; transform:translateY(24px); transition:opacity .6s,transform .6s; }
+.pef-appear { opacity:0; transform:translateY(22px); transition:opacity .58s ease,transform .58s ease; }
 .pef-appear.is-visible { opacity:1; transform:none; }
 
 /* ── Modal & Lightbox ── */
 #pef-modal {
   display:none; position:fixed; inset:0; z-index:9999;
-  background:rgba(0,0,0,.82); backdrop-filter:blur(4px);
+  background:rgba(6, 4, 4, .84); backdrop-filter:blur(4px);
   align-items:center; justify-content:center; padding:16px;
 }
 #pef-modal.open { display:flex; }
 #pef-modal-inner {
   background:#fff; border-radius:20px; max-width:860px; width:100%;
   max-height:90vh; overflow-y:auto;
-  box-shadow:0 30px 80px rgba(0,0,0,.5);
+  box-shadow:0 30px 80px rgba(0,0,0,.45);
   animation:modalIn .25s ease;
 }
-@keyframes modalIn { from{opacity:0;transform:scale(.95)} to{opacity:1;transform:scale(1)} }
+@keyframes modalIn { from{opacity:0;transform:scale(.96)} to{opacity:1;transform:scale(1)} }
 #pef-modal-img { width:100%; height:280px; object-fit:cover; border-radius:20px 20px 0 0; display:block; }
 #pef-modal-body { padding:28px; }
 #pef-modal-body h2 { font-family:"Bebas Neue",cursive; font-size:2rem; color:#130201; letter-spacing:.05em; margin:0 0 6px; }
 #pef-modal-content { font-size:.97rem; line-height:1.75; color:#333; margin-top:16px; }
-#pef-modal-content img { max-width:100%; border-radius:12px; margin:12px 0; cursor: zoom-in; transition: transform .2s; }
+#pef-modal-content img { max-width:100%; border-radius:12px; margin:12px 0; cursor:zoom-in; transition: transform .2s; }
 #pef-modal-content img:hover { transform: scale(1.01); }
 
 /* Lightbox Image Zoom */
 #pef-lightbox {
   display:none; position:fixed; inset:0; z-index:10000;
   background:rgba(0,0,0,.95); align-items:center; justify-content:center;
-  cursor: zoom-out;
+  cursor:zoom-out;
 }
 #pef-lightbox.open { display:flex; }
 #pef-lightbox img { max-width:90%; max-height:90%; object-fit:contain; border-radius:8px; box-shadow:0 0 40px rgba(0,0,0,.5); }
@@ -126,6 +190,15 @@ tailwind.config = {
 }
 #pef-modal-close:hover { background:#8A1D19; }
 #pef-modal-inner-wrap { position:relative; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pef-appear,
+  .pef-pilier-card,
+  .pef-blog-card,
+  .pef-icon {
+    transition: none !important;
+  }
+}
 </style>
 
 <!-- ═══ SECTION 1 — HERO ═══════════════════════════════════════════════════ -->
@@ -134,7 +207,7 @@ tailwind.config = {
   <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-10 blur-3xl" style="background:#d32f2f;transform:translate(40%,40%)"></div>
 
   <div class="flex justify-center mb-6">
-    <span class="inline-flex items-center gap-2 bg-white bg-opacity-10 border border-white border-opacity-20 text-white px-4 py-1.5 rounded-full text-sm font-semibold uppercase tracking-widest">
+    <span class="pef-hero-kicker inline-flex items-center gap-2 bg-white bg-opacity-10 border border-white border-opacity-20 text-white px-4 py-1.5 rounded-full text-sm font-semibold uppercase tracking-widest">
       <i class="fa-solid fa-star text-rouge"></i> Programme Officiel FFF
     </span>
   </div>
@@ -162,7 +235,7 @@ tailwind.config = {
 </section>
 
 <!-- ═══ SECTION 2 — 6 PILIERS ═══════════════════════════════════════════════ -->
-<section class="bg-gris py-20 px-4 font-roboto">
+<section class="bg-gris py-20 px-4 font-roboto" style="background:linear-gradient(180deg, var(--pef-paper) 0%, #ffffff 100%)">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-14 pef-appear">
       <span class="text-rouge font-semibold uppercase tracking-widest text-sm">Les fondements du programme</span>
@@ -212,7 +285,7 @@ tailwind.config = {
 </section>
 
 <!-- ═══ SECTION 4 — BLOG ════════════════════════════════════════════════════ -->
-<section class="bg-gris py-20 px-4 font-roboto">
+<section class="bg-gris py-20 px-4 font-roboto" style="background:linear-gradient(180deg, #ffffff 0%, var(--pef-paper) 100%)">
   <div class="max-w-6xl mx-auto">
     <div class="mb-12 pef-appear">
       <span class="text-rouge font-semibold uppercase tracking-widest text-sm">Fil d'actualité</span>
@@ -247,7 +320,7 @@ tailwind.config = {
         $resume = mb_strimwidth(strip_tags($a['contenu_html']), 0, 140, '…');
       ?>
       <article
-        class="pef-blog-card pef-appear bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100"
+        class="pef-blog-card pef-appear group bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100"
         style="animation-delay:<?= $i * 0.07 ?>s"
         data-id="<?= (int)$a['id'] ?>"
         onclick="pefOpenModal(<?= (int)$a['id'] ?>)"
