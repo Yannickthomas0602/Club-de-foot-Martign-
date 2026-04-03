@@ -1,0 +1,83 @@
+/* ---- VARIABLES DE COULEURS ---- */
+:root {
+    --red: #F0322B;
+    --red-dark: #8A1D19;
+    --black: #130201;
+    --grey: #f5f5f5;
+    --text-dark: #222;
+    --text-light: #fff;
+}
+
+/* ---- STYLE GLOBAL ---- */
+.admin-main {
+    width: 95%;
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: var(--text-dark);
+}
+
+.admin-main h1 {
+    font-size: 28px;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 4px solid var(--red);
+    display: inline-block;
+}
+
+/* Container for all sections */
+.admin-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 10px;
+}
+
+/* Design de chaque carte */
+.admin-card {
+    background: var(--grey);
+    padding: 25px 20px;
+    border-left: 6px solid var(--red);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.admin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    background: white;
+    border-left: 6px solid var(--red-dark);
+}
+
+.admin-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.admin-card p {
+    margin: 0;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* ---- RESPONSIVE ---- */
+@media screen and (max-width: 700px) {
+    .admin-dashboard {
+        grid-template-columns: 1fr;
+    }
+}
