@@ -28,7 +28,7 @@ $page_title = "Modifier l'équipe";
     <h1>Modifier l'équipe</h1>
     <form method="POST" action="update_team.php">
         <input type="hidden" name="id" value="<?= $team['id'] ?>">
-        <div>
+        <div class="form-group">
             <label for="name">Nom de l'équipe</label>
             <input type="text" name="name" value="<?= htmlspecialchars($team['name']) ?>" required>
         </div>
@@ -37,19 +37,24 @@ $page_title = "Modifier l'équipe";
             <?php foreach ($players as $index => $player): ?>
             <div class="player">
                 <input type="hidden" name="existing_players[<?= $index ?>][id]" value="<?= $player['id'] ?>">
-                <label>Prénom</label>
-                <input type="text" name="existing_players[<?= $index ?>][first_name]" value="<?= htmlspecialchars($player['first_name']) ?>">
-                <label>Initiale du nom</label>
-                <input type="text" name="existing_players[<?= $index ?>][initial_name]" value="<?= htmlspecialchars($player['initial_name']) ?>" maxlength="1">
-                <button type="button" onclick="removePlayer(this)">Supprimer</button>
+                <div class="input-group">
+                    <label>Prénom</label>
+                    <input type="text" name="existing_players[<?= $index ?>][first_name]" value="<?= htmlspecialchars($player['first_name']) ?>">
+                </div>
+                <div class="input-group">
+                    <label>Initiale du nom</label>
+                    <input type="text" name="existing_players[<?= $index ?>][initial_name]" value="<?= htmlspecialchars($player['initial_name']) ?>" maxlength="1">
+                </div>
+                <button type="button" onclick="removePlayer(this)" class="btn btn-danger">Supprimer</button>
             </div>
             <?php endforeach; ?>
         </div>
-        <button type="button" onclick="addPlayer()">Ajouter un joueur</button>
-        <br><br>
-        <button type="submit">Mettre à jour</button>
+        <div style="display: flex; gap: 15px; margin-top: 15px;">
+            <button type="button" onclick="addPlayer()" class="btn">Ajouter un joueur</button>
+            <button type="submit" class="btn">Mettre à jour</button>
+        </div>
     </form>
-    <a href="manage_teams.php">Retour</a>
+    <a href="manage_teams.php" class="btn" style="margin-top: 20px;">Retour</a>
 </main>
 <script>
 let playerIndex = 0; // Pour les nouveaux joueurs
@@ -59,11 +64,15 @@ function addPlayer() {
     const newPlayerDiv = document.createElement('div');
     newPlayerDiv.className = 'player';
     newPlayerDiv.innerHTML = `
-        <label>Prénom</label>
-        <input type="text" name="players[${playerIndex}][first_name]">
-        <label>Initiale du nom</label>
-        <input type="text" name="players[${playerIndex}][initial_name]" maxlength="1">
-        <button type="button" onclick="removePlayer(this)">Supprimer</button>
+        <div class="input-group">
+            <label>Prénom</label>
+            <input type="text" name="players[${playerIndex}][first_name]">
+        </div>
+        <div class="input-group">
+            <label>Initiale du nom</label>
+            <input type="text" name="players[${playerIndex}][initial_name]" maxlength="1">
+        </div>
+        <button type="button" onclick="removePlayer(this)" class="btn btn-danger">Supprimer</button>
     `;
     playersDiv.appendChild(newPlayerDiv);
     playerIndex++;

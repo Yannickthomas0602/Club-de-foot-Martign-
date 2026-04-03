@@ -16,6 +16,14 @@ main {
     padding: 20px;
     font-family: Arial, sans-serif;
     color: var(--text-dark);
+    background: var(--grey);
+    border-left: 6px solid var(--red);
+    border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+h1 {
+    margin-bottom: 25px;
 }
 
 h2, h3 {
@@ -24,46 +32,6 @@ h2, h3 {
     color: var(--red);
     text-transform: uppercase;
     letter-spacing: 1px;
-}
-
-#liste-equipes, #ajout-equipe {
-    background: var(--grey);
-    padding: 20px;
-    margin-bottom: 40px;
-    border-left: 6px solid var(--red);
-    border-radius: 6px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-}
-
-/* ---- TABLEAU ---- */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    background: white;
-    border-radius: 6px;
-    overflow: hidden;
-    font-size: 15px;
-}
-
-th {
-    background: var(--black);
-    color: var(--text-light);
-    padding: 12px;
-    text-align: left;
-}
-
-td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-}
-
-tr:nth-child(even) {
-    background: #fafafa;
-}
-
-tr:hover {
-    background: #ffe7e7;
 }
 
 /* ---- BOUTONS ---- */
@@ -157,35 +125,8 @@ form > h3 {
 }
 
 /* ---- RESPONSIVE ---- */
-@media screen and (max-width: 900px) {
-    table {
-        font-size: 13px;
-    }
-
-    td, th {
-        padding: 8px;
-    }
-}
-
 @media screen and (max-width: 700px) {
     .player {
         grid-template-columns: 1fr;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    table, thead, tbody, tr, th, td {
-        display: block;
-        width: 100%;
-    }
-
-    tr {
-        margin-bottom: 15px;
-    }
-
-    th {
-        background: var(--red);
-        color: white;
-        font-size: 14px;
     }
 }

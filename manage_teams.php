@@ -18,6 +18,7 @@ $page_title = "Gestion des équipes";
 
 <?php include 'header.php'; ?>
 <script src="assets/js/check_password.js"></script>
+<link rel="stylesheet" href="assets/css/manage_teams.css">
 <main>
     <h1>Gestion des équipes</h1>
     <div id="liste-equipes">
@@ -48,35 +49,41 @@ $page_title = "Gestion des équipes";
                     ?>
                 </td>
                 <td>
-                    <a href="edit_team.php?id=<?= $team['id'] ?>">Modifier</a>
+                    <a href="edit_team.php?id=<?= $team['id'] ?>" class="btn">Modifier</a>
                     <form action="delete_team.php" method="POST" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer l\'équipe <?= htmlspecialchars($team['name']) ?> ?');">
                         <input type="hidden" name="id" value="<?= $team['id'] ?>">
-                        <button type="submit">Supprimer</button>
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
                     </form>
                 </td>
             </tr>
             <?php endforeach; ?>
         </table>
-            <button type="button" onclick="addPlayer()">Ajouter un joueur</button>
+            <button type="button" onclick="addPlayer()" class="btn" style="margin-top:20px; margin-bottom:20px;">Ajouter un joueur</button>
     <div id="ajout-equipe">
         <h2>Ajouter une équipe</h2>
         <form method="POST" action="add_team.php">
-            <div>
+            <div class="form-group">
                 <label for="team_name">Nom de l'équipe</label>
                 <input type="text" name="team_name" required>
             </div>
             <h3>Joueurs</h3>
             <div id="players">
                 <div class="player">
-                    <label>Prénom</label>
-                    <input type="text" name="players[0][first_name]">
-                    <label>Initiale du nom</label>
-                    <input type="text" name="players[0][initial_name]" maxlength="1">
-                    <button type="button" onclick="removePlayer(this)">Supprimer</button>
+                    <div class="input-group">
+                        <label>Prénom</label>
+                        <input type="text" name="players[0][first_name]">
+                    </div>
+                    <div class="input-group">
+                        <label>Initiale du nom</label>
+                        <input type="text" name="players[0][initial_name]" maxlength="1">
+                    </div>
+                    <button type="button" onclick="removePlayer(this)" class="btn btn-danger">Supprimer</button>
                 </div>
             </div>
-            <button type="button" onclick="addPlayer()">Ajouter un joueur</button>
-            <button type="submit">Ajouter l'équipe</button>
+            <div style="display: flex; gap: 15px;">
+                <button type="button" onclick="addPlayer()" class="btn">Ajouter un joueur</button>
+                <button type="submit" class="btn">Ajouter l'équipe</button>
+            </div>
         </form>
     </div>
 </main>
@@ -88,11 +95,15 @@ function addPlayer() {
     const newPlayerDiv = document.createElement('div');
     newPlayerDiv.className = 'player';
     newPlayerDiv.innerHTML = `
-        <label>Prénom</label>
-        <input type="text" name="players[${playerIndex}][first_name]">
-        <label>Initiale du nom</label>
-        <input type="text" name="players[${playerIndex}][initial_name]" maxlength="1">
-        <button type="button" onclick="removePlayer(this)">Supprimer</button>
+        <div class="input-group">
+            <label>Prénom</label>
+            <input type="text" name="players[${playerIndex}][first_name]">
+        </div>
+        <div class="input-group">
+            <label>Initiale du nom</label>
+            <input type="text" name="players[${playerIndex}][initial_name]" maxlength="1">
+        </div>
+        <button type="button" onclick="removePlayer(this)" class="btn btn-danger">Supprimer</button>
     `;
     playersDiv.appendChild(newPlayerDiv);
     playerIndex++;
