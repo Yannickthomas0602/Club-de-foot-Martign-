@@ -16,62 +16,48 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// récupération des données du formulaire
+$id           = (int)($_POST['id'] ?? 0);
 $team_id      = (int)($_POST['team_id'] ?? 0);
 $match_place  = trim($_POST['match_place'] ?? ($_POST['addressInput'] ?? '')); 
 $match_date   = trim($_POST['match_date'] ?? '');
 $opponent     = trim($_POST['opposing_team'] ?? '');
-$absences     = $_POST['absent_players'] ?? []; // Tableau des IDs des joueurs cochés (absents)
+$absences     = $_POST['absent_players'] ?? [];
 
-// permet de normaliser la date pour la bdd
 $match_date_norm = str_replace('T', ' ', $match_date); 
 
-if (!$team_id) {
-    $_SESSION['flash_error'] = "L'équipe est requise.";
+if (!$id || !$team_id) {
     header("Location: convocation_admin.php");
     exit;
 }
 
-// ajout de la convocation dans la bdd
 try {
     $pdo->beginTransaction();
 
-    // 1. On check si team_id existe bien
-    $stmtT = $pdo->prepare("SELECT id FROM teams WHERE id = ?");
-    $stmtT->execute([$team_id]);
-    if (!$stmtT->fetch()) {
-        throw new Exception("Equipe introuvable.");
-    }
-
-    // 2. Insérer la convocation
+    // Modifier la convocation
     $stmt = $pdo->prepare(
-        "INSERT INTO convocations (team_id, match_place, match_date, opposing_team)
-         VALUES (?, ?, ?, ?)"
+        "UPDATE convocations SET team_id = ?, match_place = ?, match_date = ?, opposing_team = ? WHERE id = ?"
     );
-    $stmt->execute([
-        $team_id,
-        $match_place,
-        $match_date_norm,
-        $opponent
-    ]);
-    
-    $convocation_id = $pdo->lastInsertId();
+    $stmt->execute([$team_id, $match_place, $match_date_norm, $opponent, $id]);
 
-    // 3. Insérer les absences
+    // Supprimer les anciennes absences
+    $stmtDel = $pdo->prepare("DELETE FROM convocation_absences WHERE convocation_id = ?");
+    $stmtDel->execute([$id]);
+
+    // Ajouter les nouvelles absences
     if (!empty($absences)) {
         $stmtAbs = $pdo->prepare("INSERT INTO convocation_absences (convocation_id, player_id) VALUES (?, ?)");
         foreach ($absences as $player_id) {
-            $stmtAbs->execute([$convocation_id, (int)$player_id]);
+            $stmtAbs->execute([$id, (int)$player_id]);
         }
     }
 
     $pdo->commit();
-    $_SESSION['flash_success'] = "Convocation ajoutée avec succès.";
+    $_SESSION['flash_success'] = "Convocation modifiée avec succès.";
 } catch (Exception $e) {
     if ($pdo->inTransaction()) {
         $pdo->rollBack();
     }
-    $_SESSION['flash_error'] = "Erreur lors de l'ajout : " . $e->getMessage();
+    $_SESSION['flash_error'] = "Erreur : " . $e->getMessage();
 }
 
 header("Location: convocation_admin.php");

@@ -1,5 +1,3 @@
-
-
 <?php
 session_start();
 require "fonctions.php";
@@ -7,9 +5,9 @@ require "fonctions.php";
 $pdo = getDB();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username        = trim($_POST['username'] ?? '');
-    $email           = trim($_POST['email'] ?? '');
-    $password        = trim($_POST['password'] ?? '');
+    $username = trim($_POST['username'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = trim($_POST['password'] ?? '');
     $passwordConfirm = trim($_POST['password_confirm'] ?? '');
 
     // Vérifications
@@ -58,48 +56,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-checkSessionTimeout();
+// checkSessionTimeout();
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role_slug'] !== 'admin') {
-    header("Location: login.php");
-    exit;
-}
+// if (!isset($_SESSION['user_id']) || $_SESSION['role_slug'] !== 'admin') {
+//     header("Location: login.php");
+//     exit;
+// }
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Inscription_Test</title>
 </head>
-<body>
-<main>
-    <section>
-        <h3>Créer un compte (test)</h3>
-        <form method="POST">
-            <div>
-                <label for="username">Identifiant</label>
-                <input id="username" type="text" name="username" required>
-            </div>
-            <div>
-                <label for="email">Email</label>
-                <input id="email" type="email" name="email" required>
-            </div>
-            <div>
-                <label for="password">Mot de passe</label>
-                <input id="password" type="password" name="password" required>
-            </div>
-            <div>
-                <label for="password_confirm">Confirmer le mot de passe</label>
-                <input id="password_confirm" type="password" name="password_confirm" required>
-            </div>
-            <div>
-                <button type="submit">S'inscrire</button>
-                <a href="login.php">Déjà membre ?</a>
-            </div>
-        </form>
-    </section>
-</main>
-</body>
-</html>
 
+<body>
+    <main>
+        <section>
+            <h3>Créer un compte (test)</h3>
+            <form method="POST">
+                <div>
+                    <label for="username">Identifiant</label>
+                    <input id="username" type="text" name="username" required>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" required>
+                </div>
+                <div>
+                    <label for="password">Mot de passe</label>
+                    <input id="password" type="password" name="password" required>
+                </div>
+                <div>
+                    <label for="password_confirm">Confirmer le mot de passe</label>
+                    <input id="password_confirm" type="password" name="password_confirm" required>
+                </div>
+                <div>
+                    <button type="submit">S'inscrire</button>
+                    <a href="login.php">Déjà membre ?</a>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>
