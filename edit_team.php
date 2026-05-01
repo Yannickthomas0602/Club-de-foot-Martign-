@@ -42,8 +42,8 @@ $page_title = "Modifier l'équipe";
                     <input type="text" name="existing_players[<?= $index ?>][first_name]" value="<?= htmlspecialchars($player['first_name']) ?>">
                 </div>
                 <div class="input-group">
-                    <label>Initiale du nom</label>
-                    <input type="text" name="existing_players[<?= $index ?>][initial_name]" value="<?= htmlspecialchars($player['initial_name']) ?>" maxlength="1">
+                    <label>Initiales du nom</label>
+                    <input type="text" name="existing_players[<?= $index ?>][initial_name]" value="<?= htmlspecialchars($player['initial_name']) ?>" maxlength="5">
                 </div>
                 <button type="button" onclick="removePlayer(this)" class="btn btn-danger">Supprimer</button>
             </div>
@@ -69,8 +69,8 @@ function addPlayer() {
             <input type="text" name="players[${playerIndex}][first_name]">
         </div>
         <div class="input-group">
-            <label>Initiale du nom</label>
-            <input type="text" name="players[${playerIndex}][initial_name]" maxlength="1">
+            <label>Initiales du nom</label>
+            <input type="text" name="players[${playerIndex}][initial_name]" maxlength="5" placeholder="Jusqu'à 5 lettres">
         </div>
         <button type="button" onclick="removePlayer(this)" class="btn btn-danger">Supprimer</button>
     `;

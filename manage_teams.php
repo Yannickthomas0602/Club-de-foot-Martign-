@@ -71,11 +71,11 @@ $page_title = "Gestion des équipes";
                 <div class="player">
                     <div class="input-group">
                         <label>Prénom</label>
-                        <input type="text" name="players[0][first_name]">
+                        <input type="text" name="players[0][first_name]" placeholder="Louis">
                     </div>
                     <div class="input-group">
-                        <label>Initiale du nom</label>
-                        <input type="text" name="players[0][initial_name]" maxlength="1">
+                        <label>Initiales du nom</label>
+                        <input type="text" name="players[0][initial_name]" maxlength="5" placeholder="Jusqu'à 5 lettres">
                     </div>
                     <button type="button" onclick="removePlayer(this)" class="btn btn-danger">Supprimer</button>
                 </div>
@@ -100,7 +100,7 @@ function addPlayer() {
             <input type="text" name="players[${playerIndex}][first_name]">
         </div>
         <div class="input-group">
-            <label>Initiale du nom</label>
+            <label>Initiales du nom</label>
             <input type="text" name="players[${playerIndex}][initial_name]" maxlength="1">
         </div>
         <button type="button" onclick="removePlayer(this)" class="btn btn-danger">Supprimer</button>

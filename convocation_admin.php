@@ -45,9 +45,10 @@ foreach ($convocations as &$c) {
 
     $stmtPlayers->execute([$c['team_id'], $c['id']]);
     $present_players = $stmtPlayers->fetchAll(PDO::FETCH_ASSOC);
-    
+
     if ($present_players) {
-        $player_strings = array_map(function($p) { return $p['first_name'] . ' ' . $p['initial_name'].'.'; }, $present_players);
+        $player_strings = array_map(function ($p) {
+            return $p['first_name'] . ' ' . $p['initial_name'] . '.'; }, $present_players);
         $c['player_name_formatted'] = htmlspecialchars(implode(', ', $player_strings), ENT_QUOTES, 'UTF-8');
     } else {
         $c['player_name_formatted'] = "Aucun joueur présent";
@@ -62,6 +63,12 @@ include "header.php";
 <main>
     <div id="liste-convocations" class="liste-convocations">
         <h2>Liste des convocations : </h2>
+
+        <div class="info-purge">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Les convocations sont automatiquement supprimées 30 jours après la date du match.</span>
+        </div>
+
         <table border="2">
             <tr>
                 <th>ID</th>
@@ -73,21 +80,22 @@ include "header.php";
                 <th>Actions</th>
             </tr>
             <?php foreach ($convocations as $c): ?>
-            <tr>
-                <td><?= $c['id']?></td>
-                <td><?= htmlspecialchars($c['team_name']) ?></td>
-                <td><?= htmlspecialchars($c['match_place']) ?></td>
-                <td><?= $c['match_date_formatted']?></td>
-                <td><?= htmlspecialchars($c['opposing_team']) ?></td>
-                <td><?= $c['player_name_formatted']?></td>
-                <td>
-                    <a class="btn" href="edit_convocation.php?id=<?= $c['id'] ?>">Modifier</a>
-                    <form action="delete_convocation.php" method="POST" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer la convocation ?');">
-                        <input type="hidden" name="id" value="<?= $c['id'] ?>">
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
-                    </form>
-                </td>
-            </tr>
+                <tr>
+                    <td><?= $c['id'] ?></td>
+                    <td><?= htmlspecialchars($c['team_name']) ?></td>
+                    <td><?= htmlspecialchars($c['match_place']) ?></td>
+                    <td><?= $c['match_date_formatted'] ?></td>
+                    <td><?= htmlspecialchars($c['opposing_team']) ?></td>
+                    <td><?= $c['player_name_formatted'] ?></td>
+                    <td>
+                        <a class="btn" href="edit_convocation.php?id=<?= $c['id'] ?>">Modifier</a>
+                        <form action="delete_convocation.php" method="POST" style="display:inline;"
+                            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer la convocation ?');">
+                            <input type="hidden" name="id" value="<?= $c['id'] ?>">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         </table>
     </div>
@@ -99,30 +107,26 @@ include "header.php";
                 <label for="team_id">Equipe convoquée</label>
                 <select name="team_id" id="team_select" required>
                     <option value="">-- Sélectionnez une équipe --</option>
-                    <?php foreach($teams as $t): ?>
+                    <?php foreach ($teams as $t): ?>
                         <option value="<?= $t['id'] ?>"><?= htmlspecialchars($t['name']) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
-            
+
             <div class="lieu_match">
                 <label for="addressInput">Adresse</label>
-                <input
-                    id="addressInput"
-                    name="addressInput"
-                    type="text"
-                    autocomplete="off"
-                    placeholder="Tapez une adresse..."
-                    required
-                >
-                <ul id="suggestions"></ul>
+                <div class="input-wrapper">
+                    <input id="addressInput" name="addressInput" type="text" autocomplete="off"
+                        placeholder="Tapez une adresse..." required>
+                    <ul id="suggestions"></ul>
+                </div>
             </div>
-            
+
             <div class="date_match">
                 <label for="match_date">Date du match</label>
                 <input type="datetime-local" name="match_date" required>
             </div>
-            
+
             <div class="adversaire">
                 <label for="opposing_team">Adversaire</label>
                 <input type="text" name="opposing_team" placeholder="Insérer le nom de l'adversaire" required>
@@ -135,7 +139,7 @@ include "header.php";
                     <div class="players-list" id="playersCheckboxList">
                         <!-- Rempli en AJAX -->
                     </div>
-                    
+
                     <div class="recap-table">
                         <h4>Tableau récapitulatif</h4>
                         <table>

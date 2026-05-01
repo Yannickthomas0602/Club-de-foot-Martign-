@@ -39,6 +39,30 @@ main h2, main h3 {
     box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
 
+.info-purge {
+    background: var(--light);
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--red);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: #444;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.info-purge i {
+    color: var(--red);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.info-purge span {
+    line-height: 1.4;
+}
+
 /* TABLEAU */
 table {
     width: 100%;
@@ -87,6 +111,11 @@ tr:hover {
     display: flex;
     flex-direction: column;
     gap: 6px;
+}
+
+.ajout-convocation form .lieu_match .input-wrapper {
+    position: relative;
+    width: 100%;
 }
 
 .ajout-convocation label {
@@ -201,16 +230,20 @@ tr:hover {
 /* ADRESSES BAN */
 #suggestions {
     position: absolute;
-    width: calc(50% - 30px);
+    top: 100%;
+    left: 0;
+    width: 100%;
     background: var(--light);
     border-radius: 6px;
     list-style: none;
-    margin-top: -2px;
+    margin-top: 2px;
     padding: 0;
     max-height: 200px;
     overflow-y: auto;
-    z-index: 15;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: 1px solid var(--border);
+    box-sizing: border-box;
 }
 
 #suggestions li {
@@ -275,7 +308,7 @@ tr:hover {
         grid-template-columns: 1fr;
     }
     #suggestions {
-        width: calc(100% - 50px);
+        width: 100%;
     }
     .grid-2-cols {
         grid-template-columns: 1fr;
