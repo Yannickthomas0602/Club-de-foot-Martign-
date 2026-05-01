@@ -48,7 +48,8 @@ foreach ($convocations as &$c) {
 
     if ($present_players) {
         $player_strings = array_map(function ($p) {
-            return $p['first_name'] . ' ' . $p['initial_name'] . '.'; }, $present_players);
+            return $p['first_name'] . ' ' . $p['initial_name'] . '.';
+        }, $present_players);
         $c['player_name_formatted'] = htmlspecialchars(implode(', ', $player_strings), ENT_QUOTES, 'UTF-8');
     } else {
         $c['player_name_formatted'] = "Aucun joueur présent";
