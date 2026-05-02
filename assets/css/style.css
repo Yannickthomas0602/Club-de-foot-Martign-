@@ -1,15 +1,14 @@
-
-
 body {
     margin: 0;
-    background-color: #f4f4f9; 
+    background-color: #f4f4f9;
 }
+
 .Image_accueil {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9; 
+    aspect-ratio: 16 / 9;
     overflow: hidden;
-    background-color: #130201; 
+    background-color: #130201;
     margin-top: -70px;
 }
 
@@ -17,8 +16,8 @@ body {
     position: absolute;
     inset: 0;
     width: 100%;
-    height: 100%; 
-    object-fit: cover; 
+    height: 100%;
+    object-fit: cover;
     display: block;
     opacity: 0;
     transition: opacity 0.7s ease;
@@ -82,7 +81,8 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50%; /* On peut l'agrandir un peu pour plus de douceur */
+    height: 50%;
+    /* On peut l'agrandir un peu pour plus de douceur */
     background: linear-gradient(to top, rgba(19, 2, 1, 1), rgba(19, 2, 1, 0.6), transparent);
     pointer-events: none;
     z-index: 2;
@@ -101,7 +101,8 @@ body {
     justify-content: center;
     gap: 30px;
     padding: 20px;
-    flex-wrap: wrap; /* Important pour le responsive */
+    flex-wrap: wrap;
+    /* Important pour le responsive */
 }
 
 /* Style de base d'une carte */
@@ -110,20 +111,27 @@ body {
     border-radius: 20px;
     padding: 20px;
     width: 100%;
-    max-width: 450px; /* Largeur ajustable */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 450px;
+    /* Largeur ajustable */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 2px solid transparent;
     font-family: "Roboto", sans-serif;
 }
+
 .card:hover {
-    border-color: #ff0000; /* Accentue la bordure rouge au survol */
+    border-color: #ff0000;
+    /* Accentue la bordure rouge au survol */
 }
 
 
-.border-blue { border-color: #ffffff; } /* La bordure bleue de ton image */
+.border-blue {
+    border-color: #ffffff;
+}
+
+/* La bordure bleue de ton image */
 
 .card-title {
     align-self: center;
@@ -141,7 +149,8 @@ body {
     overflow: hidden;
     position: relative;
     margin-bottom: 20px;
-    background: #fdfaf7; /* Fond un peu crème comme sur ton image */
+    background: #fdfaf7;
+    /* Fond un peu crème comme sur ton image */
     padding: 15px;
     text-align: center;
 }
@@ -179,11 +188,13 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 38px;
-    transition: background-color 0.25s ease;
+    transition: all 0.3s ease;
 }
 
 .btn-red:hover {
     background-color: #8A1D19;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Style spécifique au score */
@@ -202,7 +213,10 @@ body {
     border: 1px solid #ccc;
 }
 
-.logo { width: 50px; height: 50px; }
+.logo {
+    width: 50px;
+    height: 50px;
+}
 
 .results-box {
     display: flex;
@@ -479,7 +493,7 @@ body {
     animation: ldsdr 1.2s linear infinite;
 }
 
-}
+
 
 /* ==========================================================================
    REFONTE PAGE D'ACCUEIL (NOUVEAUX STYLES)
@@ -520,7 +534,7 @@ body {
     text-transform: uppercase;
     line-height: 1.1;
     margin: 0 0 15px 0;
-    text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .hero-subtitle {
@@ -530,7 +544,7 @@ body {
     margin: 0 0 30px 0;
     line-height: 1.5;
     color: #e2e8f0;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-actions {
@@ -596,58 +610,72 @@ body {
 
 @media (max-width: 768px) {
     .Image_accueil {
-        height: 80vh; /* Plus grand sur mobile pour laisser de la place au texte */
+        height: 80vh;
+        /* Plus grand sur mobile pour laisser de la place au texte */
         min-height: 500px;
         aspect-ratio: auto;
         background-color: #130201;
     }
+
     .Image_accueil::before {
         display: none;
     }
+
     .Image_accueil .hero-slide {
         height: 100%;
         bottom: 0;
     }
+
     .Image_accueil::after {
         height: 100%;
         bottom: 0;
         background: linear-gradient(to top, rgba(19, 2, 1, 0.95) 0%, rgba(19, 2, 1, 0.6) 50%, transparent 100%);
     }
+
     .hero-overlay-content {
         position: absolute;
         left: 5%;
         right: 5%;
-        bottom: 80px; /* Remonté pour ne pas chevaucher la barre de progression */
+        bottom: 80px;
+        /* Remonté pour ne pas chevaucher la barre de progression */
         padding: 0;
         text-align: left;
         background-color: transparent;
     }
+
     .hero-overlay-content.is-hidden {
         opacity: 0;
     }
+
     .hero-title {
         font-size: 2.2rem;
         margin-bottom: 10px;
         line-height: 1.1;
     }
+
     .hero-subtitle {
         font-size: 1.1rem;
         margin-bottom: 20px;
         line-height: 1.4;
     }
+
     .hero-actions {
         flex-direction: column;
         gap: 12px;
     }
-    .btn-red, .btn-outline-white {
+
+    .btn-red,
+    .btn-outline-white {
         width: 100%;
         font-size: 1.2rem;
         padding: 12px;
         min-height: 48px;
     }
+
     .hero-progress {
         position: absolute;
-        bottom: 10px; /* On remet la barre de progression en bas de l'image */
+        bottom: 10px;
+        /* On remet la barre de progression en bas de l'image */
         top: auto;
         left: 5%;
         right: 5%;
@@ -753,7 +781,7 @@ body {
     z-index: 2;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .story-image-wrapper img {
@@ -778,6 +806,7 @@ body {
         grid-template-columns: 1fr;
         gap: 40px;
     }
+
     .story-image-decoration {
         transform: translate(10px, 10px);
     }
@@ -791,7 +820,8 @@ body {
 
 .modern-stats {
     padding: 80px 20px;
-    display: block; /* Remplacement du flex global pour mieux organiser avec le titre */
+    display: block;
+    /* Remplacement du flex global pour mieux organiser avec le titre */
 }
 
 .section-heading {
@@ -825,16 +855,17 @@ body {
     width: 100%;
     max-width: 450px;
     border-radius: 16px;
-    background-color: #130201; /* DA Sombre du club */
+    background-color: #130201;
+    /* DA Sombre du club */
     border: 1px solid #333;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     color: #ffffff;
 }
 
 .modern-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(211,47,47,0.2);
+    box-shadow: 0 15px 35px rgba(211, 47, 47, 0.2);
     border-color: #d32f2f;
 }
 
@@ -881,7 +912,7 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(211,47,47,0.1) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(211, 47, 47, 0.1) 0%, transparent 60%);
     pointer-events: none;
     z-index: 1;
 }
@@ -921,4 +952,3 @@ body {
         font-size: 1.8rem;
     }
 }
-

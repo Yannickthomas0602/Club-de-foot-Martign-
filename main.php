@@ -32,6 +32,8 @@
             'subtitle' => 'Plus qu\'un club de football, une véritable famille.',
             'btn1_text' => 'Nos Équipes',
             'btn1_url' => 'equipes.php',
+            'btn1_target' => '',
+            'btn1_rel' => '',
             'btn2_text' => 'Découvrir le PEF',
             'btn2_url' => 'pef.php'
         ],
@@ -40,6 +42,8 @@
             'subtitle' => 'La passion du jeu et l\'esprit d\'équipe à chaque instant.',
             'btn1_text' => 'Nous Contacter',
             'btn1_url' => 'mailto:CCMreseauxsociaux@gmail.com',
+            'btn1_target' => '',
+            'btn1_rel' => '',
             'btn2_text' => '',
             'btn2_url' => ''
         ],
@@ -48,6 +52,8 @@
             'subtitle' => 'Des tribunes au terrain, partageons ensemble les émotions du football.',
             'btn1_text' => 'Boutique',
             'btn1_url' => 'https://cadets-chelun-martigne.kalisport.com/',
+            'btn1_target' => '_blank',
+            'btn1_rel' => 'noopener noreferrer',
             'btn2_text' => '',
             'btn2_url' => ''
         ]
@@ -199,7 +205,9 @@ document.addEventListener('DOMContentLoaded', function () {
             if (heroActions) {
                 let btnsHtml = '';
                 if(textData.btn1_text) {
-                    btnsHtml += `<a href="${textData.btn1_url}" class="btn-red">${textData.btn1_text}</a>`;
+                    const btn1Target = textData.btn1_target ? ` target="${textData.btn1_target}"` : '';
+                    const btn1Rel = textData.btn1_rel ? ` rel="${textData.btn1_rel}"` : '';
+                    btnsHtml += `<a href="${textData.btn1_url}"${btn1Target}${btn1Rel} class="btn-red">${textData.btn1_text}</a>`;
                 }
                 if(textData.btn2_text) {
                     btnsHtml += `<a href="${textData.btn2_url}" class="btn-outline-white">${textData.btn2_text}</a>`;
