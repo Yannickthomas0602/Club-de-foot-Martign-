@@ -109,7 +109,8 @@ body {
     background: white;
     border-radius: 20px;
     padding: 20px;
-    width: 450px; /* Largeur ajustable */
+    width: 100%;
+    max-width: 450px; /* Largeur ajustable */
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
@@ -478,7 +479,446 @@ body {
     animation: ldsdr 1.2s linear infinite;
 }
 
-@keyframes ldsdr {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }
+
+/* ==========================================================================
+   REFONTE PAGE D'ACCUEIL (NOUVEAUX STYLES)
+   ========================================================================== */
+
+/* ── Hero Overlay ── */
+.Image_accueil::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient depuis le bas pour le texte positionné en bas */
+    background: linear-gradient(to top, rgba(19, 2, 1, 0.95) 0%, rgba(19, 2, 1, 0.5) 40%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.hero-overlay-content {
+    position: absolute;
+    bottom: 10%;
+    left: max(5%, calc((100vw - 1400px) / 2 + 20px));
+    z-index: 3;
+    max-width: 600px;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hero-overlay-content.is-hidden {
+    opacity: 0;
+    transform: translateY(-45%);
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin: 0 0 15px 0;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    margin: 0 0 30px 0;
+    line-height: 1.5;
+    color: #e2e8f0;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.hero-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-outline-white {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: "Bebas Neue", cursive;
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 2px solid #ffffff;
+    border-radius: 24px;
+    background: transparent;
+    transition: all 0.3s ease;
+    min-height: 38px;
+    box-sizing: border-box;
+}
+
+.btn-outline-white:hover {
+    background: #ffffff;
+    color: #d32f2f;
+}
+
+.btn-white {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    color: #d32f2f;
+    text-decoration: none;
+    font-family: "Bebas Neue", cursive;
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 2px solid #ffffff;
+    border-radius: 24px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    min-height: 38px;
+    box-sizing: border-box;
+}
+
+.btn-white:hover {
+    background: #f4f4f9;
+    color: #8A1D19;
+}
+
+.btn-large {
+    padding: 12px 30px;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .Image_accueil {
+        height: 80vh; /* Plus grand sur mobile pour laisser de la place au texte */
+        min-height: 500px;
+        aspect-ratio: auto;
+        background-color: #130201;
+    }
+    .Image_accueil::before {
+        display: none;
+    }
+    .Image_accueil .hero-slide {
+        height: 100%;
+        bottom: 0;
+    }
+    .Image_accueil::after {
+        height: 100%;
+        bottom: 0;
+        background: linear-gradient(to top, rgba(19, 2, 1, 0.95) 0%, rgba(19, 2, 1, 0.6) 50%, transparent 100%);
+    }
+    .hero-overlay-content {
+        position: absolute;
+        left: 5%;
+        right: 5%;
+        bottom: 80px; /* Remonté pour ne pas chevaucher la barre de progression */
+        padding: 0;
+        text-align: left;
+        background-color: transparent;
+    }
+    .hero-overlay-content.is-hidden {
+        opacity: 0;
+    }
+    .hero-title {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+        line-height: 1.1;
+    }
+    .hero-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+        line-height: 1.4;
+    }
+    .hero-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .btn-red, .btn-outline-white {
+        width: 100%;
+        font-size: 1.2rem;
+        padding: 12px;
+        min-height: 48px;
+    }
+    .hero-progress {
+        position: absolute;
+        bottom: 10px; /* On remet la barre de progression en bas de l'image */
+        top: auto;
+        left: 5%;
+        right: 5%;
+    }
+}
+
+/* ── Section Histoire et Valeurs ── */
+.club-story-section {
+    padding: 80px 20px;
+    background-color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.story-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.story-text h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #130201;
+    margin: 0 0 10px 0;
+}
+
+.title-separator {
+    width: 60px;
+    height: 4px;
+    background-color: #d32f2f;
+    margin-bottom: 25px;
+    border-radius: 2px;
+}
+
+.title-separator.center {
+    margin: 0 auto 25px auto;
+}
+
+.story-text p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #4a5568;
+    margin-bottom: 20px;
+}
+
+.story-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #ffebee;
+    color: #d32f2f;
+    border-radius: 12px;
+    font-size: 1.5rem;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #130201;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #718096;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.story-image-container {
+    position: relative;
+    width: 100%;
+}
+
+.story-image-wrapper {
+    position: relative;
+    z-index: 2;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.story-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+
+.story-image-decoration {
+    position: absolute;
+    inset: 0;
+    border: 4px solid #d32f2f;
+    border-radius: 20px;
+    transform: translate(20px, 20px);
+    z-index: -1;
+}
+
+@media (max-width: 992px) {
+    .story-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .story-image-decoration {
+        transform: translate(10px, 10px);
+    }
+}
+
+/* ── Modernisation Stats / Cards ── */
+.bg-light-gray {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.modern-stats {
+    padding: 80px 20px;
+    display: block; /* Remplacement du flex global pour mieux organiser avec le titre */
+}
+
+.section-heading {
+    margin-bottom: 50px;
+}
+
+.section-heading h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #130201;
+    margin: 0 0 10px 0;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #4a5568;
+    margin: 0;
+}
+
+.cards-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.modern-card {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 16px;
+    background-color: #130201; /* DA Sombre du club */
+    border: 1px solid #333;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    color: #ffffff;
+}
+
+.modern-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(211,47,47,0.2);
+    border-color: #d32f2f;
+}
+
+.modern-card .card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modern-card .card-content {
+    background: transparent;
+    border: none;
+}
+
+.text-rouge {
+    color: #d32f2f;
+}
+
+.w-full {
+    width: 100% !important;
+}
+
+/* ── CTA Banner ── */
+.cta-banner {
+    background-color: #130201;
+    border-top: 4px solid #d32f2f;
+    border-bottom: 4px solid #d32f2f;
+    padding: 80px 20px;
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(211,47,47,0.1) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cta-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-container h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+}
+
+.cta-container p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin: 0 auto 30px auto;
+    color: #e2e8f0;
+    max-width: 600px;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .cta-container h2 {
+        font-size: 1.8rem;
+    }
+}
+

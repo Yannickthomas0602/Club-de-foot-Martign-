@@ -102,7 +102,6 @@ $base_href = isset($base_href) ? (string)$base_href : '';
                 <li><a href="index.php">Accueil</a></li>
                 <li><a href="equipes.php">&Eacute;quipes</a></li>
                 <li><a href="resultats.php">R&eacute;sultats</a></li>
-                <li><a href="calendrier.php">Calendrier</a></li>
                 <li><a href="photos.php">Photos</a></li>
                 <li><a href="organigramme.php">Organigramme</a></li>
                 <li><a href="pef.php">PEF</a></li>

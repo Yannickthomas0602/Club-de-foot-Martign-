@@ -36,7 +36,6 @@
                 <div class="footer-nav-split">
                     <ul class="footer-nav-list">
                         <li><a href="index.php">Accueil</a></li>
-                        <li><a href="calendrier.php">Calendrier</a></li>
                         <li><a href="equipes.php">Équipes</a></li>
                         <li><a href="#">Convocations</a></li>
                         <li><a href="photos.php">Album photos</a></li>
