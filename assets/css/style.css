@@ -685,7 +685,7 @@ body {
 /* ── Section Histoire et Valeurs ── */
 .club-story-section {
     padding: 80px 20px;
-    background-color: #ffffff;
+    background-color: #f8fafc;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -815,7 +815,6 @@ body {
 /* ── Modernisation Stats / Cards ── */
 .bg-light-gray {
     background-color: #f8fafc;
-    border-top: 1px solid #e2e8f0;
 }
 
 .modern-stats {

@@ -16,7 +16,6 @@
     color: #fff;
     margin-top: auto; /* Push footer down */
     font-family: inherit;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .footer-container {
