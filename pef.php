@@ -371,7 +371,8 @@ include __DIR__ . "/header.php";
           [$cls, $ico] = $catCss[$a['theme']] ?? ['cat-culture', 'fa-futbol'];
           $img = !empty($a['image_couverture_url']) ? htmlspecialchars($a['image_couverture_url']) : ($defaultImgs[$a['theme']] ?? $defaultImgs['Culture Foot']);
           $date = (new DateTime($a['date_publication']))->format('d/m/Y');
-          $resume = mb_strimwidth(strip_tags($a['contenu_html']), 0, 120, '…');
+          $texte_brut = html_entity_decode(strip_tags($a['contenu_html']), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+          $resume = mb_strimwidth($texte_brut, 0, 120, '…');
           ?>
           <article class="pef-blog-card flex flex-col" onclick="pefOpenModal(<?= (int) $a['id'] ?>)">
             <div class="h-48 overflow-hidden bg-gray-100">

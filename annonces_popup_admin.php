@@ -164,6 +164,9 @@ $annonces = $pdo->query(
 
   <?php if ($success !== ''): ?>
     <p class="alert alert--success"><?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?></p>
+    <script>
+      sessionStorage.removeItem('club_popup_opened_once');
+    </script>
   <?php endif; ?>
 
   <?php if ($error !== ''): ?>
