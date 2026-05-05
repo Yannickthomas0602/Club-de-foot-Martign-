@@ -7,14 +7,14 @@
 :root {
     --orga-red:        #d32f2f;
     --orga-red-dark:   #8a1d19;
-    --orga-navy:       #0d1b3e;
-    --orga-navy-light: #16285a;
-    --orga-bg:         #f0f2f8;
+    --orga-navy:       #130201; /* Noir du club au lieu du bleu */
+    --orga-navy-light: #2a0403; /* Rouge très foncé au lieu du bleu clair */
+    --orga-bg:         #f4f4f9; /* Couleur de fond unifiée avec le site */
     --orga-card-bg:    #ffffff;
     --orga-text:       #1a1a2e;
     --orga-muted:      #5a6278;
     --orga-border:     #dde3f0;
-    --orga-shadow:     0 8px 32px rgba(13, 27, 62, 0.12);
+    --orga-shadow:     0 8px 32px rgba(19, 2, 1, 0.12); /* Ombre aux tons club */
     --orga-radius:     18px;
     --transition:      0.28s cubic-bezier(.4,0,.2,1);
 }
