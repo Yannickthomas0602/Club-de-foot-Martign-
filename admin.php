@@ -11,8 +11,20 @@ $page_title = "Tableau de Bord Admin";
 
 $pdo = getDB();
 
-// Le nom d'utilisateur est stocké dans la session
-$displayName = $_SESSION['username'] ?? 'Admin';
+// Fetch currentUser to display a proper name instead of email
+try {
+    $stmtUser = $pdo->prepare("SELECT username, first_name, last_name FROM users WHERE id = :id");
+    $stmtUser->execute(['id' => $_SESSION['user_id']]);
+    $currentUser = $stmtUser->fetch();
+    // Si le username ressemble à un email, on utilise le prénom, sinon on utilise le username
+    if ($currentUser && filter_var($currentUser['username'], FILTER_VALIDATE_EMAIL)) {
+        $displayName = $currentUser['first_name'];
+    } else {
+        $displayName = $currentUser['username'] ?? 'Admin';
+    }
+} catch (Throwable $e) {
+    $displayName = $_SESSION['username'] ?? 'Admin';
+}
 
 // Fetch KPIs
 try {
@@ -57,27 +69,27 @@ try {
                 <i class="fa-solid fa-shirt"></i>
             </div>
             <div class="kpi-info">
-                <h3><?= (int)$countTeams ?></h3>
+                <h3><?= (int) $countTeams ?></h3>
                 <p>Équipes gérées</p>
             </div>
         </div>
-        
+
         <div class="kpi-card">
             <div class="kpi-icon icon-annonces">
                 <i class="fa-solid fa-bell"></i>
             </div>
             <div class="kpi-info">
-                <h3><?= (int)$countAnnonces ?></h3>
+                <h3><?= (int) $countAnnonces ?></h3>
                 <p>Annonces actives</p>
             </div>
         </div>
-        
+
         <div class="kpi-card">
             <div class="kpi-icon icon-pef">
                 <i class="fa-solid fa-graduation-cap"></i>
             </div>
             <div class="kpi-info">
-                <h3><?= (int)$countPef ?></h3>
+                <h3><?= (int) $countPef ?></h3>
                 <p>Articles PEF</p>
             </div>
         </div>
@@ -86,7 +98,7 @@ try {
     <!-- Grille d'actions rapides -->
     <section class="actions-section">
         <h2><i class="fa-solid fa-bolt"></i> Accès Rapides</h2>
-        
+
         <div class="actions-grid">
             <!-- Utilisateurs -->
             <a href="manage_users.php" class="action-card">
@@ -179,4 +191,5 @@ try {
     <?php include 'footer.php'; ?>
 </footer>
 </body>
+
 </html>

@@ -4,14 +4,17 @@
     --card-bg: #ffffff;
     --text-main: #2c3e50;
     --text-muted: #7f8c8d;
-    --primary: #d32f2f;     /* Rouge Club */
+    --primary: #d32f2f;
+    /* Rouge Club */
     --primary-dark: #b71c1c;
     --primary-light: #ff6659;
-    --accent: #173f75;      /* Bleu marine */
+    --accent: #173f75;
+    /* Bleu marine */
     --black: #130201;
-    --shadow-sm: 0 2px 10px rgba(0,0,0,0.03);
-    --shadow-md: 0 4px 15px rgba(0,0,0,0.06);
-    --radius: 8px;
+    --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 12px 35px rgba(211, 47, 47, 0.12);
+    --radius: 16px;
 }
 
 body {
@@ -32,21 +35,34 @@ body {
     justify-content: space-between;
     align-items: center;
     background: var(--card-bg);
-    padding: 30px 40px;
+    padding: 35px 40px;
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     border-left: 6px solid var(--primary);
-    border: 1px solid #eaeaea;
-    border-left: 5px solid var(--primary);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet graphique discret en arrière-plan du header */
+.dashboard-header::after {
+    content: '';
+    position: absolute;
+    right: -50px;
+    top: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(211, 47, 47, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 .header-text h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.2rem;
+    font-weight: 800;
     color: var(--black);
-    margin: 0 0 8px 0;
+    margin: 0 0 10px 0;
 }
 
 .header-text h1 .highlight {
@@ -56,26 +72,30 @@ body {
 .header-text p {
     margin: 0;
     color: var(--text-muted);
-    font-size: 1.05rem;
+    font-size: 1.1rem;
 }
 
 .btn-create-annonce {
     background: var(--primary);
     color: white;
-    padding: 10px 20px;
-    border-radius: 4px;
+    padding: 14px 28px;
+    border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-family: 'Montserrat', sans-serif;
     display: flex;
     align-items: center;
-    gap: 8px;
-    transition: background 0.2s ease;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+    z-index: 1;
 }
 
 .btn-create-annonce:hover {
     background: var(--primary-dark);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
     color: white;
 }
 
@@ -83,40 +103,63 @@ body {
 .kpi-section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-    margin-bottom: 40px;
+    gap: 25px;
+    margin-bottom: 50px;
 }
 
 .kpi-card {
     background: var(--card-bg);
-    padding: 20px;
+    padding: 30px 25px;
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
     display: flex;
     align-items: center;
-    gap: 15px;
-    border: 1px solid #eaeaea;
+    gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
 }
 
 .kpi-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 6px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     flex-shrink: 0;
 }
 
-.icon-teams { background: #f4f6f9; color: #2c3e50; }
-.icon-annonces { background: #fdf2f2; color: #d32f2f; }
-.icon-pef { background: #f4f6f9; color: #173f75; }
+/* Couleurs des icônes KPI avec de légers dégradés */
+.icon-users {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    color: #1565c0;
+}
+
+.icon-teams {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    color: #2e7d32;
+}
+
+.icon-annonces {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    color: #e65100;
+}
+
+.icon-pef {
+    background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+    color: #c2185b;
+}
 
 .kpi-info h3 {
-    margin: 0 0 4px 0;
-    font-size: 1.6rem;
-    font-weight: 700;
+    margin: 0 0 5px 0;
+    font-size: 2rem;
+    font-weight: 800;
     color: var(--black);
     font-family: 'Montserrat', sans-serif;
     line-height: 1;
@@ -125,8 +168,8 @@ body {
 .kpi-info p {
     margin: 0;
     color: var(--text-muted);
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 0.95rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -134,61 +177,84 @@ body {
 /* ---- ACTIONS SECTION ---- */
 .actions-section h2 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-size: 1.6rem;
+    font-weight: 800;
     color: var(--black);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .actions-section h2 i {
     color: var(--primary);
+    background: #fdf2f2;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.2rem;
 }
 
 .actions-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 25px;
 }
 
 .action-card {
     background: var(--card-bg);
     border-radius: var(--radius);
-    padding: 20px;
+    padding: 25px;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
     text-decoration: none;
     color: inherit;
-    border: 1px solid #eaeaea;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--primary);
+    transition: width 0.3s ease;
 }
 
 .action-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    border-color: #dcdcdc;
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(211, 47, 47, 0.1);
+}
+
+.action-card:hover::before {
+    width: 100%;
 }
 
 .action-icon {
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     background: #fdf2f2;
     color: var(--primary);
-    border-radius: 6px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     flex-shrink: 0;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
 .action-card:hover .action-icon {
     background: var(--primary);
     color: white;
+    transform: scale(1.1) rotate(-5deg);
 }
 
 .action-content {
@@ -196,26 +262,33 @@ body {
 }
 
 .action-content h4 {
-    margin: 0 0 4px 0;
-    font-size: 1.05rem;
+    margin: 0 0 6px 0;
+    font-size: 1.2rem;
     font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--black);
+    transition: color 0.3s ease;
+}
+
+.action-card:hover .action-content h4 {
+    color: var(--primary);
 }
 
 .action-content p {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--text-muted);
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .action-arrow {
-    color: #ccc;
-    font-size: 1rem;
+    color: #e0e0e0;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .action-card:hover .action-arrow {
+    transform: translateX(8px);
     color: var(--primary);
 }
 
@@ -224,10 +297,10 @@ body {
     .dashboard-header {
         flex-direction: column;
         text-align: center;
-        gap: 20px;
-        padding: 25px 20px;
+        gap: 25px;
+        padding: 30px 20px;
     }
-    
+
     .actions-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
@@ -237,12 +310,12 @@ body {
     .kpi-section {
         grid-template-columns: 1fr;
     }
-    
+
     .actions-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .header-text h1 {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
     }
 }
