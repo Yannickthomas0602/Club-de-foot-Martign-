@@ -1,83 +1,248 @@
-/* ---- VARIABLES DE COULEURS ---- */
+/* ---- VARIABLES ---- */
 :root {
-    --red: #F0322B;
-    --red-dark: #8A1D19;
+    --bg-light: #f4f6f9;
+    --card-bg: #ffffff;
+    --text-main: #2c3e50;
+    --text-muted: #7f8c8d;
+    --primary: #d32f2f;     /* Rouge Club */
+    --primary-dark: #b71c1c;
+    --primary-light: #ff6659;
+    --accent: #173f75;      /* Bleu marine */
     --black: #130201;
-    --grey: #f5f5f5;
-    --text-dark: #222;
-    --text-light: #fff;
+    --shadow-sm: 0 2px 10px rgba(0,0,0,0.03);
+    --shadow-md: 0 4px 15px rgba(0,0,0,0.06);
+    --radius: 8px;
 }
 
-/* ---- STYLE GLOBAL ---- */
-.admin-main {
-    width: 95%;
-    max-width: 1400px;
+body {
+    background-color: var(--bg-light);
+    font-family: 'Roboto', sans-serif;
+}
+
+/* ---- CONTAINER MAIN ---- */
+.admin-dashboard-container {
+    max-width: 1200px;
     margin: 40px auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    color: var(--text-dark);
+    padding: 0 20px;
 }
 
-.admin-main h1 {
-    font-size: 28px;
-    text-transform: uppercase;
-    color: var(--black);
+/* ---- HEADER ---- */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    padding: 30px 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
     margin-bottom: 30px;
-    padding-bottom: 10px;
-    border-bottom: 4px solid var(--red);
-    display: inline-block;
+    border-left: 6px solid var(--primary);
+    border: 1px solid #eaeaea;
+    border-left: 5px solid var(--primary);
 }
 
-/* Container for all sections */
-.admin-dashboard {
+.header-text h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--black);
+    margin: 0 0 8px 0;
+}
+
+.header-text h1 .highlight {
+    color: var(--primary);
+}
+
+.header-text p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+.btn-create-annonce {
+    background: var(--primary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s ease;
+}
+
+.btn-create-annonce:hover {
+    background: var(--primary-dark);
+    color: white;
+}
+
+/* ---- KPIs SECTION ---- */
+.kpi-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    margin-top: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
 }
 
-/* Design de chaque carte */
-.admin-card {
-    background: var(--grey);
-    padding: 25px 20px;
-    border-left: 6px solid var(--red);
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.kpi-card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid #eaeaea;
+}
+
+.kpi-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.icon-teams { background: #f4f6f9; color: #2c3e50; }
+.icon-annonces { background: #fdf2f2; color: #d32f2f; }
+.icon-pef { background: #f4f6f9; color: #173f75; }
+
+.kpi-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1;
+}
+
+.kpi-info p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ---- ACTIONS SECTION ---- */
+.actions-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.actions-section h2 i {
+    color: var(--primary);
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.action-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
     text-decoration: none;
     color: inherit;
-    transition: all 0.3s ease;
+    border: 1px solid #eaeaea;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: #dcdcdc;
+}
+
+.action-icon {
+    width: 45px;
+    height: 45px;
+    background: #fdf2f2;
+    color: var(--primary);
+    border-radius: 6px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: flex-start;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
-.admin-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    background: white;
-    border-left: 6px solid var(--red-dark);
+.action-card:hover .action-icon {
+    background: var(--primary);
+    color: white;
 }
 
-.admin-card h3 {
-    margin: 0 0 10px 0;
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--red);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.action-content {
+    flex-grow: 1;
 }
 
-.admin-card p {
+.action-content h4 {
+    margin: 0 0 4px 0;
+    font-size: 1.05rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.action-content p {
     margin: 0;
-    font-size: 15px;
-    color: #555;
+    font-size: 0.9rem;
+    color: var(--text-muted);
     line-height: 1.4;
 }
 
+.action-arrow {
+    color: #ccc;
+    font-size: 1rem;
+}
+
+.action-card:hover .action-arrow {
+    color: var(--primary);
+}
+
 /* ---- RESPONSIVE ---- */
-@media screen and (max-width: 700px) {
-    .admin-dashboard {
+@media screen and (max-width: 900px) {
+    .dashboard-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 25px 20px;
+    }
+    
+    .actions-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .kpi-section {
         grid-template-columns: 1fr;
+    }
+    
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-text h1 {
+        font-size: 1.6rem;
     }
 }

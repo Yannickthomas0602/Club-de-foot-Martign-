@@ -206,12 +206,34 @@
         gap: 40px 30px;
         padding: 40px 20px 30px;
     }
+    
+    /* Centrer la 3e colonne sur tablette pour un meilleur équilibre */
+    .footer-legal-col {
+        grid-column: 1 / -1;
+        align-items: center;
+        text-align: center;
+        margin-top: 10px;
+    }
+    
+    .footer-legal-col .footer-title {
+        align-self: center;
+    }
+    
+    .footer-legal-col .footer-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-legal-col .footer-contact-list,
+    .footer-legal-col .footer-legal-list {
+        align-items: center;
+    }
 }
 
 @media (max-width: 650px) {
     .footer-container {
         grid-template-columns: 1fr;
-        gap: 35px;
+        gap: 40px;
         padding: 35px 20px 25px;
     }
 
@@ -235,12 +257,14 @@
 
     .devise {
         text-align: center;
+        font-size: 1.8rem; /* Un peu plus petit sur mobile */
     }
 
     .footer-nav-split {
         justify-content: center;
         gap: 20px;
         flex-wrap: wrap; 
+        text-align: center;
     }
     
     .footer-nav-split ul {
@@ -261,17 +285,18 @@
     .footer-contact-list a {
         text-align: center;
         flex-direction: column; 
-        gap: 4px;
+        gap: 6px;
     }
 
     .social-links {
         justify-content: center;
+        margin-top: 20px;
     }
 
     .footer-nav-list a,
     .footer-legal-list a,
     .footer-contact-list a {
-        padding: 8px 0; /* Touch targets */
+        padding: 8px 0; /* Touch targets plus larges */
         min-height: 40px; 
     }
 }
